@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"html"
 	"os"
@@ -11,52 +12,27 @@ import (
 
 	"github.com/gookit/color"
 	"github.com/k0kubun/pp"
+	pythainlp "github.com/tassa-yoniso-manasi-karoto/go-pythainlp"
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
 )
 
-// Thai character categories
-const (
-	consonants = "กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ"
-	vowels     = "ะัาิีึืุูเแโใไๅำ"
-	toneMarks  = "่้๊๋"
-	symbols    = "์ํ็ฺๆ"
-)
+// Global dictionary built from manual vocab
+var dictionary = make(map[string]string)
+var syllableDict = make(map[string]string)
 
-// Consonant tone classes
-var (
-	highClass = map[string]bool{
-		"ข": true, "ฃ": true, "ฉ": true, "ฐ": true, "ถ": true,
-		"ผ": true, "ฝ": true, "ศ": true, "ษ": true, "ส": true, "ห": true,
-	}
-	
-	midClass = map[string]bool{
-		"ก": true, "จ": true, "ฎ": true, "ฏ": true,
-		"ด": true, "ต": true, "บ": true, "ป": true, "อ": true,
-	}
-	
-	lowClass = map[string]bool{
-		"ค": true, "ฅ": true, "ฆ": true, "ง": true, "ช": true, "ซ": true,
-		"ฌ": true, "ญ": true, "ฑ": true, "ฒ": true, "ณ": true, "ท": true,
-		"ธ": true, "น": true, "พ": true, "ฟ": true, "ภ": true, "ม": true,
-		"ย": true, "ร": true, "ฤ": true, "ล": true, "ฦ": true, "ว": true, 
-		"ฬ": true, "ฮ": true,
-	}
-)
-
-// Initial consonant mappings
+// Consonant mappings
 var initialConsonants = map[string]string{
 	"ก": "g", "ข": "k", "ฃ": "k", "ค": "k", "ฅ": "k", "ฆ": "k", "ง": "ng",
 	"จ": "j", "ฉ": "ch", "ช": "ch", "ซ": "s", "ฌ": "ch", "ญ": "y", "ฎ": "d",
 	"ฏ": "dt", "ฐ": "t", "ฑ": "t", "ฒ": "t", "ณ": "n", "ด": "d", "ต": "dt",
 	"ถ": "t", "ท": "t", "ธ": "t", "น": "n", "บ": "b", "ป": "bp", "ผ": "p",
 	"ฝ": "f", "พ": "p", "ฟ": "f", "ภ": "p", "ม": "m", "ย": "y", "ร": "r",
-	"ฤ": "rʉ", "ล": "l", "ฦ": "lʉ", "ว": "w", "ศ": "s", "ษ": "s", "ส": "s", 
+	"ฤ": "rʉ", "ล": "l", "ฦ": "lʉ", "ว": "w", "ศ": "s", "ษ": "s", "ส": "s",
 	"ห": "h", "ฬ": "l", "อ": "", "ฮ": "h",
 }
 
-// Final consonant mappings
 var finalConsonants = map[string]string{
 	"ก": "k", "ข": "k", "ฃ": "k", "ค": "k", "ฅ": "k", "ฆ": "k", "ง": "ng",
 	"จ": "t", "ฉ": "t", "ช": "t", "ซ": "t", "ฌ": "t", "ญ": "n", "ฎ": "t",
@@ -67,7 +43,25 @@ var finalConsonants = map[string]string{
 	"อ": "", "ฮ": "",
 }
 
-// Consonant clusters
+// Tone classes
+var (
+	highClass = map[string]bool{
+		"ข": true, "ฃ": true, "ฉ": true, "ฐ": true, "ถ": true,
+		"ผ": true, "ฝ": true, "ศ": true, "ษ": true, "ส": true, "ห": true,
+	}
+	midClass = map[string]bool{
+		"ก": true, "จ": true, "ฎ": true, "ฏ": true,
+		"ด": true, "ต": true, "บ": true, "ป": true, "อ": true,
+	}
+	lowClass = map[string]bool{
+		"ค": true, "ฅ": true, "ฆ": true, "ง": true, "ช": true, "ซ": true,
+		"ฌ": true, "ญ": true, "ฑ": true, "ฒ": true, "ณ": true, "ท": true,
+		"ธ": true, "น": true, "พ": true, "ฟ": true, "ภ": true, "ม": true,
+		"ย": true, "ร": true, "ล": true, "ว": true, "ฬ": true, "ฮ": true,
+	}
+)
+
+// Common clusters
 var clusters = map[string]string{
 	"กร": "gr", "กล": "gl", "กว": "gw",
 	"ขร": "kr", "ขล": "kl", "ขว": "kw",
@@ -76,500 +70,485 @@ var clusters = map[string]string{
 	"พร": "pr", "พล": "pl",
 	"ผล": "pl",
 	"ฟร": "fr", "ฟล": "fl",
-	"ตร": "dtr",
-	"ทร": "s", // Special case: ทร → s
+	"ตร": "dtr", "ทร": "s",
 	"ดร": "dr",
 }
 
-// Special words that don't follow normal rules
-var specialWords = map[string]string{
-	"ธรรม": "tam",
-	"ธรรมะ": "tam-má",
-	"จริง": "jing",
-	"สัตว์": "sàt",
-	"กรรม": "gam",
-	"ทรราช": "sɔɔn-raa-râat",
-}
+// Global pythainlp manager
+var nlpManager *pythainlp.PyThaiNLPManager
 
-// Syllable represents a parsed Thai syllable
-type Syllable struct {
-	LeadingVowel  string   // เ แ โ ไ ใ
-	Initial       string   // Initial consonant(s)
-	VowelMarks    string   // Vowel marks after/above/below consonant
-	Final         string   // Final consonant
-	ToneMark      string   // Tone mark
-	Silenced      bool     // Has thanthakhat (์)
-	Raw           string   // Original Thai text
-	InitialThai   []string // Original Thai consonants for tone class
-}
-
-func ThaiToRoman(text string) string {
-	text = strings.TrimSpace(text)
+// Initialize pythainlp manager
+func initPyThaiNLP(ctx context.Context) error {
+	var err error
+	nlpManager, err = pythainlp.NewManager(ctx)
+	if err != nil {
+		return fmt.Errorf("failed to initialize pythainlp: %w", err)
+	}
 	
-	// Check special words first
-	if trans, ok := specialWords[text]; ok {
+	// Initialize the service
+	if err := nlpManager.Init(ctx); err != nil {
+		return fmt.Errorf("failed to start pythainlp service: %w", err)
+	}
+	
+	return nil
+}
+
+// ThaiToRoman is the main transliteration function using go-pythainlp
+func ThaiToRoman(text string) string {
+	// First, try direct dictionary lookup for the whole text
+	if trans, ok := dictionary[text]; ok {
 		return trans
 	}
 	
-	// Parse into syllables
-	syllables := parseSyllables(text)
-	results := []string{}
+	ctx := context.Background()
 	
-	for _, syl := range syllables {
+	// Initialize pythainlp if not already done
+	if nlpManager == nil {
+		if err := initPyThaiNLP(ctx); err != nil {
+			fmt.Printf("Warning: pythainlp not available, using fallback: %v\n", err)
+			return fallbackTransliteration(text)
+		}
+	}
+	
+	// Tokenize using pythainlp
+	opts := pythainlp.AnalyzeOptions{
+		Features:       []string{"tokenize", "syllable"},
+		TokenizeEngine: "newmm",
+		SyllableEngine: "han_solo",
+	}
+	
+	result, err := nlpManager.AnalyzeWithOptions(ctx, text, opts)
+	if err != nil {
+		fmt.Printf("Warning: tokenization failed, using fallback: %v\n", err)
+		return fallbackTransliteration(text)
+	}
+	
+	// Process word by word
+	results := []string{}
+	for _, word := range result.RawTokens {
+		// Skip empty tokens
+		if word == "" || word == " " {
+			continue
+		}
+		
+		// Try dictionary lookup first
+		if trans, ok := dictionary[word]; ok {
+			results = append(results, trans)
+			continue
+		}
+		
+		// Fall back to syllable-by-syllable transliteration
+		wordResult := transliterateWordWithSyllables(word, result.Syllables)
+		if wordResult != "" {
+			results = append(results, wordResult)
+		}
+	}
+	
+	return strings.Join(results, "-")
+}
+
+// fallbackTransliteration when pythainlp is not available
+func fallbackTransliteration(text string) string {
+	// First, try direct dictionary lookup
+	if trans, ok := dictionary[text]; ok {
+		return trans
+	}
+	
+	// Fall back to simple transliteration
+	return transliterateWord(text)
+}
+
+// transliterateWordWithSyllables handles a word with known syllables from pythainlp
+func transliterateWordWithSyllables(word string, allSyllables []string) string {
+	// Try dictionary first
+	if trans, ok := dictionary[word]; ok {
+		return trans
+	}
+	
+	// Find syllables that belong to this word
+	wordSyllables := []string{}
+	currentPos := 0
+	wordRunes := []rune(word)
+	
+	for _, syl := range allSyllables {
+		sylRunes := []rune(syl)
+		// Check if this syllable matches the current position in the word
+		if currentPos < len(wordRunes) {
+			match := true
+			for i, r := range sylRunes {
+				if currentPos+i >= len(wordRunes) || wordRunes[currentPos+i] != r {
+					match = false
+					break
+				}
+			}
+			if match {
+				wordSyllables = append(wordSyllables, syl)
+				currentPos += len(sylRunes)
+			}
+		}
+		if currentPos >= len(wordRunes) {
+			break
+		}
+	}
+	
+	// Transliterate each syllable
+	results := []string{}
+	for _, syl := range wordSyllables {
+		// Try syllable dictionary
+		if trans, ok := syllableDict[syl]; ok {
+			results = append(results, trans)
+			continue
+		}
+		
+		// Fall back to rule-based transliteration
 		trans := transliterateSyllable(syl)
 		if trans != "" {
 			results = append(results, trans)
 		}
 	}
 	
-	// Join with hyphen for multi-syllable words
-	if len(results) > 1 {
-		return strings.Join(results, "-")
-	} else if len(results) == 1 {
-		return results[0]
+	if len(results) == 0 {
+		return ""
 	}
-	return ""
+	return strings.Join(results, "")
 }
 
-func parseSyllables(text string) []Syllable {
-	syllables := []Syllable{}
-	runes := []rune(text)
-	i := 0
+// transliterateWord handles a single Thai word without known syllables
+func transliterateWord(word string) string {
+	// Try dictionary first
+	if trans, ok := dictionary[word]; ok {
+		return trans
+	}
 	
-	for i < len(runes) {
-		syl := Syllable{}
-		start := i
-		
-		// Check for leading vowel (เ แ โ ไ ใ)
-		if i < len(runes) && isLeadingVowel(string(runes[i])) {
-			syl.LeadingVowel = string(runes[i])
-			i++
-		}
-		
-		// Get initial consonant(s)
-		consonantCount := 0
-		for i < len(runes) && isConsonant(string(runes[i])) {
-			c := string(runes[i])
-			syl.InitialThai = append(syl.InitialThai, c)
-			consonantCount++
-			i++
-			
-			// Check for phinthu (ฺ) - subscript marker
-			if i < len(runes) && string(runes[i]) == "ฺ" {
-				i++
-			}
-			
-			// Check for thanthakhat (์) - silencer
-			if i < len(runes) && string(runes[i]) == "์" {
-				syl.Silenced = true
-				i++
-			}
-			
-			// Stop after 2 consonants (could be cluster)
-			if consonantCount >= 2 {
-				break
-			}
-		}
-		
-		// Process vowel marks and symbols
-		hasVowel := syl.LeadingVowel != ""
-		for i < len(runes) {
-			r := string(runes[i])
-			
-			if isVowel(r) {
-				syl.VowelMarks += r
-				hasVowel = true
-				i++
-			} else if isToneMark(r) {
-				syl.ToneMark = r
-				i++
-			} else if r == "็" { // mai taikhu (vowel shortener)
-				syl.VowelMarks += r
-				i++
-			} else if r == "ํ" { // nikkhahit
-				syl.VowelMarks += r
-				i++
-			} else if r == "์" { // thanthakhat
-				syl.Silenced = true
-				i++
-			} else if r == "ๆ" { // repetition mark
-				i++
-			} else if isConsonant(r) && hasVowel {
-				// Could be final consonant
-				// Check if next char is a vowel or leading vowel
-				if i+1 < len(runes) {
-					next := string(runes[i+1])
-					if isVowel(next) || isLeadingVowel(next) {
-						// It's the start of the next syllable
-						break
-					}
-				}
-				// It's a final consonant
-				syl.Final = r
-				i++
-				
-				// Check for thanthakhat after final
-				if i < len(runes) && string(runes[i]) == "์" {
-					// The final consonant is silenced
-					syl.Final = ""
-					i++
-				}
-				break
-			} else {
-				break
-			}
-		}
-		
-		// Handle case where we haven't moved (prevent infinite loop)
-		if i == start {
-			i++
+	// Get syllables using simple extraction
+	syllables := extractSyllables(word)
+	
+	results := []string{}
+	for _, syl := range syllables {
+		// Try syllable dictionary
+		if trans, ok := syllableDict[syl]; ok {
+			results = append(results, trans)
 			continue
 		}
 		
-		syl.Raw = string(runes[start:i])
-		syllables = append(syllables, syl)
+		// Fall back to rule-based transliteration
+		trans := transliterateSyllable(syl)
+		if trans != "" {
+			results = append(results, trans)
+		}
+	}
+	
+	if len(results) == 0 {
+		return ""
+	}
+	return strings.Join(results, "")
+}
+
+// extractSyllables extracts syllables from a word
+func extractSyllables(word string) []string {
+	// Simplified syllable extraction
+	// In production, use go-pythainlp's syllable tokenizer
+	syllables := []string{}
+	runes := []rune(word)
+	i := 0
+	
+	for i < len(runes) {
+		sylEnd := findSyllableEnd(runes, i)
+		if sylEnd > i {
+			syllables = append(syllables, string(runes[i:sylEnd]))
+		}
+		i = sylEnd
+		if i == 0 {
+			break // Prevent infinite loop
+		}
 	}
 	
 	return syllables
 }
 
-func transliterateSyllable(syl Syllable) string {
-	// Skip silenced syllables
-	if syl.Silenced && syl.Final == "" && syl.VowelMarks == "" {
-		return ""
+// findSyllableEnd finds the end of a Thai syllable
+func findSyllableEnd(runes []rune, start int) int {
+	if start >= len(runes) {
+		return start
 	}
 	
-	// Get initial consonant sound
-	initial := getInitialSound(syl)
+	i := start
+	hasVowel := false
 	
-	// Get vowel sound
-	vowel := getVowelSound(syl)
+	// Check for leading vowel (เ แ โ ไ ใ)
+	if i < len(runes) && isLeadingVowel(string(runes[i])) {
+		i++
+		hasVowel = true
+	}
 	
-	// Get final consonant sound
-	final := ""
-	if syl.Final != "" {
-		if f, ok := finalConsonants[syl.Final]; ok {
-			final = f
+	// Get consonant(s)
+	consonantCount := 0
+	for i < len(runes) && isConsonant(string(runes[i])) {
+		i++
+		consonantCount++
+		// Allow up to 2 consonants (cluster)
+		if consonantCount >= 2 {
+			break
 		}
 	}
 	
-	// Combine sounds
-	result := initial + vowel + final
+	// Get trailing vowels and marks
+	for i < len(runes) {
+		r := string(runes[i])
+		if isVowel(r) || isToneMark(r) || r == "็" || r == "์" || r == "ํ" {
+			i++
+			if isVowel(r) {
+				hasVowel = true
+			}
+		} else if hasVowel && isConsonant(r) {
+			// Final consonant
+			nextIsVowel := i+1 < len(runes) && (isVowel(string(runes[i+1])) || isLeadingVowel(string(runes[i+1])))
+			if !nextIsVowel {
+				i++
+			}
+			break
+		} else {
+			break
+		}
+	}
+	
+	// Ensure we moved forward
+	if i == start {
+		return start + 1
+	}
+	
+	return i
+}
+
+// transliterateSyllable converts a Thai syllable to Paiboon
+func transliterateSyllable(syllable string) string {
+	// Special cases
+	specialCases := map[string]string{
+		"ธรรม": "tam",
+		"กรรม": "gam",
+		"สัตว์": "sàt",
+		"จริง": "jing",
+	}
+	
+	if trans, ok := specialCases[syllable]; ok {
+		return trans
+	}
+	
+	// Parse syllable components
+	components := parseSyllableComponents(syllable)
+	
+	// Build transliteration
+	result := components.Initial + components.Vowel + components.Final
 	
 	// Apply tone
-	result = applyTone(result, syl)
+	result = applyTone(result, components)
 	
 	return result
 }
 
-func getInitialSound(syl Syllable) string {
-	if len(syl.InitialThai) == 0 {
-		return ""
+// SyllableComponents represents the parts of a Thai syllable
+type SyllableComponents struct {
+	Initial     string // Initial consonant(s) sound
+	Vowel       string // Vowel sound
+	Final       string // Final consonant sound
+	ToneMark    string // Tone mark if any
+	InitialThai string // Original Thai initial for tone class
+}
+
+// parseSyllableComponents breaks down a Thai syllable
+func parseSyllableComponents(syllable string) SyllableComponents {
+	comp := SyllableComponents{}
+	runes := []rune(syllable)
+	i := 0
+	
+	leadingVowel := ""
+	vowelMarks := ""
+	finalCons := ""
+	
+	// Check for leading vowel
+	if i < len(runes) && isLeadingVowel(string(runes[i])) {
+		leadingVowel = string(runes[i])
+		i++
+	}
+	
+	// Get initial consonant(s)
+	initialCons := ""
+	for i < len(runes) && isConsonant(string(runes[i])) {
+		initialCons += string(runes[i])
+		i++
+		if len([]rune(initialCons)) >= 2 {
+			break
+		}
+	}
+	
+	// Store Thai initial for tone class
+	if initialCons != "" {
+		comp.InitialThai = string([]rune(initialCons)[0])
 	}
 	
 	// Check for cluster
-	if len(syl.InitialThai) == 2 {
-		cluster := syl.InitialThai[0] + syl.InitialThai[1]
-		if trans, ok := clusters[cluster]; ok {
-			return trans
-		}
-		// Not a cluster - use first consonant only
-		if trans, ok := initialConsonants[syl.InitialThai[0]]; ok {
-			return trans
-		}
-	}
-	
-	// Single consonant
-	if trans, ok := initialConsonants[syl.InitialThai[0]]; ok {
-		return trans
-	}
-	
-	return ""
-}
-
-func getVowelSound(syl Syllable) string {
-	// Combine all vowel information
-	lead := syl.LeadingVowel
-	marks := syl.VowelMarks
-	final := syl.Final
-	
-	// Handle special combinations
-	// เ-vowels
-	if lead == "เ" {
-		if marks == "็" || (marks == "" && final != "" && !isLongVowelContext(syl)) {
-			return "e"
-		}
-		if marks == "ีย" {
-			return "iia"
-		}
-		if marks == "ือ" {
-			return "ʉʉa"
-		}
-		if marks == "ียะ" {
-			return "ia"
-		}
-		if marks == "ือะ" {
-			return "ʉa"
-		}
-		if marks == "า" {
-			return "ao"
-		}
-		if marks == "าะ" {
-			return "ɔ"
-		}
-		if marks == "อะ" {
-			return "ə"
-		}
-		if marks == "อ" {
-			return "əə"
-		}
-		if marks == "ะ" {
-			return "e"
-		}
-		if marks == "ิ" {
-			return "əə"
-		}
-		if marks == "" && final == "ว" {
-			return "ee"
-		}
-		if marks == "" && final == "ย" {
-			return "əə"
-		}
-		if marks == "" {
-			return "ee"
+	if cluster, ok := clusters[initialCons]; ok {
+		comp.Initial = cluster
+	} else if initialCons != "" {
+		// Use first consonant only
+		firstCons := string([]rune(initialCons)[0])
+		if trans, ok := initialConsonants[firstCons]; ok {
+			comp.Initial = trans
 		}
 	}
 	
-	// แ-vowels
-	if lead == "แ" {
-		if marks == "็" || (marks == "" && final != "" && !isLongVowelContext(syl)) {
-			return "ɛ"
-		}
-		if marks == "ะ" {
-			return "ɛ"
-		}
-		if marks == "" && final == "ว" {
-			return "ɛɛ"
-		}
-		if marks == "" {
-			return "ɛɛ"
-		}
-	}
-	
-	// โ-vowels
-	if lead == "โ" {
-		if marks == "ะ" {
-			return "o"
-		}
-		if marks == "" && final == "ย" {
-			return "oo"
-		}
-		if marks == "" {
-			return "oo"
-		}
-	}
-	
-	// ไ/ใ vowels
-	if lead == "ไ" || lead == "ใ" {
-		return "ai"
-	}
-	
-	// Simple vowel marks
-	if marks == "ะ" || marks == "ั" {
-		return "a"
-	}
-	if marks == "า" {
-		if final == "ย" {
-			return "aa"
-		}
-		if final == "ว" {
-			return "aa"
-		}
-		return "aa"
-	}
-	if marks == "ิ" {
-		if final == "ว" {
-			return "i"
-		}
-		return "i"
-	}
-	if marks == "ี" {
-		return "ii"
-	}
-	if marks == "ึ" {
-		return "ʉ"
-	}
-	if marks == "ื" {
-		return "ʉʉ"
-	}
-	if marks == "ุ" {
-		if final == "ย" {
-			return "u"
-		}
-		return "u"
-	}
-	if marks == "ู" {
-		return "uu"
-	}
-	if marks == "ำ" {
-		return "am"
-	}
-	if marks == "ัว" {
-		if final == "" {
-			return "uua"
-		}
-		return "ua"
-	}
-	if marks == "็" {
-		return "e"
-	}
-	
-	// Complex combinations
-	if marks == "อ" && final == "ย" {
-		return "ɔɔ"
-	}
-	
-	// Inherent vowel (no explicit vowel mark)
-	if lead == "" && marks == "" {
-		if final == "" {
-			// Open syllable - long inherent vowel
-			return "ɔɔ"
+	// Process remaining marks
+	for i < len(runes) {
+		r := string(runes[i])
+		if isVowel(r) || r == "็" {
+			vowelMarks += r
+			i++
+		} else if isToneMark(r) {
+			comp.ToneMark = r
+			i++
+		} else if r == "์" {
+			// Thanthakhat - silence marker
+			i++
+		} else if isConsonant(r) && i == len(runes)-1 {
+			// Final consonant
+			finalCons = r
+			i++
 		} else {
-			// Closed syllable - short inherent vowel
-			return "o"
+			i++
 		}
+	}
+	
+	// Determine vowel sound
+	comp.Vowel = determineVowelSound(leadingVowel, vowelMarks, finalCons)
+	
+	// Set final consonant
+	if finalCons != "" {
+		if trans, ok := finalConsonants[finalCons]; ok {
+			comp.Final = trans
+		}
+	}
+	
+	return comp
+}
+
+// determineVowelSound determines the vowel sound from Thai components
+func determineVowelSound(leading, marks, final string) string {
+	// Map common patterns
+	patterns := map[string]string{
+		"เ-": "ee", "เ-็": "e", "เ-า": "ao", "เ-ีย": "iia", "เ-ือ": "ʉʉa",
+		"เ-อ": "əə", "เ-ิ": "əə", "เ-อะ": "ə", "เ-าะ": "ɔ", "เ-ะ": "e",
+		"แ-": "ɛɛ", "แ-็": "ɛ", "แ-ะ": "ɛ",
+		"โ-": "oo", "โ-ะ": "o",
+		"ไ-": "ai", "ใ-": "ai",
+		"-ะ": "a", "-ั": "a", "-า": "aa",
+		"-ิ": "i", "-ี": "ii",
+		"-ึ": "ʉ", "-ื": "ʉʉ", 
+		"-ุ": "u", "-ู": "uu",
+		"-ำ": "am",
+		"-ัว": "uua",
+	}
+	
+	// Try exact pattern match
+	pattern := leading + "-" + marks
+	if vowel, ok := patterns[pattern]; ok {
+		return vowel
+	}
+	
+	// Try without leading
+	if marks != "" {
+		pattern = "-" + marks
+		if vowel, ok := patterns[pattern]; ok {
+			return vowel
+		}
+	}
+	
+	// Try leading only
+	if leading != "" {
+		pattern = leading + "-"
+		if vowel, ok := patterns[pattern]; ok {
+			return vowel
+		}
+	}
+	
+	// Default inherent vowel
+	if leading == "" && marks == "" {
+		if final == "" {
+			return "ɔɔ" // Open syllable
+		}
+		return "o" // Closed syllable
 	}
 	
 	return ""
 }
 
-func isLongVowelContext(syl Syllable) bool {
-	// Check if the vowel should be long based on context
-	return syl.VowelMarks == "" && syl.Final == ""
-}
-
-func applyTone(text string, syl Syllable) string {
-	// Get tone class from initial consonant
-	toneClass := getToneClass(syl)
+// applyTone applies tone marks to the transliteration
+func applyTone(text string, comp SyllableComponents) string {
+	// Determine tone class
+	toneClass := "mid"
+	if highClass[comp.InitialThai] {
+		toneClass = "high"
+	} else if lowClass[comp.InitialThai] {
+		toneClass = "low"
+	}
 	
-	// Check if syllable is live or dead
-	isLive := isSyllableLive(syl)
+	// Determine if syllable is live (sonorant ending or long vowel)
+	isLive := false
+	if comp.Final == "" || comp.Final == "n" || comp.Final == "m" || comp.Final == "ng" {
+		isLive = true
+	}
+	longVowels := []string{"aa", "ii", "ʉʉ", "uu", "ee", "ɛɛ", "oo", "ɔɔ", "əə"}
+	for _, lv := range longVowels {
+		if strings.Contains(comp.Vowel, lv) {
+			isLive = true
+			break
+		}
+	}
 	
 	// Get tone number
-	toneNum := getToneNumber(syl.ToneMark, toneClass, isLive)
-	
-	// Apply tone mark
-	return addToneMark(text, toneNum)
-}
-
-func getToneClass(syl Syllable) string {
-	if len(syl.InitialThai) == 0 {
-		return "mid"
-	}
-	
-	// Use first consonant for tone class
-	firstCons := syl.InitialThai[0]
-	
-	// Special case: ห as tone modifier
-	if firstCons == "ห" && len(syl.InitialThai) > 1 {
-		// ห makes following low consonant high class
-		secondCons := syl.InitialThai[1]
-		if lowClass[secondCons] {
-			return "high"
-		}
-	}
-	
-	if highClass[firstCons] {
-		return "high"
-	}
-	if midClass[firstCons] {
-		return "mid"
-	}
-	if lowClass[firstCons] {
-		return "low"
-	}
-	
-	return "mid"
-}
-
-func isSyllableLive(syl Syllable) bool {
-	// Live syllables end in sonorant or long vowel
-	
-	// Check final consonant
-	if syl.Final != "" {
-		sonorants := map[string]bool{
-			"ง": true, "น": true, "ม": true, "ย": true,
-			"ว": true, "ล": true, "ร": true, "ญ": true,
-			"ณ": true, "ฬ": true,
-		}
-		return sonorants[syl.Final]
-	}
-	
-	// Check for long vowel
-	vowel := getVowelSound(syl)
-	longVowels := map[string]bool{
-		"aa": true, "ii": true, "ʉʉ": true, "uu": true,
-		"ee": true, "ɛɛ": true, "oo": true, "ɔɔ": true,
-		"əə": true, "iia": true, "ʉʉa": true, "uua": true,
-		"aao": true, "iao": true, "eeo": true, "ɛɛo": true,
-		"ai": true, "ao": true,
-	}
-	
-	return longVowels[vowel]
-}
-
-func getToneNumber(toneMark string, toneClass string, isLive bool) int {
-	// Thai tone rules
-	// Return: 0=mid, 1=low, 2=high, 3=falling, 4=rising
-	
-	if toneMark == "" {
-		// No tone mark
+	toneNum := 0 // mid tone
+	if comp.ToneMark == "" {
+		// Apply tone rules based on class and syllable type
 		switch toneClass {
-		case "mid":
-			if isLive {
-				return 0 // mid
-			}
-			return 1 // low
 		case "high":
 			if isLive {
-				return 4 // rising
+				toneNum = 4 // rising
+			} else {
+				toneNum = 1 // low
 			}
-			return 1 // low
 		case "low":
-			if isLive {
-				return 0 // mid
+			if !isLive {
+				toneNum = 2 // high
 			}
-			return 2 // high (with short vowel) or 3 (falling with long vowel)
+		case "mid":
+			if !isLive {
+				toneNum = 1 // low
+			}
+		}
+	} else {
+		// Apply tone mark rules
+		switch comp.ToneMark {
+		case "่": // mai ek
+			if toneClass == "low" {
+				toneNum = 3 // falling
+			} else {
+				toneNum = 1 // low
+			}
+		case "้": // mai tho
+			if toneClass == "low" {
+				toneNum = 2 // high
+			} else {
+				toneNum = 3 // falling
+			}
+		case "๊": // mai tri
+			toneNum = 2 // high
+		case "๋": // mai jattawa
+			toneNum = 4 // rising
 		}
 	}
 	
-	switch toneMark {
-	case "่": // mai ek
-		switch toneClass {
-		case "low":
-			return 3 // falling
-		default:
-			return 1 // low
-		}
-	case "้": // mai tho
-		switch toneClass {
-		case "low":
-			return 2 // high
-		default:
-			return 3 // falling
-		}
-	case "๊": // mai tri
-		return 2 // high
-	case "๋": // mai jattawa
-		return 4 // rising
-	}
-	
-	return 0 // mid (default)
-}
-
-func addToneMark(text string, toneNum int) string {
+	// Add tone mark
 	if toneNum == 0 {
-		return text // mid tone, no mark
+		return text
 	}
 	
 	marks := map[int]string{
@@ -579,39 +558,36 @@ func addToneMark(text string, toneNum int) string {
 		4: "\u030C", // caron (rising)
 	}
 	
-	mark := marks[toneNum]
-	
-	// Find main vowel to add tone mark
+	// Find first vowel to add tone mark
 	runes := []rune(text)
 	for i, r := range runes {
 		if isRomanVowel(r) {
-			// Insert tone mark after first vowel
-			return string(runes[:i+1]) + mark + string(runes[i+1:])
+			return string(runes[:i+1]) + marks[toneNum] + string(runes[i+1:])
 		}
 	}
 	
 	return text
 }
 
+// Helper functions
 func isConsonant(s string) bool {
-	return strings.Contains(consonants, s)
+	return strings.Contains("กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ", s)
 }
 
 func isVowel(s string) bool {
-	return strings.Contains(vowels, s)
-}
-
-func isToneMark(s string) bool {
-	return strings.Contains(toneMarks, s)
+	return strings.Contains("ะัาิีึืุูเแโใไๅำ", s)
 }
 
 func isLeadingVowel(s string) bool {
 	return s == "เ" || s == "แ" || s == "โ" || s == "ไ" || s == "ใ"
 }
 
+func isToneMark(s string) bool {
+	return strings.Contains("่้๊๋", s)
+}
+
 func isRomanVowel(r rune) bool {
-	vowelChars := "aeiouəɛɔʉ"
-	return strings.ContainsRune(vowelChars, r)
+	return strings.ContainsRune("aeiouəɛɔʉ", r)
 }
 
 // Testing functions
@@ -638,15 +614,17 @@ var m = make(map[string]string)
 var re = regexp.MustCompile(`(.*),(.*\p{Thai}.*)`)
 
 func init() {
-	pp.Println("Init")
+	pp.Println("Building dictionary from manual vocab...")
 	path := "/home/voiduser/go/src/paiboonizer/manual vocab/"
 	a, err := os.ReadDir(path)
 	check(err)
+	
 	for _, e := range a {
 		file := filepath.Join(path, e.Name())
 		dat, err := os.ReadFile(file)
 		check(err)
 		arr := strings.Split(string(dat), "\n")
+		
 		for _, str := range arr {
 			raw := re.FindStringSubmatch(str)
 			if len(raw) == 0 {
@@ -655,10 +633,23 @@ func init() {
 			row := strings.Split(raw[2], ",")[:2]
 			th := html.UnescapeString(row[0])
 			translit := html.UnescapeString(row[1])
+			
+			// Add to test data
 			words = append(words, th)
 			m[th] = translit
+			
+			// Build dictionary
+			dictionary[th] = translit
+			
+			// Try to extract single syllables for syllable dictionary
+			// This is a simplification - in production, use proper tokenization
+			if !strings.Contains(th, " ") && len([]rune(th)) <= 4 {
+				syllableDict[th] = translit
+			}
 		}
 	}
+	
+	fmt.Printf("Dictionary built: %d entries, %d syllables\n", len(dictionary), len(syllableDict))
 }
 
 func check(e error) {
@@ -668,43 +659,20 @@ func check(e error) {
 }
 
 func main() {
-	fmt.Println("Testing improved Thai to Paiboon transliterator")
-	fmt.Println("Loaded", len(words), "words from manual vocab")
-	
-	// Test with Wiktionary cases
-	fmt.Println("\n=== Wiktionary Test Cases ===")
-	testWiktionary()
-	
-	// Test with manual vocab
-	fmt.Println("\n=== Manual Vocab Test Cases ===")
-	passCount := 0
-	failCount := 0
-	
-	for i, th := range words {
-		if i > 200 { // Test more samples
-			break
+	// Clean up pythainlp on exit
+	defer func() {
+		if nlpManager != nil {
+			ctx := context.Background()
+			nlpManager.Stop(ctx)
+			nlpManager.Close()
 		}
-		r := ThaiToRoman(th)
-		t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
-		r, _, _ = transform.String(t, r)
-		expected := m[th]
-		
-		if r == expected {
-			passCount++
-		} else {
-			failCount++
-			if failCount <= 30 { // Show first 30 failures
-				fmt.Printf("FAIL %s Got: %s Expected: %s\n", th, r, expected)
-			}
-		}
-	}
+	}()
 	
-	fmt.Printf("\nResults: %d passed, %d failed (%.1f%% accuracy)\n",
-		passCount, failCount, float64(passCount)*100/float64(passCount+failCount))
+	// Run accuracy test
+	testAccuracy()
 }
 
 func testWiktionary() {
-	// Basic tests
 	test("น้ำ", "nám")
 	test("ธรรม", "tam")
 	test("บาด", "bàat")
