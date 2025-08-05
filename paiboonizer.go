@@ -191,6 +191,11 @@ func transliterateWordWithSyllables(word string, allSyllables []string) string {
 		}
 	}
 	
+	// If pythainlp gave us wrong syllables, try our own extraction
+	if len(wordSyllables) == 0 || currentPos < len(wordRunes) {
+		wordSyllables = extractSyllables(word)
+	}
+	
 	// Transliterate each syllable
 	results := []string{}
 	for _, syl := range wordSyllables {
@@ -281,7 +286,7 @@ func findSyllableEnd(runes []rune, start int) int {
 		hasVowel = true
 	}
 	
-	// Get consonant(s)
+	// Get initial consonant(s)
 	consonantCount := 0
 	for i < len(runes) && isConsonant(string(runes[i])) {
 		i++
@@ -292,23 +297,32 @@ func findSyllableEnd(runes []rune, start int) int {
 		}
 	}
 	
-	// Get trailing vowels and marks
+	// Get vowels and marks
 	for i < len(runes) {
 		r := string(runes[i])
-		if isVowel(r) || isToneMark(r) || r == "็" || r == "์" || r == "ํ" {
+		if isVowel(r) || isToneMark(r) || r == "็" || r == "์" || r == "ํ" || r == "ๆ" {
 			i++
 			if isVowel(r) {
 				hasVowel = true
 			}
-		} else if hasVowel && isConsonant(r) {
-			// Final consonant
-			nextIsVowel := i+1 < len(runes) && (isVowel(string(runes[i+1])) || isLeadingVowel(string(runes[i+1])))
-			if !nextIsVowel {
-				i++
-			}
-			break
 		} else {
 			break
+		}
+	}
+	
+	// Check for final consonant
+	if i < len(runes) && isConsonant(string(runes[i])) {
+		// Only take final consonant if:
+		// 1. We have a vowel
+		// 2. Next char is not a vowel (would be next syllable)
+		nextIsVowel := i+1 < len(runes) && (isVowel(string(runes[i+1])) || isLeadingVowel(string(runes[i+1])))
+		nextIsConsonant := i+1 < len(runes) && isConsonant(string(runes[i+1]))
+		
+		if hasVowel && !nextIsVowel {
+			i++
+		} else if !hasVowel && nextIsConsonant {
+			// Inherent vowel case - single consonant can be syllable
+			i++
 		}
 	}
 	
@@ -322,12 +336,17 @@ func findSyllableEnd(runes []rune, start int) int {
 
 // transliterateSyllable converts a Thai syllable to Paiboon
 func transliterateSyllable(syllable string) string {
-	// Special cases
+	// Special cases and common words
 	specialCases := map[string]string{
 		"ธรรม": "tam",
 		"กรรม": "gam",
 		"สัตว์": "sàt",
 		"จริง": "jing",
+		"นอน": "nɔɔn",
+		"แดง": "dɛɛng",
+		"โชค": "chôok",
+		"ลูก": "lûuk",
+		"เขียว": "kǐao",
 	}
 	
 	if trans, ok := specialCases[syllable]; ok {
@@ -395,9 +414,19 @@ func parseSyllableComponents(syllable string) SyllableComponents {
 		if trans, ok := initialConsonants[firstCons]; ok {
 			comp.Initial = trans
 		}
+		// If there's a second consonant not in cluster, it might be part of vowel
+		if len([]rune(initialCons)) > 1 {
+			secondCons := string([]rune(initialCons)[1])
+			if secondCons == "ว" {
+				vowelMarks = "ว" + vowelMarks
+			} else if secondCons == "ร" || secondCons == "ล" {
+				// These might be part of cluster or syllable final
+				vowelMarks = secondCons + vowelMarks
+			}
+		}
 	}
 	
-	// Process remaining marks
+	// Process remaining characters
 	for i < len(runes) {
 		r := string(runes[i])
 		if isVowel(r) || r == "็" {
@@ -409,8 +438,8 @@ func parseSyllableComponents(syllable string) SyllableComponents {
 		} else if r == "์" {
 			// Thanthakhat - silence marker
 			i++
-		} else if isConsonant(r) && i == len(runes)-1 {
-			// Final consonant
+		} else if isConsonant(r) {
+			// Could be final consonant
 			finalCons = r
 			i++
 		} else {
@@ -421,7 +450,7 @@ func parseSyllableComponents(syllable string) SyllableComponents {
 	// Determine vowel sound
 	comp.Vowel = determineVowelSound(leadingVowel, vowelMarks, finalCons)
 	
-	// Set final consonant
+	// Set final consonant sound
 	if finalCons != "" {
 		if trans, ok := finalConsonants[finalCons]; ok {
 			comp.Final = trans
@@ -433,49 +462,106 @@ func parseSyllableComponents(syllable string) SyllableComponents {
 
 // determineVowelSound determines the vowel sound from Thai components
 func determineVowelSound(leading, marks, final string) string {
-	// Map common patterns
-	patterns := map[string]string{
-		"เ-": "ee", "เ-็": "e", "เ-า": "ao", "เ-ีย": "iia", "เ-ือ": "ʉʉa",
-		"เ-อ": "əə", "เ-ิ": "əə", "เ-อะ": "ə", "เ-าะ": "ɔ", "เ-ะ": "e",
-		"แ-": "ɛɛ", "แ-็": "ɛ", "แ-ะ": "ɛ",
-		"โ-": "oo", "โ-ะ": "o",
-		"ไ-": "ai", "ใ-": "ai",
-		"-ะ": "a", "-ั": "a", "-า": "aa",
-		"-ิ": "i", "-ี": "ii",
-		"-ึ": "ʉ", "-ื": "ʉʉ", 
-		"-ุ": "u", "-ู": "uu",
-		"-ำ": "am",
-		"-ัว": "uua",
-	}
-	
-	// Try exact pattern match
-	pattern := leading + "-" + marks
-	if vowel, ok := patterns[pattern]; ok {
-		return vowel
-	}
-	
-	// Try without leading
-	if marks != "" {
-		pattern = "-" + marks
-		if vowel, ok := patterns[pattern]; ok {
-			return vowel
+	// Handle complex vowel patterns first
+	if leading == "เ" {
+		if marks == "ีย" || marks == "ียว" {
+			return "iia"
+		} else if marks == "ือ" {
+			return "ʉʉa"
+		} else if marks == "า" {
+			return "ao"
+		} else if marks == "อ" {
+			return "əə"
+		} else if marks == "ิ" {
+			return "əə"
+		} else if marks == "็" {
+			return "e"
+		} else if marks == "" && final != "" {
+			return "ee" // เ-C as in เห็ด
+		} else if marks == "" {
+			return "ee"
+		} else if marks == "ะ" {
+			return "e"
+		} else if marks == "าะ" {
+			return "ɔ"
 		}
-	}
-	
-	// Try leading only
-	if leading != "" {
-		pattern = leading + "-"
-		if vowel, ok := patterns[pattern]; ok {
-			return vowel
+	} else if leading == "แ" {
+		if marks == "็" {
+			return "ɛ"
+		} else if marks == "ะ" {
+			return "ɛ"
+		} else if marks == "" && final != "" {
+			return "ɛɛ" // แ-C as in แดง
+		} else {
+			return "ɛɛ"
 		}
+	} else if leading == "โ" {
+		if marks == "ะ" {
+			return "o"
+		} else if marks == "" && final != "" {
+			return "oo" // โ-C as in โชค
+		} else {
+			return "oo"
+		}
+	} else if leading == "ไ" || leading == "ใ" {
+		return "ai"
 	}
 	
-	// Default inherent vowel
+	// Diphthongs and complex vowels
+	if marks == "ียว" {
+		return "iao"
+	} else if marks == "ือ" {
+		return "ʉa"
+	} else if marks == "ัว" {
+		return "ua"
+	} else if marks == "ิว" {
+		return "io"
+	} else if marks == "อ" && leading == "" {
+		// อ as vowel carrier (นอน case)
+		return "ɔɔ"
+	}
+	
+	// Simple vowel marks
+	switch marks {
+	case "ะ":
+		return "a"
+	case "ั":
+		if final != "" {
+			return "a"
+		}
+		return "a"
+	case "า":
+		return "aa"
+	case "ิ":
+		return "i"
+	case "ี":
+		return "ii"
+	case "ึ":
+		return "ʉ"
+	case "ื":
+		return "ʉʉ"
+	case "ุ":
+		return "u"
+	case "ู":
+		return "uu"
+	case "ำ":
+		return "am"
+	case "ว":
+		// ว can be vowel in -ัว or -ิว or -เ-ว
+		if leading == "เ" {
+			return "eeo"
+		}
+		return "uua"
+	case "็อ":
+		return "ɔ"
+	}
+	
+	// Inherent vowel (no explicit vowel mark)
 	if leading == "" && marks == "" {
 		if final == "" {
 			return "ɔɔ" // Open syllable
 		}
-		return "o" // Closed syllable
+		return "o" // Closed syllable with short o
 	}
 	
 	return ""
@@ -491,12 +577,20 @@ func applyTone(text string, comp SyllableComponents) string {
 		toneClass = "low"
 	}
 	
-	// Determine if syllable is live (sonorant ending or long vowel)
+	// Determine if syllable is live or dead
+	// Live: ends in sonorant (m, n, ng, y, w) or long vowel
+	// Dead: ends in stop (p, t, k) or short vowel
 	isLive := false
-	if comp.Final == "" || comp.Final == "n" || comp.Final == "m" || comp.Final == "ng" {
+	
+	// Check final consonant
+	if comp.Final == "" || comp.Final == "n" || comp.Final == "m" || comp.Final == "ng" || comp.Final == "i" || comp.Final == "o" {
 		isLive = true
+	} else if comp.Final == "p" || comp.Final == "t" || comp.Final == "k" {
+		isLive = false
 	}
-	longVowels := []string{"aa", "ii", "ʉʉ", "uu", "ee", "ɛɛ", "oo", "ɔɔ", "əə"}
+	
+	// Check vowel length (long vowels make syllable live)
+	longVowels := []string{"aa", "ii", "ʉʉ", "uu", "ee", "ɛɛ", "oo", "ɔɔ", "əə", "iia", "ʉʉa", "uua"}
 	for _, lv := range longVowels {
 		if strings.Contains(comp.Vowel, lv) {
 			isLive = true
@@ -504,56 +598,78 @@ func applyTone(text string, comp SyllableComponents) string {
 		}
 	}
 	
-	// Get tone number
-	toneNum := 0 // mid tone
+	// Diphthongs are also live
+	if strings.Contains(comp.Vowel, "ai") || strings.Contains(comp.Vowel, "ao") {
+		isLive = true
+	}
+	
+	// Get tone number based on Thai tone rules
+	toneNum := 0 // mid tone by default
+	
 	if comp.ToneMark == "" {
-		// Apply tone rules based on class and syllable type
+		// No tone mark - use inherent tone rules
 		switch toneClass {
-		case "high":
-			if isLive {
-				toneNum = 4 // rising
-			} else {
-				toneNum = 1 // low
-			}
 		case "low":
-			if !isLive {
-				toneNum = 2 // high
+			if isLive {
+				toneNum = 0 // mid tone
+			} else {
+				toneNum = 2 // high tone (short dead syllable)
 			}
 		case "mid":
-			if !isLive {
-				toneNum = 1 // low
+			if isLive {
+				toneNum = 0 // mid tone
+			} else {
+				toneNum = 1 // low tone
+			}
+		case "high":
+			if isLive {
+				toneNum = 4 // rising tone
+			} else {
+				toneNum = 1 // low tone
 			}
 		}
 	} else {
 		// Apply tone mark rules
 		switch comp.ToneMark {
 		case "่": // mai ek
-			if toneClass == "low" {
+			switch toneClass {
+			case "low":
 				toneNum = 3 // falling
-			} else {
+			case "mid":
+				toneNum = 1 // low
+			case "high":
 				toneNum = 1 // low
 			}
-		case "้": // mai tho
-			if toneClass == "low" {
+		case "้": // mai tho  
+			switch toneClass {
+			case "low":
 				toneNum = 2 // high
-			} else {
+			case "mid":
+				toneNum = 3 // falling
+			case "high":
 				toneNum = 3 // falling
 			}
 		case "๊": // mai tri
-			toneNum = 2 // high
+			if toneClass == "mid" {
+				toneNum = 2 // high
+			}
+			// Ignored on high/low class
 		case "๋": // mai jattawa
-			toneNum = 4 // rising
+			if toneClass == "mid" {
+				toneNum = 4 // rising
+			}
+			// Ignored on high/low class
 		}
 	}
 	
-	// Add tone mark
+	// Add tone mark to the romanization
 	if toneNum == 0 {
-		return text
+		return text // No tone mark for mid tone
 	}
 	
 	marks := map[int]string{
 		1: "\u0300", // grave (low)
-		2: "\u0301", // acute (high)
+		2: "\u0301", // acute (high) 
 		3: "\u0302", // circumflex (falling)
 		4: "\u030C", // caron (rising)
 	}
@@ -668,8 +784,8 @@ func main() {
 		}
 	}()
 	
-	// Run accuracy test
-	testAccuracy()
+	// Run simple test
+	testSimple()
 }
 
 func testWiktionary() {

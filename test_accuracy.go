@@ -69,6 +69,7 @@ func testAccuracy() {
 	for _, test := range wiktionaryTests {
 		// Skip if it's in the dictionary (to test actual transliteration)
 		if _, inDict := dictionary[test.thai]; inDict {
+			fmt.Printf("⏭️  %s is in dictionary, skipping\n", test.thai)
 			continue
 		}
 		
@@ -86,6 +87,11 @@ func testAccuracy() {
 		} else {
 			failCount++
 			fmt.Printf("❌ %s → %s (expected: %s)\n", test.thai, result, test.expected)
+			// Debug: show byte comparison
+			if test.thai == "น้ำ" || test.thai == "คิด" {
+				fmt.Printf("   Result bytes: %q\n", result)
+				fmt.Printf("   Expected bytes: %q\n", test.expected)
+			}
 		}
 	}
 	
