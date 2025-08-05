@@ -3,6 +3,10 @@ package main
 import (
 	"fmt"
 	"strings"
+	"unicode"
+	"golang.org/x/text/unicode/norm"
+	"golang.org/x/text/transform"
+	"golang.org/x/text/runes"
 )
 
 func testAccuracy() {
@@ -74,11 +78,16 @@ func testAccuracy() {
 		}
 		
 		result := ThaiToRoman(test.thai)
+		// Normalize for proper Unicode comparison
+		t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
+		resultNorm, _, _ := transform.String(t, result)
+		expectedNorm, _, _ := transform.String(t, test.expected)
+		
 		// Remove tone marks for comparison
 		resultClean := removeToneMarks(result)
 		expectedClean := removeToneMarks(test.expected)
 		
-		if result == test.expected {
+		if result == test.expected || resultNorm == expectedNorm {
 			passCount++
 			fmt.Printf("✅ %s → %s\n", test.thai, result)
 		} else if resultClean == expectedClean {

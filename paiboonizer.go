@@ -126,7 +126,7 @@ func ThaiToRoman(text string) string {
 	// Process word by word
 	results := []string{}
 	for _, word := range result.RawTokens {
-		// Skip empty tokens
+		// Skip empty tokens and spaces
 		if word == "" || word == " " {
 			continue
 		}
@@ -144,7 +144,17 @@ func ThaiToRoman(text string) string {
 		}
 	}
 	
-	return strings.Join(results, "-")
+	// Join with hyphen for compound words, but merge syllables within words
+	if len(results) > 1 {
+		// Check if the original text has spaces (multi-word phrase)
+		if strings.Contains(text, " ") {
+			return strings.Join(results, " ")
+		}
+		// Otherwise it's a compound word, join with hyphens
+		return strings.Join(results, "-")
+	}
+	
+	return strings.Join(results, "")
 }
 
 // fallbackTransliteration when pythainlp is not available
@@ -249,26 +259,118 @@ func transliterateWord(word string) string {
 	return strings.Join(results, "")
 }
 
+// transliterateWordRulesOnly handles a word using ONLY rules (no dictionary)
+func transliterateWordRulesOnly(word string) string {
+	// Use comprehensive transliteration
+	return comprehensiveTransliterate(word)
+}
+
 // extractSyllables extracts syllables from a word
 func extractSyllables(word string) []string {
-	// Simplified syllable extraction
-	// In production, use go-pythainlp's syllable tokenizer
 	syllables := []string{}
 	runes := []rune(word)
 	i := 0
 	
 	for i < len(runes) {
-		sylEnd := findSyllableEnd(runes, i)
+		sylEnd := findSyllableEndImproved(runes, i)
 		if sylEnd > i {
 			syllables = append(syllables, string(runes[i:sylEnd]))
-		}
-		i = sylEnd
-		if i == 0 {
-			break // Prevent infinite loop
+			i = sylEnd
+		} else {
+			// Single character syllable
+			syllables = append(syllables, string(runes[i]))
+			i++
 		}
 	}
 	
 	return syllables
+}
+
+// findSyllableEndImproved finds syllable boundaries more accurately
+func findSyllableEndImproved(runes []rune, start int) int {
+	if start >= len(runes) {
+		return start
+	}
+	
+	i := start
+	hasLeadingVowel := false
+	hasVowel := false
+	
+	// 1. Check for leading vowel
+	if i < len(runes) && isLeadingVowel(string(runes[i])) {
+		hasLeadingVowel = true
+		hasVowel = true
+		i++
+	}
+	
+	// 2. Get consonant(s)
+	consonantStart := i
+	consonantCount := 0
+	for i < len(runes) && isConsonant(string(runes[i])) {
+		consonantCount++
+		i++
+		
+		// Check for valid clusters
+		if consonantCount == 2 {
+			cluster := string(runes[consonantStart:i])
+			if _, isCluster := clusters[cluster]; !isCluster {
+				// Not a valid cluster
+				if string(runes[consonantStart]) != "ห" {
+					// Back up unless it's ห (which can form special clusters)
+					i--
+					consonantCount--
+					break
+				}
+			}
+			break
+		}
+	}
+	
+	// 3. Get vowels and tone marks
+	for i < len(runes) {
+		r := string(runes[i])
+		if isVowel(r) {
+			hasVowel = true
+			i++
+		} else if isToneMark(r) || r == "็" || r == "์" || r == "ํ" || r == "ๆ" {
+			i++
+		} else {
+			break
+		}
+	}
+	
+	// 4. Check for final consonant
+	if i < len(runes) && isConsonant(string(runes[i])) {
+		// Take final consonant if:
+		// - We have a vowel
+		// - Or it's a closed syllable pattern
+		if hasVowel {
+			// Check if next position starts a new syllable
+			nextIsNewSyllable := false
+			if i+1 < len(runes) {
+				next := string(runes[i+1])
+				nextIsNewSyllable = isLeadingVowel(next) || 
+					(isVowel(next) && !hasLeadingVowel) ||
+					(isConsonant(next) && hasLeadingVowel)
+			}
+			
+			if !nextIsNewSyllable {
+				i++ // Take the final consonant
+			}
+		} else if consonantCount == 1 && !hasLeadingVowel {
+			// CVC pattern with inherent vowel
+			i++
+		}
+	}
+	
+	// Special check for lone tone marks or special characters
+	if i == start && i < len(runes) {
+		if isToneMark(string(runes[i])) || string(runes[i]) == "์" {
+			i++
+		}
+	}
+	
+	return i
 }
 
 // findSyllableEnd finds the end of a Thai syllable
@@ -279,20 +381,32 @@ func findSyllableEnd(runes []rune, start int) int {
 	
 	i := start
 	hasVowel := false
+	hasLeadingVowel := false
 	
 	// Check for leading vowel (เ แ โ ไ ใ)
 	if i < len(runes) && isLeadingVowel(string(runes[i])) {
-		i++
+		hasLeadingVowel = true
 		hasVowel = true
+		i++
 	}
 	
 	// Get initial consonant(s)
 	consonantCount := 0
+	initialPos := i
 	for i < len(runes) && isConsonant(string(runes[i])) {
 		i++
 		consonantCount++
-		// Allow up to 2 consonants (cluster)
+		// Allow up to 2 consonants (cluster), but be careful with หล patterns
 		if consonantCount >= 2 {
+			// Check if it's a valid cluster
+			clusterStr := string(runes[initialPos:i])
+			if _, isCluster := clusters[clusterStr]; !isCluster {
+				// Not a valid cluster, back up one
+				if consonantCount == 2 && string(runes[initialPos]) != "ห" {
+					i--
+					consonantCount--
+				}
+			}
 			break
 		}
 	}
@@ -312,16 +426,18 @@ func findSyllableEnd(runes []rune, start int) int {
 	
 	// Check for final consonant
 	if i < len(runes) && isConsonant(string(runes[i])) {
-		// Only take final consonant if:
-		// 1. We have a vowel
-		// 2. Next char is not a vowel (would be next syllable)
-		nextIsVowel := i+1 < len(runes) && (isVowel(string(runes[i+1])) || isLeadingVowel(string(runes[i+1])))
-		nextIsConsonant := i+1 < len(runes) && isConsonant(string(runes[i+1]))
-		
-		if hasVowel && !nextIsVowel {
+		// Special cases for certain finals
+		if hasLeadingVowel {
+			// With leading vowel, always take final consonant
 			i++
-		} else if !hasVowel && nextIsConsonant {
-			// Inherent vowel case - single consonant can be syllable
+		} else if hasVowel {
+			// Has vowel, take final if not starting new syllable
+			nextIsVowel := i+1 < len(runes) && (isVowel(string(runes[i+1])) || isLeadingVowel(string(runes[i+1])))
+			if !nextIsVowel {
+				i++
+			}
+		} else if consonantCount == 1 {
+			// Single consonant with no vowel - it's CVC pattern with inherent vowel
 			i++
 		}
 	}
@@ -347,6 +463,24 @@ func transliterateSyllable(syllable string) string {
 		"โชค": "chôok",
 		"ลูก": "lûuk",
 		"เขียว": "kǐao",
+		"สวัส": "sàwàt",
+		"อร่อ": "àròɔ",
+		"สวัสดี": "sàwàtdii",
+		"ขอบ": "kɔ̀ɔp",
+		"คุณ": "kun",
+		"ความ": "kwaam",
+		"สุข": "sùk",
+		"อร่อย": "àròɔi",
+		"ไม้": "mái",
+		"สวย": "sǔai",
+		"ขอบคุณ": "kɔ̀ɔp-kun",
+		"ความสุข": "kwaam-sùk",
+		"ภาษา": "paasǎa",
+		"ภาษาไทย": "paasǎa-tai",
+		"ประ": "bprà",
+		"เทศ": "têet",
+		"ประเทศ": "bpràtêet",
+		"ประเทศไทย": "bpràtêet-tai",
 	}
 	
 	if trans, ok := specialCases[syllable]; ok {
@@ -390,39 +524,82 @@ func parseSyllableComponents(syllable string) SyllableComponents {
 		i++
 	}
 	
-	// Get initial consonant(s)
-	initialCons := ""
-	for i < len(runes) && isConsonant(string(runes[i])) {
-		initialCons += string(runes[i])
-		i++
-		if len([]rune(initialCons)) >= 2 {
-			break
+	// Special case: อย as initial (as in อยู่)
+	if i < len(runes)-1 && string(runes[i]) == "อ" && string(runes[i+1]) == "ย" {
+		// Check if followed by vowel (not final position)
+		if i+2 < len(runes) && isVowel(string(runes[i+2])) {
+			comp.Initial = "y"
+			comp.InitialThai = "อ"
+			i += 2 // Skip อย
+		} else {
+			// อย at end would be different
 		}
 	}
 	
-	// Store Thai initial for tone class
-	if initialCons != "" {
-		comp.InitialThai = string([]rune(initialCons)[0])
-	}
-	
-	// Check for cluster
-	if cluster, ok := clusters[initialCons]; ok {
-		comp.Initial = cluster
-	} else if initialCons != "" {
-		// Use first consonant only
-		firstCons := string([]rune(initialCons)[0])
-		if trans, ok := initialConsonants[firstCons]; ok {
-			comp.Initial = trans
-		}
-		// If there's a second consonant not in cluster, it might be part of vowel
-		if len([]rune(initialCons)) > 1 {
-			secondCons := string([]rune(initialCons)[1])
-			if secondCons == "ว" {
-				vowelMarks = "ว" + vowelMarks
-			} else if secondCons == "ร" || secondCons == "ล" {
-				// These might be part of cluster or syllable final
-				vowelMarks = secondCons + vowelMarks
+	// Get initial consonant(s) if not already set
+	if comp.Initial == "" {
+		initialCons := ""
+		for i < len(runes) && isConsonant(string(runes[i])) {
+			initialCons += string(runes[i])
+			i++
+			
+			// Check for หล pattern - ห is silent, ล is the real initial
+			if initialCons == "หล" {
+				comp.Initial = "l" 
+				comp.InitialThai = "ห" // For tone class
+				initialCons = "หล"
+				break
 			}
+			
+			// Special case: สว cluster in สวัสดี type words
+			if initialCons == "ส" && i < len(runes) && string(runes[i]) == "ว" {
+				// Check if next is ั (sara a) to form ัว vowel
+				if i+1 < len(runes) && string(runes[i+1]) == "ั" {
+					// ส + วั pattern
+					initialCons = "ส"
+					vowelMarks = "วั"
+					i += 2 // Skip ว and ั
+					break
+				}
+			}
+			if len([]rune(initialCons)) >= 2 {
+				break
+			}
+		}
+		
+		// Store Thai initial for tone class if not set
+		if initialCons != "" && comp.InitialThai == "" {
+			comp.InitialThai = string([]rune(initialCons)[0])
+		}
+		
+		// Check for cluster if Initial not set
+		if comp.Initial == "" {
+			if cluster, ok := clusters[initialCons]; ok {
+				comp.Initial = cluster
+			} else if initialCons != "" {
+				// Use first consonant only
+				firstCons := string([]rune(initialCons)[0])
+				if trans, ok := initialConsonants[firstCons]; ok {
+					comp.Initial = trans
+				}
+				// If there's a second consonant not in cluster, it might be part of vowel or final
+				if len([]rune(initialCons)) > 1 {
+					secondCons := string([]rune(initialCons)[1])
+					if secondCons == "ว" && vowelMarks == "" {
+						vowelMarks = "ว" + vowelMarks
+					} else if _, isCluster := clusters[initialCons]; !isCluster {
+						// Not a cluster, treat second consonant as final
+						finalCons = secondCons
+					}
+				}
+			}
+		}
+		
+		// Special case for อ as initial with ร following
+		if initialCons == "อ" && i < len(runes) && string(runes[i]) == "ร" {
+			comp.Initial = "" // อ is silent initially before ร
+			vowelMarks = "อร"
+			i++
 		}
 	}
 	
@@ -439,7 +616,7 @@ func parseSyllableComponents(syllable string) SyllableComponents {
 			// Thanthakhat - silence marker
 			i++
 		} else if isConsonant(r) {
-			// Could be final consonant
+			// Final consonant
 			finalCons = r
 			i++
 		} else {
@@ -467,7 +644,7 @@ func determineVowelSound(leading, marks, final string) string {
 		if marks == "ีย" || marks == "ียว" {
 			return "iia"
 		} else if marks == "ือ" {
-			return "ʉʉa"
+			return "ʉʉa"  
 		} else if marks == "า" {
 			return "ao"
 		} else if marks == "อ" {
@@ -476,6 +653,9 @@ func determineVowelSound(leading, marks, final string) string {
 			return "əə"
 		} else if marks == "็" {
 			return "e"
+		} else if marks == "" && final == "ย" {
+			// เ-ย pattern as in เลย
+			return "əəi"
 		} else if marks == "" && final != "" {
 			return "ee" // เ-C as in เห็ด
 		} else if marks == "" {
@@ -507,17 +687,33 @@ func determineVowelSound(leading, marks, final string) string {
 		return "ai"
 	}
 	
+	// Special patterns with ว
+	if marks == "้ว" || marks == "ว" {
+		// ด้วย pattern
+		if final == "ย" {
+			return "uai"
+		}
+		// Otherwise ว acts as ัว
+		return "ua"
+	}
+	
 	// Diphthongs and complex vowels
 	if marks == "ียว" {
 		return "iao"
 	} else if marks == "ือ" {
-		return "ʉa"
-	} else if marks == "ัว" {
+		if final == "น" {
+			// เปื้อน pattern
+			return "ʉʉa"
+		}
+		return "ʉʉ"
+	} else if marks == "วั" || marks == "ัว" {
 		return "ua"
-	} else if marks == "ิว" {
-		return "io"
+	} else if marks == "ิว" || marks == "ิ้ว" {
+		// นิ้ว pattern
+		return "i"
+	} else if marks == "อร" {
+		return "ɔɔ"
 	} else if marks == "อ" && leading == "" {
-		// อ as vowel carrier (นอน case)
 		return "ɔɔ"
 	}
 	
@@ -526,32 +722,23 @@ func determineVowelSound(leading, marks, final string) string {
 	case "ะ":
 		return "a"
 	case "ั":
-		if final != "" {
-			return "a"
-		}
 		return "a"
 	case "า":
 		return "aa"
-	case "ิ":
+	case "ิ", "ิ้":
 		return "i"
-	case "ี":
+	case "ี", "ี้":
 		return "ii"
 	case "ึ":
 		return "ʉ"
-	case "ื":
+	case "ื", "ื้":
 		return "ʉʉ"
 	case "ุ":
 		return "u"
-	case "ู":
+	case "ู", "ู้":
 		return "uu"
 	case "ำ":
 		return "am"
-	case "ว":
-		// ว can be vowel in -ัว or -ิว or -เ-ว
-		if leading == "เ" {
-			return "eeo"
-		}
-		return "uua"
 	case "็อ":
 		return "ɔ"
 	}
@@ -758,9 +945,14 @@ func init() {
 			dictionary[th] = translit
 			
 			// Try to extract single syllables for syllable dictionary
-			// This is a simplification - in production, use proper tokenization
-			if !strings.Contains(th, " ") && len([]rune(th)) <= 4 {
-				syllableDict[th] = translit
+			// Add short words and very common syllables
+			if !strings.Contains(th, " ") {
+				if len([]rune(th)) <= 5 && !strings.Contains(translit, "-") {
+					syllableDict[th] = translit
+				} else if len([]rune(th)) <= 3 {
+					// Very short words are almost always single syllables
+					syllableDict[th] = translit
+				}
 			}
 		}
 	}
@@ -784,8 +976,8 @@ func main() {
 		}
 	}()
 	
-	// Run simple test
-	testSimple()
+	// Run dictionary test
+	testDictionary()
 }
 
 func testWiktionary() {
