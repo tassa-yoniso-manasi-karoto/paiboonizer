@@ -23,7 +23,7 @@ func analyzeFailures() {
 	}
 	
 	for _, test := range tests {
-		result := transliterateWordRulesOnly(test.thai)
+		result := TransliterateWordRulesOnly(test.thai)
 		fmt.Printf("\nThai: %s\n", test.thai)
 		fmt.Printf("Expected: %s\n", test.expected)
 		fmt.Printf("Got:      %s\n", result)
@@ -32,7 +32,7 @@ func analyzeFailures() {
 			fmt.Printf("Status:   ❌ FAIL\n")
 			
 			// Debug: show syllables
-			syllables := extractSyllables(test.thai)
+			syllables := ExtractSyllables(test.thai)
 			fmt.Printf("Syllables: %v\n", syllables)
 			
 			for _, syl := range syllables {

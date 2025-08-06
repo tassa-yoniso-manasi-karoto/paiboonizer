@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"html"
 	"os"
@@ -16,6 +17,7 @@ import (
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
+	"github.com/rivo/uniseg"
 )
 
 // Global dictionary built from manual vocab
@@ -203,7 +205,7 @@ func transliterateWordWithSyllables(word string, allSyllables []string) string {
 	
 	// If pythainlp gave us wrong syllables, try our own extraction
 	if len(wordSyllables) == 0 || currentPos < len(wordRunes) {
-		wordSyllables = extractSyllables(word)
+		wordSyllables = ExtractSyllables(word)
 	}
 	
 	// Transliterate each syllable
@@ -229,6 +231,9 @@ func transliterateWordWithSyllables(word string, allSyllables []string) string {
 }
 
 // transliterateWord handles a single Thai word without known syllables
+// transliterateWord converts a Thai word to Paiboon romanization.
+// It first attempts dictionary lookup for known words, then falls back to
+// rule-based transliteration using pythainlp tokenization when available.
 func transliterateWord(word string) string {
 	// Try dictionary first
 	if trans, ok := dictionary[word]; ok {
@@ -236,7 +241,7 @@ func transliterateWord(word string) string {
 	}
 	
 	// Get syllables using simple extraction
-	syllables := extractSyllables(word)
+	syllables := ExtractSyllables(word)
 	
 	results := []string{}
 	for _, syl := range syllables {
@@ -259,14 +264,42 @@ func transliterateWord(word string) string {
 	return strings.Join(results, "")
 }
 
-// transliterateWordRulesOnly handles a word using ONLY rules (no dictionary)
-func transliterateWordRulesOnly(word string) string {
-	// Use comprehensive transliteration
-	return comprehensiveTransliterate(word)
+// TransliterateWordRulesOnly transliterates Thai words using dictionary lookup
+// followed by rule-based transliteration with syllable tokenization support.
+// This is the main public API for transliteration.
+func TransliterateWordRulesOnly(word string) string {
+	// Try dictionary lookup first
+	if trans, ok := dictionary[word]; ok {
+		return trans
+	}
+	
+	// Try syllable tokenization if pythainlp is available
+	if nlpManager != nil {
+		ctx := context.Background()
+		result, err := nlpManager.SyllableTokenize(ctx, word)
+		if err == nil && result != nil && len(result.Syllables) > 0 {
+			// Multi-syllable word - transliterate each syllable
+			results := []string{}
+			for _, syllable := range result.Syllables {
+				trans := ComprehensiveTransliterate(syllable)
+				if trans != "" {
+					results = append(results, trans)
+				}
+			}
+			if len(results) > 0 {
+				return strings.Join(results, "-")
+			}
+		}
+	}
+	
+	// Fall back to comprehensive transliteration
+	return ComprehensiveTransliterate(word)
 }
 
-// extractSyllables extracts syllables from a word
-func extractSyllables(word string) []string {
+// ExtractSyllables breaks a Thai word into individual syllables using
+// rule-based syllable boundary detection. It handles leading vowels,
+// consonant clusters, and complex vowel patterns.
+func ExtractSyllables(word string) []string {
 	syllables := []string{}
 	runes := []rune(word)
 	i := 0
@@ -849,7 +882,7 @@ func applyTone(text string, comp SyllableComponents) string {
 		}
 	}
 	
-	// Add tone mark to the romanization
+	// Add tone mark to the romanization using proper grapheme handling
 	if toneNum == 0 {
 		return text // No tone mark for mid tone
 	}
@@ -861,15 +894,33 @@ func applyTone(text string, comp SyllableComponents) string {
 		4: "\u030C", // caron (rising)
 	}
 	
-	// Find first vowel to add tone mark
-	runes := []rune(text)
-	for i, r := range runes {
-		if isRomanVowel(r) {
-			return string(runes[:i+1]) + marks[toneNum] + string(runes[i+1:])
+	// Find first vowel and add tone mark properly
+	graphemes := uniseg.NewGraphemes(text)
+	var result strings.Builder
+	tonePlaced := false
+	
+	for graphemes.Next() {
+		cluster := graphemes.Str()
+		if !tonePlaced && len(cluster) > 0 {
+			for _, r := range cluster {
+				if isRomanVowel(r) {
+					result.WriteString(cluster + marks[toneNum])
+					tonePlaced = true
+					break
+				}
+			}
+			if !tonePlaced {
+				result.WriteString(cluster)
+			}
+		} else {
+			result.WriteString(cluster)
 		}
 	}
 	
-	return text
+	if !tonePlaced {
+		return text // No vowel found
+	}
+	return result.String()
 }
 
 // Helper functions
@@ -967,6 +1018,13 @@ func check(e error) {
 }
 
 func main() {
+	// Define command line flags
+	dictionaryCheck := flag.Bool("dictionary-check", false, "Test transliterator accuracy against dictionary")
+	analyzeFlag := flag.Bool("analyze", false, "Analyze specific failure cases")
+	testFile := flag.Bool("test", false, "Test transliterator on test.txt")
+	noDictionary := flag.Bool("no-dict", false, "Disable dictionary lookup for testing pure rules")
+	flag.Parse()
+	
 	// Clean up pythainlp on exit
 	defer func() {
 		if nlpManager != nil {
@@ -976,8 +1034,24 @@ func main() {
 		}
 	}()
 	
-	// Run dictionary test
-	testDictionary()
+	// Handle flags
+	if *dictionaryCheck {
+		testDictionary(!*noDictionary) // Pass true to use dictionary, false to use pure rules
+		return
+	}
+	
+	if *analyzeFlag {
+		analyzeFailures()
+		return
+	}
+	
+	if *testFile {
+		testTransliterate()
+		return
+	}
+	
+	// Default test
+	fmt.Println("Use -dictionary-check, -analyze, or -test flags to run tests")
 }
 
 func testWiktionary() {

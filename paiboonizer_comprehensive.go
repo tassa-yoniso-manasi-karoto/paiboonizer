@@ -2,6 +2,7 @@ package main
 
 import (
 	"strings"
+	"github.com/rivo/uniseg"
 )
 
 // ComprehensiveSyllable represents a parsed Thai syllable
@@ -36,18 +37,32 @@ func parseThaiSyllable(syl string) ComprehensiveSyllable {
 		
 		// Check for second consonant (cluster)
 		if i < len(runes) && isConsonant(string(runes[i])) {
-			// Check if it's a valid cluster
-			cluster := cs.Initial1 + string(runes[i])
-			if _, ok := clusters[cluster]; ok {
-				cs.Initial2 = string(runes[i])
-				i++
-			} else if cs.Initial1 == "ห" && (string(runes[i]) == "น" || string(runes[i]) == "ม" || string(runes[i]) == "ล" || string(runes[i]) == "ว" || string(runes[i]) == "ย") {
-				// ห leading consonant clusters
-				cs.Initial2 = string(runes[i])
-				i++
-			} else if i+1 < len(runes) && !isVowel(string(runes[i+1])) && !isToneMark(string(runes[i+1])) {
-				// Not a cluster, might be final consonant
-				// Don't consume it here
+			// Special case for Cร patterns
+			if string(runes[i]) == "ร" {
+				// Check if followed by ะ or า (กระ, กรา patterns)
+				if i+1 < len(runes) && (string(runes[i+1]) == "ะ" || string(runes[i+1]) == "า") {
+					cs.Initial2 = string(runes[i])
+					i++
+					// The vowel will be picked up in the next section
+				} else {
+					// Regular cluster with ร
+					cs.Initial2 = string(runes[i])
+					i++
+				}
+			} else {
+				// Check if it's a valid cluster
+				cluster := cs.Initial1 + string(runes[i])
+				if _, ok := clusters[cluster]; ok {
+					cs.Initial2 = string(runes[i])
+					i++
+				} else if cs.Initial1 == "ห" && (string(runes[i]) == "น" || string(runes[i]) == "ม" || string(runes[i]) == "ล" || string(runes[i]) == "ว" || string(runes[i]) == "ย") {
+					// ห leading consonant clusters
+					cs.Initial2 = string(runes[i])
+					i++
+				} else if i+1 < len(runes) && !isVowel(string(runes[i+1])) && !isToneMark(string(runes[i+1])) {
+					// Not a cluster, might be final consonant
+					// Don't consume it here
+				}
 			}
 		}
 	}
@@ -89,6 +104,7 @@ func parseThaiSyllable(syl string) ComprehensiveSyllable {
 // buildPaiboonFromSyllable converts parsed syllable to Paiboon
 func buildPaiboonFromSyllable(cs ComprehensiveSyllable) string {
 	result := ""
+	vowelSound := ""
 	
 	// Get initial consonant sound
 	initialSound := ""
@@ -97,6 +113,17 @@ func buildPaiboonFromSyllable(cs ComprehensiveSyllable) string {
 		cluster := cs.Initial1 + cs.Initial2
 		if trans, ok := clusters[cluster]; ok {
 			initialSound = trans
+		} else if cs.Initial2 == "ร" && (cs.Vowel1 == "ะ" || cs.Vowel1 == "า") {
+			// Special Cระ/Cรา patterns (like กระ, ครา)
+			if trans, ok := initialConsonants[cs.Initial1]; ok {
+				initialSound = trans + "r"
+				// Add tilde for shortened vowel in Cระ pattern
+				if cs.Vowel1 == "ะ" {
+					initialSound = trans + "r" + "à~"
+					cs.Vowel1 = "" // Don't process the vowel again
+					vowelSound = "skip" // Skip vowel processing
+				}
+			}
 		} else if cs.Initial1 == "ห" {
 			// ห is silent in these clusters
 			if trans, ok := initialConsonants[cs.Initial2]; ok {
@@ -109,13 +136,19 @@ func buildPaiboonFromSyllable(cs ComprehensiveSyllable) string {
 		}
 	}
 	
-	// Determine vowel sound based on pattern
-	vowelSound := ""
-	
+	// Determine vowel sound based on pattern (skip if already handled)
+	if vowelSound == "skip" {
+		vowelSound = "" // Reset for final assembly
+	} else {
 	// Handle specific patterns
 	if cs.LeadingVowel == "เ" {
 		if cs.Vowel1 == "ี" && cs.Vowel2 == "ย" {
 			vowelSound = "iia"
+		} else if cs.Vowel1 == "ี" && cs.Final1 == "ย" {
+			// เรียน pattern where ย is part of vowel
+			vowelSound = "iia"
+			cs.Final1 = cs.Final2
+			cs.Final2 = ""
 		} else if cs.Vowel1 == "ื" && cs.Vowel2 == "อ" {
 			vowelSound = "ʉʉa"
 		} else if cs.Vowel1 == "ื" && cs.Final1 == "อ" {
@@ -219,6 +252,7 @@ func buildPaiboonFromSyllable(cs ComprehensiveSyllable) string {
 			}
 		}
 	}
+	}
 	
 	// Get final consonant sound
 	finalSound := ""
@@ -291,29 +325,97 @@ func buildPaiboonFromSyllable(cs ComprehensiveSyllable) string {
 		}
 	}
 	
-	// Add tone diacritic to first vowel
+	// Add tone diacritic to first vowel using proper grapheme handling
 	if toneNum > 0 {
 		toneMarks := map[int]string{
 			1: "\u0300", // grave
-			2: "\u0301", // acute
+			2: "\u0301", // acute 
 			3: "\u0302", // circumflex
 			4: "\u030C", // caron
 		}
 		
-		// Find first vowel in result
-		for i, r := range result {
-			if isRomanVowel(r) {
-				result = result[:i+1] + toneMarks[toneNum] + result[i+1:]
-				break
+		// Find first vowel and add tone mark properly
+		graphemes := uniseg.NewGraphemes(result)
+		var newResult strings.Builder
+		tonePlaced := false
+		
+		for graphemes.Next() {
+			cluster := graphemes.Str()
+			// Check if this grapheme contains a vowel
+			if !tonePlaced && len(cluster) > 0 {
+				for _, r := range cluster {
+					if isRomanVowel(r) {
+						// Add the vowel with the tone mark
+						newResult.WriteString(cluster + toneMarks[toneNum])
+						tonePlaced = true
+						break
+					}
+				}
+				if !tonePlaced {
+					newResult.WriteString(cluster)
+				}
+			} else {
+				newResult.WriteString(cluster)
 			}
 		}
+		result = newResult.String()
 	}
 	
 	return result
 }
 
-// comprehensiveTransliterate uses the comprehensive parser
-func comprehensiveTransliterate(word string) string {
+// findSyllableEndComprehensive finds syllable boundaries with better pattern recognition
+func findSyllableEndComprehensive(runes []rune, start int) int {
+	if start >= len(runes) {
+		return start
+	}
+	
+	// Check for special patterns first
+	if start+3 <= len(runes) {
+		// Check เCียน pattern (like เรียน)
+		if string(runes[start]) == "เ" && isConsonant(string(runes[start+1])) {
+			if start+4 <= len(runes) && string(runes[start+2]) == "ี" && string(runes[start+3]) == "ย" {
+				// Check if there's a final consonant
+				if start+5 <= len(runes) && isConsonant(string(runes[start+4])) {
+					return start + 5 // เCียC pattern
+				}
+				return start + 4 // เCีย pattern
+			}
+			// Check เCือน pattern
+			if start+4 <= len(runes) && string(runes[start+2]) == "ื" && string(runes[start+3]) == "อ" {
+				if start+5 <= len(runes) && isConsonant(string(runes[start+4])) {
+					return start + 5
+				}
+				return start + 4
+			}
+		}
+		
+		// Check กระ/กรา patterns and other Cระ/Cรา patterns
+		if start+2 < len(runes) && string(runes[start+1]) == "ร" {
+			if string(runes[start+2]) == "ะ" {
+				// Check for final consonant after Cระ
+				if start+3 < len(runes) && isConsonant(string(runes[start+3])) {
+					return start + 4 // CระC pattern
+				}
+				return start + 3 // Cระ pattern
+			} else if string(runes[start+2]) == "า" {
+				// Check for final consonant after Cรา
+				if start+3 < len(runes) && isConsonant(string(runes[start+3])) {
+					return start + 4 // CราC pattern
+				}
+				return start + 3 // Cรา pattern
+			}
+		}
+	}
+	
+	// Fall back to improved syllable finder
+	return findSyllableEndImproved(runes, start)
+}
+
+// ComprehensiveTransliterate performs advanced Thai-to-Paiboon transliteration
+// using comprehensive syllable parsing, pattern recognition, and tone rules.
+// It handles complex vowel patterns, consonant clusters, and special cases.
+func ComprehensiveTransliterate(word string) string {
 	// Try syllable dictionary first for known syllables
 	if trans, ok := syllableDict[word]; ok {
 		return trans
@@ -340,8 +442,8 @@ func comprehensiveTransliterate(word string) string {
 		}
 		
 		if !found {
-			// Extract one syllable using rules
-			end := findSyllableEndImproved(runes, i)
+			// Extract one syllable using improved rules
+			end := findSyllableEndComprehensive(runes, i)
 			if end > i {
 				syl := string(runes[i:end])
 				parsed := parseThaiSyllable(syl)

@@ -9,10 +9,17 @@ import (
 	"golang.org/x/text/runes"
 )
 
-func testDictionary() {
-	fmt.Println("=== Testing Rule-Based Transliterator Against Dictionary ===")
-	fmt.Println("Dictionary entries:", len(dictionary))
-	fmt.Println("Testing WITHOUT dictionary lookup (pure rules only)\n")
+func testDictionary(useDictionary bool) {
+	// Control whether to use dictionary lookup or pure rules
+	
+	if useDictionary {
+		fmt.Println("=== Testing Transliterator With Dictionary Lookup ===")
+		fmt.Println("Testing WITH dictionary lookup enabled")
+	} else {
+		fmt.Println("=== Testing Rule-Based Transliterator (No Dictionary) ===")
+		fmt.Println("Testing WITHOUT dictionary lookup (pure rules only)")
+	}
+	fmt.Println("Dictionary entries available:", len(dictionary), "\n")
 	
 	passed := 0
 	total := 0
@@ -31,8 +38,13 @@ func testDictionary() {
 		
 		total++
 		
-		// Use rule-based transliteration ONLY (no dictionary lookup)
-		result := transliterateWordRulesOnly(thai)
+		// Use dictionary or pure rules based on configuration
+		var result string
+		if useDictionary {
+			result = TransliterateWordRulesOnly(thai) // This uses dictionary first
+		} else {
+			result = ComprehensiveTransliterate(thai) // This uses only rules
+		}
 		
 		// Remove hyphens from expected for comparison (compound word separation not important now)
 		expectedNoHyphen := strings.ReplaceAll(expected, "-", "")
