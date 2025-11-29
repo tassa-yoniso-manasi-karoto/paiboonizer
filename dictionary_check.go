@@ -236,13 +236,18 @@ func transliterateWithPythainlp(word string) string {
 
 // InitPythainlp initializes the pythainlp manager for testing
 func InitPythainlp() error {
-	if globalManager != nil {
+	return InitPythainlpWithRecreate(false)
+}
+
+// InitPythainlpWithRecreate initializes pythainlp, optionally recreating the container
+func InitPythainlpWithRecreate(recreate bool) error {
+	if globalManager != nil && !recreate {
 		return nil // Already initialized
 	}
 
 	ctx := context.Background()
 	var err error
-	globalManager, err = NewManager(ctx)
+	globalManager, err = NewManagerWithRecreate(ctx, recreate)
 	if err != nil {
 		return fmt.Errorf("failed to initialize pythainlp: %w", err)
 	}
