@@ -2,12 +2,10 @@ module github.com/tassa-yoniso-manasi-karoto/paiboonizer
 
 go 1.23.11
 
-replace github.com/tassa-yoniso-manasi-karoto/go-pythainlp => /home/voiduser/go/src/go-pythainlp
-
 require (
 	github.com/gookit/color v1.5.4
-	github.com/k0kubun/pp v3.0.1+incompatible
-	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-00010101000000-000000000000
+	github.com/rivo/uniseg v0.4.7
+	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20250805205043-7595f20e9979
 	golang.org/x/text v0.27.0
 )
 
@@ -101,6 +99,7 @@ require (
 	github.com/jonboulle/clockwork v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/k0kubun/pp v3.0.1+incompatible // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/kevinburke/ssh_config v1.2.0 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
@@ -143,7 +142,6 @@ require (
 	github.com/prometheus/common v0.55.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/r3labs/sse v0.0.0-20210224172625-26fe804710bc // indirect
-	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rs/zerolog v1.33.0 // indirect
 	github.com/secure-systems-lab/go-securesystemslib v0.4.0 // indirect
 	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
