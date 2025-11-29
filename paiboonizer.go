@@ -8,6 +8,7 @@ import (
 	"html"
 	"io/fs"
 	"regexp"
+	"sort"
 	"strings"
 	"unicode"
 
@@ -1604,8 +1605,18 @@ func init() {
 // extractSyllablesFromDictionary extracts individual syllables from multi-syllable
 // dictionary entries to expand the syllable dictionary for maximal matching
 func extractSyllablesFromDictionary() {
+	// CRITICAL: Sort dictionary keys for deterministic iteration order
+	// Otherwise if two words share a syllable with different romanizations,
+	// whichever is processed first wins, causing entropy in measured accuracy
+	sortedKeys := make([]string, 0, len(dictionary))
+	for k := range dictionary {
+		sortedKeys = append(sortedKeys, k)
+	}
+	sort.Strings(sortedKeys)
+
 	// Process entries with hyphens (multi-syllable words)
-	for th, translit := range dictionary {
+	for _, th := range sortedKeys {
+		translit := dictionary[th]
 		if strings.Contains(translit, "-") {
 			// Split Thai text into syllables using rule-based extraction
 			thaiSyllables := ExtractSyllables(th)
