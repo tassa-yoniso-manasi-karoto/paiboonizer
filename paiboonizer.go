@@ -588,18 +588,33 @@ var globalManager *Manager
 
 // NewManager creates a new paiboonizer manager
 func NewManager(ctx context.Context) (*Manager, error) {
+	return NewManagerWithRecreate(ctx, false)
+}
+
+// NewManagerWithRecreate creates a new paiboonizer manager.
+// If recreate is true, tears down existing container before creating a new one.
+// This is needed because each NewManager() allocates a new random port, but if
+// an existing container wasn't properly removed, it has a stale port mapping.
+func NewManagerWithRecreate(ctx context.Context, recreate bool) (*Manager, error) {
 	m := &Manager{}
 	var err error
 	m.nlpManager, err = pythainlp.NewManager(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize pythainlp: %w", err)
 	}
-	
+
 	// Initialize the service
-	if err := m.nlpManager.Init(ctx); err != nil {
-		return nil, fmt.Errorf("failed to start pythainlp service: %w", err)
+	if recreate {
+		// Recreate container to ensure port mapping matches
+		if err := m.nlpManager.InitRecreate(ctx, false); err != nil {
+			return nil, fmt.Errorf("failed to start pythainlp service: %w", err)
+		}
+	} else {
+		if err := m.nlpManager.Init(ctx); err != nil {
+			return nil, fmt.Errorf("failed to start pythainlp service: %w", err)
+		}
 	}
-	
+
 	return m, nil
 }
 
