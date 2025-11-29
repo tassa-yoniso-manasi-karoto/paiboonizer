@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"paiboonizer"
+	"github.com/tassa-yoniso-manasi-karoto/paiboonizer"
 )
 
 func main() {
@@ -16,9 +16,9 @@ func main() {
 
 	if *dictionaryCheck {
 		if *usePythainlp {
-			// Initialize pythainlp
+			// Initialize pythainlp with recreate to handle port mismatches
 			fmt.Println("Initializing pythainlp...")
-			if err := paiboonizer.InitPythainlp(); err != nil {
+			if err := paiboonizer.InitPythainlpWithRecreate(true); err != nil {
 				fmt.Printf("Failed to initialize pythainlp: %v\n", err)
 				fmt.Println("Falling back to pure rules...")
 				paiboonizer.TestDictionaryWithMode(paiboonizer.TestModePureRules)
@@ -44,7 +44,7 @@ func main() {
 	if len(args) > 0 {
 		if *usePythainlp {
 			fmt.Println("Initializing pythainlp for debug...")
-			if err := paiboonizer.InitPythainlp(); err != nil {
+			if err := paiboonizer.InitPythainlpWithRecreate(true); err != nil {
 				fmt.Printf("Failed to initialize pythainlp: %v\n", err)
 			} else {
 				defer paiboonizer.ClosePythainlp()

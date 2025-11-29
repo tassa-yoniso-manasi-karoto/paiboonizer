@@ -5,7 +5,7 @@ go 1.23.11
 require (
 	github.com/gookit/color v1.5.4
 	github.com/rivo/uniseg v0.4.7
-	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20250805205043-7595f20e9979
+	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20251129141818-5609150be34d
 	golang.org/x/text v0.27.0
 )
 
