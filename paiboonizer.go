@@ -89,6 +89,17 @@ var specialCasesGlobal = map[string]string{
 	"อายุ": "aa-yú", "จุด": "jùt", "เหตุ": "hèet",
 	"บวก": "bùuak", "พวก": "pûuak", "ผัว": "pǔa", "ตัว": "dtua",
 
+	// Closed syllables with -บ (p) final - prevents สิ+บ splitting
+	"สิบ": "sìp", "จิบ": "jìp", "ดิบ": "dìp", "นิบ": "níp", "ริบ": "ríp",
+	"ขยับ": "kà~yàp", "ขับ": "kàp", "รับ": "ráp", "ดับ": "dàp",
+	"กลับ": "glàp", "ลับ": "láp", "ตับ": "dtàp", "ซับ": "sáp",
+
+	// Common closed syllables with -น (n) final
+	"ค่อน": "kɔ̂n", "ก่อน": "gɔ̀ɔn", "ต้น": "dtôn", "คน": "kon",
+	"สัญ": "sǎn", "ผัน": "pǎn",
+	// Common patterns with อะ
+	"อะ": "à",
+
 	// อ-initial patterns
 	"อนุ": "à~nú", "อัศ": "àt", "อาทิตย์": "aa-tít",
 
@@ -467,6 +478,9 @@ var specialCasesGlobal = map[string]string{
 
 	// สมมุติ pattern
 	"สมมุติ": "sǒm-mút",
+
+	// Fix syllable dict errors (wrong entries from automatic extraction)
+	"รม": "rom", // Was incorrectly mapped to grom from extraction
 
 	// Individual syllables that pythainlp returns
 	"กาศ": "gàat", "เมื่อย": "mʉ̂ʉai",
@@ -1606,8 +1620,7 @@ func init() {
 // dictionary entries to expand the syllable dictionary for maximal matching
 func extractSyllablesFromDictionary() {
 	// CRITICAL: Sort dictionary keys for deterministic iteration order
-	// Otherwise if two words share a syllable with different romanizations,
-	// whichever is processed first wins, causing entropy in measured accuracy
+	// otherwise if two words share a syllable with different romanizations, whichever is processed first wins =>>> entropy in measured accuracy
 	sortedKeys := make([]string, 0, len(dictionary))
 	for k := range dictionary {
 		sortedKeys = append(sortedKeys, k)

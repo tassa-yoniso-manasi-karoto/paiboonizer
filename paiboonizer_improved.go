@@ -357,8 +357,11 @@ func applyToneToResult(result, initialCons, cluster, toneMark, vowel, finalCons 
 	// Determine live/dead syllable
 	isLive := isLiveSyllable(vowel, finalCons)
 
+	// Determine vowel length (for dead-short vs dead-long tone distinction)
+	longVowel := isLongVowel(vowel)
+
 	// Calculate tone number
-	toneNum := calculateToneNum(toneClass, isLive, toneMark)
+	toneNum := calculateToneNum(toneClass, isLive, toneMark, longVowel)
 
 	if toneNum == 0 {
 		return result
@@ -402,14 +405,35 @@ func isLiveSyllable(vowel, finalCons string) bool {
 	return false
 }
 
+// isLongVowel checks if a romanized vowel is long
+// Long vowels have doubled letters (aa, ii, uu, etc.) or specific patterns
+// Note: "ai" and "ao" are SHORT diphthongs; "aai" and "aao" are long
+func isLongVowel(vowel string) bool {
+	// Check long diphthongs first (before short ones would match via Contains)
+	longPatterns := []string{"aai", "aao", "aa", "ii", "ʉʉ", "uu", "ee", "ɛɛ", "oo", "ɔɔ", "əə", "iia", "ʉʉa", "uua"}
+	for _, lp := range longPatterns {
+		if strings.Contains(vowel, lp) {
+			return true
+		}
+	}
+	return false
+}
+
 // calculateToneNum calculates the tone number based on Thai tone rules
-func calculateToneNum(toneClass string, isLive bool, toneMark string) int {
+// isLongVowelParam is used to distinguish dead-short vs dead-long for low-class consonants
+func calculateToneNum(toneClass string, isLive bool, toneMark string, isLongVowelParam bool) int {
 	if toneMark == "" {
 		// Inherent tone rules
 		switch toneClass {
 		case "low":
 			if isLive {
 				return 0 // mid
+			}
+			// Dead syllable with low-class initial:
+			// - Short vowel → HIGH tone (Wiktionary: dead-short → high)
+			// - Long vowel → FALLING tone (Wiktionary: dead-long → falling)
+			if isLongVowelParam {
+				return 3 // falling
 			}
 			return 2 // high
 		case "mid":

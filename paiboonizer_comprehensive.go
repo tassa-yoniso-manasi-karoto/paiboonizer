@@ -447,6 +447,18 @@ func ComprehensiveTransliterate(word string) string {
 		for length := maxLen; length > 0; length-- {
 			if i+length <= len(runes) {
 				substr := string(runes[i : i+length])
+
+				// Check if this match would leave an orphan consonant
+				// (a single consonant without a vowel at the end)
+				if i+length < len(runes) {
+					remaining := runes[i+length:]
+					if len(remaining) == 1 && isConsonant(string(remaining[0])) {
+						// Would leave orphan consonant - skip this match
+						// unless it's at the start of a new syllable pattern
+						continue
+					}
+				}
+
 				// Check special cases first
 				if trans, ok := specialCasesGlobal[substr]; ok {
 					results = append(results, trans)

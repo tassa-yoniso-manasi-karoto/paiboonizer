@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 	"unicode"
 
@@ -29,6 +30,9 @@ const (
 	TestModeFullDictionary                 // Full dictionary lookup (baseline)
 )
 
+// Track pythainlp failures that fell back to pure rules
+var pythainlpFallbackCount int
+
 func TestDictionary(useDictionary bool) {
 	if useDictionary {
 		TestDictionaryWithMode(TestModeFullDictionary)
@@ -46,6 +50,7 @@ func TestDictionaryWithMode(mode TestMode) {
 	case TestModePythainlp:
 		fmt.Println("=== Testing Pythainlp Tokenization + Rule-Based Transliteration ===")
 		fmt.Println("Testing pythainlp syllable tokenization + rule-based transliteration")
+		pythainlpFallbackCount = 0
 	case TestModeFullDictionary:
 		fmt.Println("=== Testing With Full Dictionary Lookup ===")
 		fmt.Println("Testing WITH dictionary lookup (baseline)")
@@ -61,8 +66,17 @@ func TestDictionaryWithMode(mode TestMode) {
 		got      string
 	}{}
 
-	// Test each dictionary entry
-	for thai, expected := range dictionary {
+	// Sort dictionary keys for deterministic iteration order
+	// This ensures consistent accuracy measurements across runs
+	sortedKeys := make([]string, 0, len(dictionary))
+	for k := range dictionary {
+		sortedKeys = append(sortedKeys, k)
+	}
+	sort.Strings(sortedKeys)
+
+	// Test each dictionary entry in deterministic order
+	for _, thai := range sortedKeys {
+		expected := dictionary[thai]
 		// Skip multi-word phrases for now
 		if strings.Contains(thai, " ") {
 			continue
@@ -126,6 +140,10 @@ func TestDictionaryWithMode(mode TestMode) {
 	fmt.Printf("Total words tested: %d\n", total)
 	fmt.Printf("Passed: %d\n", passed)
 	fmt.Printf("Failed: %d\n", total-passed)
+	if mode == TestModePythainlp && pythainlpFallbackCount > 0 {
+		fmt.Printf("Pythainlp fallbacks: %d (%.1f%% of tests used pure rules due to pythainlp failures)\n",
+			pythainlpFallbackCount, float64(pythainlpFallbackCount)*100/float64(total))
+	}
 	fmt.Printf("\nREAL ACCURACY: %.2f%%\n", accuracy)
 	
 	if accuracy >= 90.0 {
@@ -185,15 +203,16 @@ func transliterateWithPythainlp(word string) string {
 	ctx := context.Background()
 	result, err := globalManager.nlpManager.SyllableTokenize(ctx, word)
 	if err != nil || result == nil || len(result.Syllables) == 0 {
-		// Fall back to pure rules
+		pythainlpFallbackCount++
 		return ComprehensiveTransliterate(word)
 	}
+	syllables := result.Syllables
 
 	// Transliterate each syllable using rules (syllable dict + pattern matching)
 	results := []string{}
 	var lastTrans string // Track last transliteration for ๆ repetition
 
-	for _, syllable := range result.Syllables {
+	for _, syllable := range syllables {
 		// Handle ๆ (mai yamok) - repeat previous syllable
 		if syllable == "ๆ" {
 			if lastTrans != "" {
@@ -290,14 +309,16 @@ func DebugTransliteration(word string) {
 		if err == nil && result != nil {
 			fmt.Printf("Pythainlp syllables: %v\n", result.Syllables)
 			for i, syl := range result.Syllables {
+				// Clean syllable first (same as actual test flow)
+				cleanSyl := RemoveSilentConsonants(syl)
 				// Check syllable dict
-				if trans, ok := syllableDict[syl]; ok {
+				if trans, ok := syllableDict[cleanSyl]; ok {
 					fmt.Printf("  [%d] '%s' → '%s' (syllable dict)\n", i, syl, trans)
-				} else if trans, ok := specialCasesGlobal[syl]; ok {
+				} else if trans, ok := specialCasesGlobal[cleanSyl]; ok {
 					fmt.Printf("  [%d] '%s' → '%s' (special case)\n", i, syl, trans)
 				} else {
-					trans := ComprehensiveTransliterate(syl)
-					fmt.Printf("  [%d] '%s' → '%s' (rules)\n", i, syl, trans)
+					trans := ComprehensiveTransliterate(cleanSyl)
+					fmt.Printf("  [%d] '%s' → '%s' (rules, cleaned: '%s')\n", i, syl, trans, cleanSyl)
 				}
 			}
 		} else {
