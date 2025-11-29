@@ -1,8 +1,8 @@
-package main
+package paiboonizer
 
 import "fmt"
 
-func analyzeFailures() {
+func AnalyzeFailures() {
 	fmt.Println("=== Analyzing Specific Failures ===")
 	
 	// Test cases that are failing

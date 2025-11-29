@@ -1,0 +1,253 @@
+I have a stomach ache.,ปวดท้อง,bpùuat-tɔ́ɔng,,sent,Situations > Health > Talking with Doctors
+mistake (fault),ความผิดพลาด,kwaam-pìt-plâat,,n
+mistake (fault, shortcoming),ข้อบกพร่อง,kɔ̂ɔ-bòk-prɔ̂ng,,n
+wrong (incorrect, not suitable),ผิด,pìt,,adj
+improper (wrong),ไม่ถูกต้อง,mâi-tùuk-dtɔ̂ng,,adj
+incorrect (wrong),ผิดพลาด,pìt-plâat,,adj
+including,รวมทั้ง,ruuam-táng,,prep
+enter | get in (enter, e.g. house),เข้า,kâo,,v
+back (body part),หลัง,lǎng,,n,Glossary > Body Parts
+My stomach hurts.,ผมปวดที่ท้อง,pǒm-bpùuat-tîi-tɔ́ɔng,,sent,Situations > Health > Talking with Doctors
+occur, happen (happen),เกิดขึ้น,gə̀ət-kʉ̂n,,vi
+happen,เกิดขึ้น,gə̀ət-kʉ̂n,,vi
+sick (heavy-hearted),ไม่สบายใจ,mâi-sà~baai-jai,,adj
+enjoy,สนุกกับ,sà~nùk-gàp,,vt
+easy (not difficult),ง่าย,ngâai,,adj
+easy (not difficult),หมู,mǔu,slang,adj
+belong to (someone),เป็นของ,bpen-kɔ̌ɔng,,vt
+joke (be funny),พูดเล่น,pûut-lên,slang,vi
+hand (body part),มือ,mʉʉ,,n,Glossary > Body Parts
+foot, ft (12 inches),ฟุต,fút,,n,Glossary > Units of Length
+wash clothes, do the laundry | launder (wash clothes),ซักผ้า,sák-pâa,,vi
+kitchen,ห้องครัว,hɔ̂ng-kruua,,n,Situations > Construction > Building | Situations > Shopping > Household
+go without (e.g. food, sleep),อด,òt,,vt
+drowsy (sleepy),สัปหงก,sàp-bpà~ngòk,,adj
+stomach,พุง,pung,slang,n
+one,สิ่งนั้น,sìng-nán,,pron
+one,สิ่งนั้น,sìng-nán,,pron
+talk (chat, converse, confer),คุย,kui,,vi
+talk (chat, converse, confer),พูด,pûut,,vi
+talk (chat, converse, confer),เว้า,wáo,slang,vi
+desire (want),อยากได้,yàak-dâai,,vt
+desire (wish),ปรารถนา,bpràat-tà~nǎa,,vt
+desire (request),ขอร้อง,kɔ̌ɔ-rɔ́ɔng,,vt
+bullshit! | B.S.! | stupid!,งี่เง่า,ngîi-ngâo,,sent,Essentials > Swearing/Insults
+big,เบ้อเร่อ,bə̂ə-rə̂ə,slang,adj
+big,เบ้อเร่อ,bə̂ə-rə̂ə,slang,adj
+Theravada Buddhist,พุทธนิกายเถรวาท,pút-ní-gaai-těe-rá~wâat,,adj,Situations > Religion > Religions
+Zen Buddhist,พุทธนิกายเซน,pút-ní-gaai-sen,,adj,Situations > Religion > Religions
+Christian,คริสต์,krít,,adj,Situations > Religion > Religions
+vocabulary,คำศัพท์,kam-sàp,,n
+vocabulary,ศัพท์,sàp,,n
+in order to,เพื่อที่จะ,pʉ̂ʉa-tîi-jà,,prep
+for the purpose of,เพื่อ,pʉ̂ʉa,,conj
+for the sake of <n>, for the benefit of <n> (<n>),เพื่อ<n>,pʉ̂ʉa-<n>,,adv
+in order to,เพื่อที่จะ,pʉ̂ʉa-tîi-jà,,prep
+he, him, sir, she, her | Reverend (used as a title of respect) | you (used to address someone with respect) | second and third person pronoun used to address someone with respect,ท่าน,tân,formal,pron
+authority (official, e.g. government),เจ้าหน้าที่,jâo-nâa-tîi,,n
+scorpion,แมงป่อง,mɛɛng-bpɔ̀ng,,n
+snake,งู,nguu,,n,Glossary > Nature > Animals | Situations > Food/Drink > Meat
+touch,แตะ,dtɛ̀,,vt,Situations > Love/Romance > Sexy Talk
+touch (come into contact with),จับ,jàp,,vt
+touch (come into contact with),แตะ,dtɛ̀,,vt
+anything (whatever),อะไรก็ได้,à~rai-gɔ̂ɔ-dâai,,pron
+what's up? (anything new?),มีข่าวอะไรบ้าง,mii-kàao-à~rai-bâang,,sent
+anything (thing of any kind),สิ่งใดสิ่งหนึ่ง,sìng-dai-sìng-nʉ̀ng,,n
+what's up? (anything new?),มีข่าวอะไรบ้าง,mii-kàao-à~rai-bâang,,sent
+run out (be used up),หมด,mòt,,vi
+call (name, summon, annouce) | call (name, summon, announce),เรียก,rîiak,,v
+called (named),เรียกว่า,rîiak-wâa,,adj
+call (name, summon, annouce) | call (name, summon, announce),เรียก,rîiak,,v
+Please help me make this call.,ช่วยโทรเบอร์นี้ให้ด้วยครับ,chûuai-too-bəə-níi-hâi-dûuai-kráp,,sent,Situations > Telephone/SMS > Conversation
+slowly,ช้าๆ,cháa-cháa,,adv
+paper (document),เอกสาร,èek-gà~sǎan,,n
+when,เมื่อไหร่,mʉ̂ʉa-rài,,pron
+as (in the same manner, equally),เหมือนกับ,mʉ̌ʉan-gàp,,adv
+tray,ถาด,tàat,,n
+tray,ถาด,tàat,,n
+fashionable | stylish (elegant) | fly (fashionable) | spiffy, foxy, chic, nifty, sassy, dapper (stylish),เก๋,gěe,slang,adj
+any (used with thing, where, one, etc.),ก็ได้,gɔ̂ɔ-dâai,slang,adj
+correct, edit | edit, amend, remedy, modify, improve, redact, rectify, pull up, pick up on (correct) | mend (correct, improve) | resolve (e.g. problem) | revise (fix) | repair (fix, mend) | perfect (improve) | overhaul (make corrections to) | get over (solve) | sort out (straighten out),แก้ไข,gɛ̂ɛ-kǎi,,vt
+get back at someone,แก้ลำ,gɛ̂ɛ-lam,slang,v
+try to do better when given a second chance,แก้มือ,gɛ̂ɛ-mʉʉ,slang,v
+grateful,กตัญญู,gà~dtan-yuu,,adj
+
+
+small talk (chitchat),การพูดคุยเล่น,gaan-pûut-kui-lên,,n,Situations > Small Talk
+trivial (trifling),หยุมหยิม,yǔm-yǐm,,adj
+unimportant (trivial),ขี้ปะติ๋ว,kîi-bpà~dtǐu,slang,adj
+trivial (unimportant),ไม่สำคัญ,mâi-sǎm-kan,,adj
+chitchat (usually about trivial things; from the English word 'mouth'),เม้าท์,máo,slang,v
+try,ลอง,lɔɔng,,vt
+attempt,พยายาม,pá~yaa-yaam,,vt
+try (make an effort),ลองดู,lɔɔng-duu,slang,vi
+cat (animal),แมว,mɛɛo,,n,Glossary > Nature > Animals
+but,แต่,dtɛ̀ɛ,,conj,Essentials > Grammar > Conjunctions
+change (money returned),เงินทอน,ngən-tɔɔn,,n
+pay,เฉ่ง,chèng,slang,v
+give change,ทอน,tɔɔn,,vi
+call for (demand),เรียกร้อง,rîiak-rɔ́ɔng,,vt
+summon <n> (call for the presence of <n>),เรียก<n>ให้มา,rîiak-<n>hâi-maa,,vt
+curiosity (desire to know),ความอยากรู้อยากเห็น,kwaam-yàak-rúu-yàak-hěn,,n
+more (in addition),อีก,ìik,,adv
+more or less,ไม่มากก็น้อย,mâi-mâak-gɔ̂ɔ-nɔ́ɔi,,adv
+again (one more time),ใหม่,mài,slang,adv
+intensify (become more intense),รุนแรงขึ้น,run-rɛɛng-kʉ̂n,,vi
+twice (two times more),สองเท่า,sɔ̌ɔng-tâo,,adv
+equal | parallel (be equivalent to) | match (equal),เท่ากับ,tâo-gàp,,vt
+equal | parallel (be equivalent to) | match (equal),เท่ากับ,tâo-gàp,,vt
+business owner (male),เถ้าแก่,tâo-gɛ̀ɛ,slang,n
+as far as, as far,เท่าที่,tâo-tîi,,prep
+as well (equally),เท่าๆกัน,tâo-tâo-gan,,adv
+metro (subway),รถไฟใต้ดิน,rót-fai-dtâai-din,,n
+walk,เดิน,dəən,,vi
+understand,เข้าใจ,kâo-jai,,v
+another,อีกหนึ่ง,ìik-nʉ̀ng,,n
+alternative (another way),อีกทางหนึ่ง,ìik-taang-nʉ̀ng,slang,n
+otherwise (differently, in another way),เป็นอย่างอื่น,bpen-yàang-ʉ̀ʉn,,adv
+become,กลายเป็น,glaai-bpen,,vi
+become a monk,บวชพระ,bùuat-prá,,vi
+disengage (become free),หลุดพ้น,lùt-pón,,vi
+die out (become extinct),สูญพันธุ์,sǔun-pan,,vi
+inflame (become aroused),รู้สึกเร่าร้อน,rúu-sʉ̀k-râo-rɔ́ɔn,,vi
+feel (e.g. angry, warm, hurt),รู้สึก,rúu-sʉ̀k,,vi
+fervent (hot) | passionate (lustful) | ardent (passionate, fervent) | incandescent (raging) | red-hot (sexy) | be in heat,เร่าร้อน,râo-rɔ́ɔn,,adj
+passion (ardor) | fire (burning passion) | fever (excitement),ความเร่าร้อน,kwaam-râo-rɔ́ɔn,,n
+entrance,ทางเข้า,taang-kâo,,n
+go for (be attracted to),หลงใหลกับ,lǒng-lǎi-gàp,,vt
+I need <n>.,ผมจำเป็นต้องมี<n>,pǒm-jam-bpen-dtɔ̂ng-mii-<n>,,sent,Essentials > Grammar > Need
+copious | plenty (numerous, abundant),เยอะแยะ,yə́-yɛ́,slang,adj
+It's too crowded.,มีคนเยอะเกินไป,mii-kon-yə́-gəən-bpai,,sent,Situations > Entertainment > Dancing/Night Club
+find (by surprise, after looking),เจอ,jəə,slang,vt
+airport,สนามบิน,sà~nǎam-bin,,n
+request,อาราธนา,aa-râat-tá~naa,monk,vt
+request,อาราธนา,aa-râat-tá~naa,monk,vt
+lawn | court (e.g. basketball) | grounds, park (field) | yard (ground, field) | field (grounds),สนาม,sà~nǎam,,n
+expire (reach the end of a term),หมดอายุ,mòt-aa-yú,,vi
+file (document),เอกสาร,èek-gà~sǎan,,n
+send,ส่ง,sòng,,vt
+through, thru (by way of),โดย,dooi,,prep
+now,ตอนนี้,dtɔɔn-níi,,adv,Essentials > Time/Date > Basics
+now,ตอนนี้,dtɔɔn-níi,,adv,Essentials > Time/Date > Basics
+tip (monetary reward),เงินรางวัล,ngən-raang-wan,,n
+This is your tip.,นี่ทิปคุณ,nîi-típ-kun,,sent,Situations > Massage/Bodywork > How Was It?
+get (item, money),ได้,dâai,,vt
+
+
+obtain (get, gain) | get (item, money) | realize, attain (obtain) | get (take, receive),ได้,dâai,,vt
+year,ปี,bpii,,n,Essentials > Time/Date > Basics | Glossary > Units of Time
+free from (without),ไร้,rái,,adj
+without,ปราศจาก,bpràat-sà~jàak,,prep
+do without <sth> (<sth>),ทำ<sth>โดยไม่มี,tam-<sth>dooi-mâi-mii,,vt
+mate (friend),เพื่อน,pʉ̂ʉan,,n
+drive,ขี่,kìi,slang,v
+stop (rest, pause),พัก,pák,,vi
+follow,ตาม,dtaam,,v
+speak (e.g. Thai, slowly, the truth),ว่า,wâa,slang,v
+speak (e.g. Thai, slowly, the truth),เว้า,wáo,slang,v
+chat,ฝอย,fɔ̌ɔi,slang,vi
+die,ตาย,dtaai,,vi
+die,มรณภาพ,mɔɔ-rá~ná-pâap,monk,vi
+win (e.g. game, battle),ชนะ,chá~ná,,v
+drink,กิน,gin,slang,v
+drink,หม่ำ,màm,slang,v
+laugh,หัวเราะ,hǔua-rɔ́,,vi
+pay,เฉ่ง,chèng,slang,v
+hear,ได้ยิน,dâi-yin,,v
+touch (come into contact with),ถูก,tùuk,slang,vt
+sit,นั่ง,nâng,,vi
+stand (be standing: people),ยืน,yʉʉn,,vi
+love,รัก,rák,,v
+wake up (get up),ตื่น,dtʉ̀ʉn,,vi
+call (used when someone calls you),โทรมา,too-maa,,vi
+call (name, summon, annouce) | call (name, summon, announce),เรียก,rîiak,,v
+call for (demand) | claim (demand, request) | put in for (make a request) | demand (require),เรียกร้อง,rîiak-rɔ́ɔng,,vt
+develop (grow),เติบโต,dtə̀əp-dtoo,,vi
+catch (e.g. bus),ไปทัน,bpai-tan,,vt
+clean (with liquid),ล้าง,láang,,vt
+clean,สะอาด,sà~àat,,adj
+clean (wipe),เช็ด,chét,,vt
+dirty (soiled),สกปรก,sòk-gà~bpròk,,adj
+dirty (soiled),ซกมก,sók-mók,slang,adj
+mistake <n> <n> (confuse <n> for <n>),เข้าใจ<n>ว่าเป็น<n>,kâo-jai-<n>wâa-bpen-<n>,,vt
+stumble (make mistake),ทำพลาด,tam-plâat,,vi
+push (shove, drive),ผลัก,plàk,,vt
+pull (draw),ถอน,tɔ̌ɔn,,vt
+carry (hold),ถือ,tʉ̌ʉ,,vt
+wear, put on,ใส่,sài,,vt
+wear, put on,นุ่ง,nûng,slang,vt
+wide,กว้าง,gwâang,,adj
+narrow,แคบ,kɛ̂ɛp,,adj
+old (not young),แก่,gɛ̀ɛ,,adj
+old (not young),เฒ่า,tâo,slang,adj
+young (youthful),อายุน้อย,aa-yú-nɔ́ɔi,,adj
+young (youthful),ซิงๆ,sing-sing,slang,adj
+bad,เลว,leeo,,adj
+wet,เปียก,bpìiak,,adj,Situations > Weather
+wet,แฉะ,chɛ̀,slang,adj,Situations > Weather
+dry,แห้ง,hɛ̂ng,,adj,Situations > Weather
+arid (dry) | dry (no rain),แล้ง,lɛ́ɛng,,adj
+noisy, loud,เจี๊ยวจ๊าว,jíiao-jáao,slang,adj
+noisy, loud,เสียงดัง,sǐiang-dang,,adj
+quiet (silent),เงียบ,ngîiap,,adj
+happy,สุข,sùk,,adj
+happen,ปรากฏขึ้น,bpraa-gòt-kʉ̂n,,vi
+happen,ปรากฏขึ้น,bpraa-gòt-kʉ̂n,,vi
+kind (gentle),อ่อนโยน,ɔ̀ɔn-yoon,,adj
+mean (cruel),ใจร้าย,jai-ráai,,adj
+mean (cruel),ใจร้าย,jai-ráai,,adj
+thin (for people, animals),ผอม,pɔ̌ɔm,,adj
+thin (for things),บาง,baang,,adj
+thick (e.g. hair, smoke) | thick (solid object, e.g. paper, hair, book) | bold (typography),หนา,nǎa,,adj
+weak (not strong, frail),อ่อนแอ,ɔ̀ɔn-ɛɛ,,adj
+famous,ดัง,dang,,adj
+worry,เป็นกังวล,bpen-gang-won,,vi
+worry <sone> (<sone>),ทำให้<sone>กลุ้ม,tam-hâi-<sone>glûm,slang,vt
+prepare (get ready),เตรียม,dtriiam,,v
+surprise (astonishment),ความประหลาดใจ,kwaam-bprà~làat-jai,,n
+concern (be relevant to),เกี่ยวข้องกับ,gìiao-kɔ̂ng-gàp,,vt
+upset <sone> (disturb <sone>),ทำให้<sone>ไม่พอใจ,tam-hâi-<sone>mâi-pɔɔ-jai,,vt
+succeed (achieve success),สำเร็จ,sǎm-rèt,,vi
+resist (defy, oppose),ขัดขวาง,kàt-kwǎang,,vt
+disobey,ไม่เชื่อฟัง,mâi-chʉ̂ʉa-fang,,vt
+finished (ended),จบสิ้น,jòp-sîn,,adj
+stupid,โง่,ngôo,,adj,Essentials > Swearing/Insults
+stupid,เซ่อ,sə̂ə,slang,adj,Essentials > Swearing/Insults
+stupid,ทึ่ม,tʉ̂m,slang,adj,Essentials > Swearing/Insults
+stupid,งั่ง,ngâng,slang,adj,Essentials > Swearing/Insults
+guess (educated),คาดคะเน,kâat-ká~nee,,v
+guess (educated),เก็ง,geng,,vt
+guess (educated),กะ,gà,slang,vt
+calm (mind),ใจเย็น,jai-yen,,adj
+make sense, be proper, be decent, be suitable | sound all right,เข้าที,kâo-tii,,vi
+right (correct),ถูกต้อง,tùuk-dtɔ̂ng,,adj
+right (virtuous),สัมมา,sǎm-maa,monk,adj
+pain,ความเจ็บปวด,kwaam-jèp-bpùuat,,n
+hurt (pain),ความเจ็บปวด,kwaam-jèp-bpùuat,,n
+hurt (pain: short-term, acute),เจ็บ,jèp,,vi
+hurt (ache: longer-term, less acute),ปวด,bpùuat,,vi
+start (begin),เริ่ม,rə̂əm,,vi
+begin,ลงมือทำ,long-mʉʉ-tam,slang,v
+usually,มัก,mák,,adv
+ordinary (usual),พื้นๆ,pʉ́ʉn-pʉ́ʉn,slang,adj
+as usual,เช่นเคย,chên-kəəi,,adv
+as usual,ตามเคย,dtaam-kəəi,slang,adv
+master (e.g. in language),เชี่ยวชาญ,chîiao-chaan,,vt
+polite (courteous),มีมารยาท,mii-man-rá~yâat,,adj
+limit (terminal point),ขีดจำกัด,kìit-jam-gàt,,n
+limit (terminal point),ขีด,kìit,,n
+range (area, scope or sphere),ขอบเขต,kɔ̀ɔp-kèet,,n
+satisfied,พอใจ,pɔɔ-jai,,adj
+belong to (someone),เป็นของ,bpen-kɔ̌ɔng,,vt
+careful (cautious),ระมัดระวัง,rá~mát-rá~wang,,adj
+drawback (disadvantage),ข้อเสีย,kɔ̂ɔ-sǐia,,n
+advantage (good point),ข้อดี,kɔ̂ɔ-dii,,n
+Buddhist monk's form of addressing laymen,โยม,yoom,monk,n
+head (body part),หัว,hǔua,,n,Glossary > Body Parts
+heel (body part),ส้นเท้า,sôn-táao,,n,Essentials > Swearing/Insults | Glossary > Body Parts
+leg,ขา,kǎa,,n,Glossary > Body Parts
+skin,ผิวหนัง,pǐu-nǎng,,n,Glossary > Body Parts
+toe (of human and animal),นิ้วเท้า,níu-táao,,n,Glossary > Body Parts
+arm,แขน,kɛ̌ɛn,,n,Glossary > Body Parts
+foot (body part),เท้า,táao,,n,Glossary > Body Parts
+foot (body part),ตีน,dtiin,slang,n,Glossary > Body Parts

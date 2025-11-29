@@ -1,54 +1,99 @@
-package main
+package paiboonizer
 
 import (
+	"context"
 	"fmt"
+	"regexp"
 	"strings"
 	"unicode"
-	"golang.org/x/text/unicode/norm"
-	"golang.org/x/text/transform"
+
 	"golang.org/x/text/runes"
+	"golang.org/x/text/transform"
+	"golang.org/x/text/unicode/norm"
 )
 
-func testDictionary(useDictionary bool) {
-	// Control whether to use dictionary lookup or pure rules
-	
+// stripSpecialMarkers removes annotation markers like <sth>, <sone>, <n> etc.
+// These are not Thai words and should be ignored in transliteration
+var specialMarkerRegex = regexp.MustCompile(`<[^>]+>`)
+
+func stripSpecialMarkers(s string) string {
+	return specialMarkerRegex.ReplaceAllString(s, "")
+}
+
+// TestMode controls how transliteration is performed
+type TestMode int
+
+const (
+	TestModePureRules      TestMode = iota // No dictionary, no pythainlp
+	TestModePythainlp                      // Pythainlp tokenization + rules (no whole-word dict)
+	TestModeFullDictionary                 // Full dictionary lookup (baseline)
+)
+
+func TestDictionary(useDictionary bool) {
 	if useDictionary {
-		fmt.Println("=== Testing Transliterator With Dictionary Lookup ===")
-		fmt.Println("Testing WITH dictionary lookup enabled")
+		TestDictionaryWithMode(TestModeFullDictionary)
 	} else {
-		fmt.Println("=== Testing Rule-Based Transliterator (No Dictionary) ===")
-		fmt.Println("Testing WITHOUT dictionary lookup (pure rules only)")
+		TestDictionaryWithMode(TestModePureRules)
 	}
-	fmt.Println("Dictionary entries available:", len(dictionary), "\n")
-	
+}
+
+// TestDictionaryWithMode tests transliteration with specific mode
+func TestDictionaryWithMode(mode TestMode) {
+	switch mode {
+	case TestModePureRules:
+		fmt.Println("=== Testing Rule-Based Transliterator (No Dictionary, No Pythainlp) ===")
+		fmt.Println("Testing pure rule-based syllable extraction + transliteration")
+	case TestModePythainlp:
+		fmt.Println("=== Testing Pythainlp Tokenization + Rule-Based Transliteration ===")
+		fmt.Println("Testing pythainlp syllable tokenization + rule-based transliteration")
+	case TestModeFullDictionary:
+		fmt.Println("=== Testing With Full Dictionary Lookup ===")
+		fmt.Println("Testing WITH dictionary lookup (baseline)")
+	}
+	fmt.Println("Dictionary entries available:", len(dictionary))
+	fmt.Println("Syllable dictionary entries:", len(syllableDict), "\n")
+
 	passed := 0
 	total := 0
-	failures := []struct{
-		thai string
+	failures := []struct {
+		thai     string
 		expected string
-		got string
+		got      string
 	}{}
-	
-	// Test each dictionary entry using ONLY rule-based transliteration
+
+	// Test each dictionary entry
 	for thai, expected := range dictionary {
 		// Skip multi-word phrases for now
 		if strings.Contains(thai, " ") {
 			continue
 		}
-		
+
 		total++
-		
-		// Use dictionary or pure rules based on configuration
+
+		// Strip special markers from Thai text before transliteration
+		cleanThai := stripSpecialMarkers(thai)
+
+		// Transliterate based on mode
 		var result string
-		if useDictionary {
-			result = TransliterateWordRulesOnly(thai) // This uses dictionary first
-		} else {
-			result = ComprehensiveTransliterate(thai) // This uses only rules
+		switch mode {
+		case TestModePureRules:
+			result = ComprehensiveTransliterate(cleanThai)
+		case TestModePythainlp:
+			result = transliterateWithPythainlp(cleanThai)
+		case TestModeFullDictionary:
+			result = TransliterateWordRulesOnly(cleanThai)
 		}
-		
-		// Remove hyphens from expected for comparison (compound word separation not important now)
-		expectedNoHyphen := strings.ReplaceAll(expected, "-", "")
-		resultNoHyphen := strings.ReplaceAll(result, "-", "")
+
+		// Strip special markers from expected result too
+		cleanExpected := stripSpecialMarkers(expected)
+
+		// Remove hyphens and tildes for comparison (syllable separation style not important)
+		expectedNoSep := strings.ReplaceAll(strings.ReplaceAll(cleanExpected, "-", ""), "~", "")
+		resultNoSep := strings.ReplaceAll(strings.ReplaceAll(result, "-", ""), "~", "")
+
+		// Legacy variable names for compatibility
+		expectedNoHyphen := expectedNoSep
+		resultNoHyphen := resultNoSep
 		
 		// Also normalize Unicode for fair comparison
 		t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
@@ -126,4 +171,133 @@ func testDictionary(useDictionary bool) {
 		fmt.Printf("Vowel/length errors: ~%d (%.1f%%)\n", vowelErrors, float64(vowelErrors)*100/float64(len(failures)))
 		fmt.Printf("Consonant/other errors: ~%d (%.1f%%)\n", consonantErrors, float64(consonantErrors)*100/float64(len(failures)))
 	}
+}
+
+// transliterateWithPythainlp uses pythainlp for syllable tokenization
+// then transliterates each syllable using rules (no whole-word dictionary lookup)
+func transliterateWithPythainlp(word string) string {
+	// Ensure pythainlp manager is initialized
+	if globalManager == nil || globalManager.nlpManager == nil {
+		// Fall back to pure rules if pythainlp not available
+		return ComprehensiveTransliterate(word)
+	}
+
+	ctx := context.Background()
+	result, err := globalManager.nlpManager.SyllableTokenize(ctx, word)
+	if err != nil || result == nil || len(result.Syllables) == 0 {
+		// Fall back to pure rules
+		return ComprehensiveTransliterate(word)
+	}
+
+	// Transliterate each syllable using rules (syllable dict + pattern matching)
+	results := []string{}
+	var lastTrans string // Track last transliteration for ๆ repetition
+
+	for _, syllable := range result.Syllables {
+		// Handle ๆ (mai yamok) - repeat previous syllable
+		if syllable == "ๆ" {
+			if lastTrans != "" {
+				results = append(results, lastTrans)
+			}
+			continue
+		}
+
+		// Strip trailing silent consonants (consonant + ์) before lookup
+		// This handles syllables like สันต์ → สัน
+		cleanSyllable := RemoveSilentConsonants(syllable)
+		if cleanSyllable == "" {
+			continue // Skip syllables that are entirely silent
+		}
+
+		var trans string
+
+		// Try syllable dictionary first (but NOT whole-word dictionary)
+		if t, ok := syllableDict[cleanSyllable]; ok {
+			trans = t
+		} else if t, ok := specialCasesGlobal[cleanSyllable]; ok {
+			// Try special cases for this syllable
+			trans = t
+		} else {
+			// Fall back to rule-based transliteration for this syllable
+			trans = ComprehensiveTransliterate(cleanSyllable)
+		}
+
+		if trans != "" {
+			results = append(results, trans)
+			lastTrans = trans
+		}
+	}
+
+	if len(results) == 0 {
+		return ""
+	}
+	return strings.Join(results, "-")
+}
+
+// InitPythainlp initializes the pythainlp manager for testing
+func InitPythainlp() error {
+	if globalManager != nil {
+		return nil // Already initialized
+	}
+
+	ctx := context.Background()
+	var err error
+	globalManager, err = NewManager(ctx)
+	if err != nil {
+		return fmt.Errorf("failed to initialize pythainlp: %w", err)
+	}
+	return nil
+}
+
+// ClosePythainlp closes the pythainlp manager
+func ClosePythainlp() {
+	if globalManager != nil {
+		globalManager.Close()
+		globalManager = nil
+	}
+}
+
+// DebugTransliteration shows detailed breakdown of how a word is transliterated
+func DebugTransliteration(word string) {
+	fmt.Printf("\n=== Debug: %s ===\n", word)
+
+	// Show expected from dictionary
+	if expected, ok := dictionary[word]; ok {
+		fmt.Printf("Expected (dictionary): %s\n", expected)
+	}
+
+	// Pure rule-based
+	pureResult := ComprehensiveTransliterate(word)
+	fmt.Printf("Pure rules result: %s\n", pureResult)
+
+	// Show rule-based syllable extraction
+	syllables := ExtractSyllables(word)
+	fmt.Printf("Rule-based syllables: %v\n", syllables)
+	for i, syl := range syllables {
+		trans := ComprehensiveTransliterate(syl)
+		fmt.Printf("  [%d] '%s' → '%s'\n", i, syl, trans)
+	}
+
+	// With pythainlp (if available)
+	if globalManager != nil && globalManager.nlpManager != nil {
+		ctx := context.Background()
+		result, err := globalManager.nlpManager.SyllableTokenize(ctx, word)
+		if err == nil && result != nil {
+			fmt.Printf("Pythainlp syllables: %v\n", result.Syllables)
+			for i, syl := range result.Syllables {
+				// Check syllable dict
+				if trans, ok := syllableDict[syl]; ok {
+					fmt.Printf("  [%d] '%s' → '%s' (syllable dict)\n", i, syl, trans)
+				} else if trans, ok := specialCasesGlobal[syl]; ok {
+					fmt.Printf("  [%d] '%s' → '%s' (special case)\n", i, syl, trans)
+				} else {
+					trans := ComprehensiveTransliterate(syl)
+					fmt.Printf("  [%d] '%s' → '%s' (rules)\n", i, syl, trans)
+				}
+			}
+		} else {
+			fmt.Printf("Pythainlp error: %v\n", err)
+		}
+	}
+	fmt.Println()
 }

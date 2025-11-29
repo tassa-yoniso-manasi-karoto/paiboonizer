@@ -1,0 +1,198 @@
+adorn | write (compose) | dress (decorate, apply a dressing to, e.g. wound) | costume (dress) | compose (e.g. music, poetry) | dress up (embellish) | decorate (furnish) | paint (use facial cosmetics),แต่ง,dtɛ̀ng,,vt
+piece (of anything) | part, slice (piece) | scrap (small piece, fragment),ชิ้น,chín,,n
+lightning (thunderbolt),ฟ้าผ่า,fáa-pàa,,n
+thunder,ฟ้าร้อง,fáa-rɔ́ɔng,,n,Situations > Weather
+flood,น้ำท่วม,náam-tûuam,,n,Situations > Weather
+last, farewell, ultimate (final) | last (in a list) | aftermost (last) | final (last, decisive),สุดท้าย,sùt-táai,,adj,Essentials > Numbers > first, second, ...
+winter, cold season,ฤดูหนาว,rʉ́-duu-nǎao,,n,Essentials > Time/Date > Seasons
+summer, hot season,ฤดูร้อน,rʉ́-duu-rɔ́ɔn,,n,Essentials > Time/Date > Seasons
+spring (season),ฤดูใบไม้ผลิ,rʉ́-duu-bai-máai-plì,,n,Essentials > Time/Date > Seasons
+autumn, fall (fall),ฤดูใบไม้ร่วง,rʉ́-duu-bai-máai-rûuang,,n,Essentials > Time/Date > Seasons
+Bodhi tree,โพธิ์,poo,,n
+anymore (any longer),อีกต่อไป,ìik-dtɔ̀ɔ-bpai,,adv
+
+
+
+suspect | distrust, sniff (suspect) | doubt (suspect: object is expected outcome) | be uncertain about,สงสัย,sǒng-sǎi,,vt
+firm, corporation (company) | company (firm),บริษัท,bɔɔ-rí~sàt,,n
+disgusting (yucky, revolting),น่ารังเกียจ,nâa-rang-gìiat,,adj
+contact (e.g. address, phone number),ที่ติดต่อได้,tîi-dtìt-dtɔ̀ɔ-dâai,,adj
+hit up (contact someone),ติดต่อกับ,dtìt-dtɔ̀ɔ-gàp,,vt
+May I have your phone number?,ขอเบอร์โทรศัพท์คุณได้มั้ย,kɔ̌ɔ-bəə-too-rá~sàp-kun-dâai-mái,,sent,Situations > Small Talk > Keeping Contact
+May I have your address?,ขอที่อยู่คุณได้มั้ย,kɔ̌ɔ-tîi-yùu-kun-dâai-mái,,sent,Situations > Small Talk > Keeping Contact
+afraid (scared),กลัว,gluua,,adj
+afraid (scared),ยั่น,yân,slang,adj
+cave, cavern,ถ้ำ,tâm,,n
+pay attention to, take an interest in,สนใจไยดี,sǒn-jai-yai-dii,,vi
+sweat (perspiration),เหงื่อ,ngʉ̀ʉa,,n
+breathe (respire),หายใจ,hǎai-jai,,vi
+funny (humorous),ตลก,dtà~lòk,,adj
+funny (humorous),น่าขัน,nâa-kǎn,,adj
+funny (humorous),ฮา,haa,slang,adj
+funny (humorous),ขำ,kǎm,slang,adj
+according to,ตามที่,dtaam-tîi,,prep
+wait,คอย,kɔɔi,,vi
+disturb (bother),รบกวน,róp-guuan,,vt
+disturb (bother),แหย่,yɛ̀ɛ,slang,vt
+signature,ลายเซ็น,laai-sen,,n
+seal (stamp),ตรา,dtraa,,n
+ugly man,ผี,pǐi,slang,n,Situations > Love/Romance > Sex-Related Terms
+ugly (unattractive),ขี้เหร่,kîi-rèe,,adj
+fungus (e.g. mold, milldew),เชื้อรา,chʉ́ʉa-raa,,n
+patience (for pain, annoyance, etc.),ความอดทน,kwaam-òt-ton,,n
+sort out (select),คัดเลือก,kát-lʉ̂ʉak,,vt
+sort out (order),จัดลำดับ,jàt-lam-dàp,,vt
+smart,ฉลาด,chà~làat,,adj
+smart,เปรื่อง,bprʉ̀ʉang,,adj
+smart (elegant, stylish),เนี้ยบ,níiap,slang,adj
+same (as before),เหมือนเดิม,mʉ̌ʉan-dəəm,,adj
+hair (head),ผม,pǒm,,n,Situations > Beauty/Hair > Hair Salon
+hair (body),ขน,kǒn,,n
+praise (admire),ยกย่อง,yók-yɔ̂ng,,vt
+praise (admire),ยอ,yɔɔ,,vt
+extol (praise),สดุดี,sà~dù-dii,,vt
+professional (not amateur) | pro (professional),มือโปร,mʉʉ-bproo,slang,n
+skill,ฝีมือ,fǐi-mʉʉ,slang,n
+skill,ทักษะ,ták-sà,,n
+skill,ความเชี่ยวชาญ,kwaam-chîiao-chaan,,n
+skillful (having skill),ชำนาญ,cham-naan,,adj
+manliness, man's skill,เชิงชาย,chəəng-chaai,,n
+skillful,คล่องปรื๋อ,klɔ̂ng-bprʉ̌ʉ,slang,adv
+team | group (band, team) | faculty (department) | school (faculty) | panel, organization, party, squad (group) | company (group of persons),คณะ,ká~ná,,n
+content (e.g. of book, article),เนื้อหา,nʉ́ʉa-hǎa,,n
+content (e.g. of book, article),สาระ,sǎa-rá,,n
+amplify, expand, magnify, augment | dilate (enlarge) | enlarge (expand) | spread out (expand, extend) | bulk (expand, swell),ขยาย,kà~yǎai,,v
+duplication (duplicate),คู่ฉบับ,kûu-chà~bàp,technical,n
+grimace (facial expression),หน้าบึ้ง,nâa-bʉ̂ng,,n
+motorcycle,มอเตอร์ไซค์,mɔɔ-dtəə-sai,,n,Situations > Transportation > Vehicles
+familiar (close) | close (e.g. friend) | sound (e.g. sleep) | bosom (intimate or confidential) | profound (thorough),สนิท,sà~nìt,,adj
+last (e.g. last week),ที่ผ่านมา,tîi-pàan-maa,,adj
+make an infusion | soak in a liquid,ชง,chong,,v
+carry-on,กระเป๋าที่นำขึ้นเครื่องได้,grà~bpǎo-tîi-nam-kʉ̂n-krʉ̂ʉang-dâai,,n
+near,ณ,ná,,prep,Essentials > Grammar > Prepositions
+beside | by (next to),ข้าง,kâang,,prep,Essentials > Grammar > Prepositions
+same (as before),เหมือนเดิม,mʉ̌ʉan-dəəm,,adj
+safe (box),ตู้เซฟ,dtûu-séep,,n,Situations > Shopping > Household
+after (later in time),หลัง,lǎng,,adv
+inward (into the mind) | in one's head | in one's mind,ในใจ,nai-jai,,adj
+obsess (have the mind excessively preoccupied),ฝังแน่นในใจ,fǎng-nɛ̂n-nai-jai,,vt
+long-handled umbrella,กลด,glòt,,n
+photo, photograph | picture, print (photo),รูป,rûup,,n,Situations > Shopping > Household
+pity,เวทนา,wêet-tá~naa,,vt
+higher rank officer or monk,สัญญาบัตร,sǎn-yaa-bàt,,n
+concord (accord, agreement) | pact, indenture, accord (agreement) | agreement, deal, promise, booking (contract) | contract (legal agreement),สัญญา,sǎn-yaa,,n,Situations > Business > Contracts
+body and mind,สังขาร,sǎng-kǎan,,n
+soul | spirit (soul) | shade (soul, spirit) | presence, shadow, ghost (spirit),วิญญาณ,win-yaan,,n
+uncertain (impermanent),อนิจจัง,à-nít-jang,monk,adj
+soulless self,อนัตตา,à-nát-dtaa,,n
+tell (e.g. story) | fable (tell),เล่า,lâo,,vt
+anyway (used to resume the thread of a story) | like that (short for ยังงั้น yang-ngán),งั้น,ngán,slang,adv
+otherwise (or else),งั้น,ngán,slang,conj
+fair (not bad but not very good),งั้นๆ,ngán-ngán,slang,adj
+is that so? | really!,งั้นเหรอ,ngán-rə̌ə,slang,sent
+in a moment,เดี๋ยว,dǐiao,slang,adv
+risky | dodgy, speculative, touch-and-go (risky),เสี่ยง,sìiang,,adj
+perhaps (maybe) | possibly (perhaps),คงจะ,kong-jà,,adv
+Indonesian (Indonesia),อินโดนีเซีย,in-doo-nii-siia,,adj,Glossary > Nationalities
+caregiver, carer, caretaker | sitter (caregiver) | keeper (e.g. guard, caretaker, hotelkeeper) | superintendent (monitor) | monitor (person),ผู้ดูแล,pûu-duu-lɛɛ,,n
+do, does, did | practice (perform),ปฏิบัติ,bpà~dtì-bàt,formal,vt
+Good luck.,โชคดีนะ,chôok-dii-ná,,sent,Essentials > Basics > Good Wishes
+I wish you good luck.,ขอให้โชคดี,kɔ̌ɔ-hâi-chôok-dii,,sent,Essentials > Basics > Good Wishes
+having good luck,มือขึ้น,mʉʉ-kʉ̂n,slang,adj
+Amen!,สาธุ,sǎa-tú,,sent,Essentials > Basics > Good Wishes
+Enjoy your trip.,เที่ยวให้สนุกนะ,tîiao-hâi-sà~nùk-ná,,sent,Essentials > Basics > Good Wishes
+Welcome.,ยินดีต้อนรับ,yin-dii-dtɔ̂ɔn-ráp,,sent,Essentials > Basics > Good Wishes
+bael fruit, Bengal quince, stone apple,มะตูม,má~dtuum,,n,Situations > Food/Drink > Fruit
+call (phone),โทรหา,too-hǎa,,vt
+call (phone),สาย,sǎai,slang,n
+as much as, as many as,ตั้ง,dtâng,,adv
+extremely (very much),จัด,jàt,,adv
+fresh (e.g. fruit, idea) | green (fresh) | live (fresh, happening now) | unworn (fresh, new) | saturated (of colors),สด,sòt,,adj,Situations > Food/Drink > Preparations
+steal,ลัก,lák,slang,v,Situations > Legal Cases > Legal Terms
+see <sth> for oneself (<sth>),เห็น<sth>กับตา,hěn-<sth>gàp-dtaa,,v
+accent (dialect, pronunciation),สำเนียง,sǎm-niiang,,n
+Suvarnabhumi Airport,สนามบินสุวรรณภูมิ,sà~nǎam-bin-sù-wan-ná~puum,,n
+pronounce (enuciate, utter),ออกเสียง,ɔ̀ɔk-sǐiang,,v
+Don Mueang (airport),ดอนเมือง,dɔɔn-mʉʉang,,n
+gate (e.g. airport),ประตูทางออก,bprà~dtuu-taang-ɔ̀ɔk,,n,Situations > Transportation > General
+terminal (airport terminal),อาคารผู้โดยสาร,aa-kaan-pûu-dooi-sǎan,,n
+news,ข่าว,kàao,,n
+news,สนเทศ,sǒn-têet,,n
+clumsy,ซุ่มซ่าม,sûm-sâam,slang,adj
+clumsy,งอแง,ngɔɔ-ngɛɛ,,adj
+awkward (clumsy),เปิ่น,bpə̀n,slang,adj
+awkward (uncomfortable),อึดอัดใจ,ʉ̀t-àt-jai,,adj
+sexual desire | sensuality (arousal),ราคะ,raa-ká,monk,n
+preserve (conserve) | reserve, preserve (conserve, save) | conserve (e.g. natural resources),สงวน,sà~ngǔuan,,vt
+right (e.g. legal right),สิทธิ์,sìt,,n
+test (e.g. medical) | exploration (survey),การตรวจ,gaan-dtrùuat,,n
+report, make known | impart (communicate) | notify (inform) | advise (notify) | announce, grass on (report),แจ้ง,jɛ̂ɛng,,vt
+alphabet,ตัวหนังสือ,dtuua-nǎng~sʉ̌ʉ,,n
+Latin,ลาติน,laa-dtin,,adj
+city,เมือง,mʉʉang,,n
+village,หมู่บ้าน,mùu-bâan,,n
+laughable | funny (humorous),ขัน,kǎn,,adj
+something like that, about that | sort of (kind of) | kind of (sort of),ประมาณนั้น,bprà~maan-nán,,adv
+better (improved health),ค่อยยังชั่ว,kɔ̂i-yang-chûua,slang,adj
+little by little, gradually | softly (gently) | gently (in a gradual manner),ค่อยๆ,kɔ̂i-kɔ̂i,,adv
+quiet (gentle, silent) | gentle (quiet) | low (sound),ค่อย,kɔ̂i,,adj
+maybe!,มั้ง,máng,,sent
+discontinue | have off (have time off from work) | pull over (make a vehicle stop) | discontinue, stay, rest (stop),หยุด,yùt,,vt
+stop (e.g. car, talking, device) | stop (e.g. car, talking, machine) | cease, interrupt (stop) | pause (stop briefly) | quit (stop, cease),หยุด,yùt,,v
+anywhere,ที่ใดก็ตาม,tîi-dai-gɔ̂ɔ-dtaam,,n
+anywhere,ที่ไหนก็ได้,tîi-nǎi-gɔ̂ɔ-dâai,slang,adv
+sticky rice (savory),ข้าวเหนียว,kâao-nǐiao,,n,Situations > Food/Drink > Thai Dishes
+pay | wash (e.g. dishes, car),ชำระ,cham-rá,formal,v
+purify (cleanse) | decontaminate (purify),ชำระ,cham-rá,,vt
+disinfect, pasteurize | sterilize (kill germs in),ฆ่าเชื้อใน,kâa-chʉ́ʉa-nai,,vt
+kill, murder, slaughter | bump off, croak, destroy, execute, rub out, zap, dump, butcher, erase, strike down, dispatch (kill) | blow away (kill, e.g. by gunfire),ฆ่า,kâa,,vt,Situations > Legal Cases > Legal Terms
+violation,อาบัติ,aa-bàt,monk,n,Situations > Legal Cases > Legal Terms
+have food before noon,ฉันเพล,chǎn-peen,monk,vi
+I am vegetarian. (dairy ok),ผมกินเจ,pǒm-gin-jee,,sent,Situations > Food/Drink > Dietary Restrictions
+What do you like to drink?,คุณชอบดื่มอะไร,kun-chɔ̂ɔp-dʉ̀ʉm-à~rai,,sent,Situations > Food/Drink > Let's Go Eat
+release,ปลดปล่อย,bplòt-bplɔ̀i,,vt
+preceptor (teacher),พระอุปัชฌาย์,prá-ù-bpàt-chaa,monk,n
+soy milk (emulsified),นมถั่วเหลือง,nom-tùua-lʉ̌ʉang,,n,Situations > Food/Drink > Dairy
+bean,ถั่ว,tùua,,n,Situations > Food/Drink > Staples/Grains
+as if, like,อย่างกับว่า,yàang-gàp-wâa,,conj,Essentials > Grammar > Conjunctions
+as if, like,ราวกับว่า,raao-gàp-wâa,,conj,Essentials > Grammar > Conjunctions
+as if, like,ยังกะ,yang-gà,slang,conj,Essentials > Grammar > Conjunctions
+call back (return a phonecall),โทรกลับ,too-glàp,,vi
+Call back ASAP.,โทรกลับด่วน,too-glàp-dùuan,,sent,Situations > Telephone/SMS > Quick SMS
+You're lying.,คุณโกหก,kun-goo-hòk,,sent,Situations > Telephone/SMS > Quick SMS
+Please forgive me.,ยกโทษให้ผมด้วย,yók-tôot-hâi-pǒm-dûuai,,sent,Situations > Love/Romance > Arguments/Breakups | Situations > Telephone/SMS > Quick SMS
+I was wrong.,ผิดไปแล้ว,pìt-bpai-lɛ́ɛo,,sent,Situations > Telephone/SMS > Quick SMS
+I'm waiting for you.,รออยู่นะ,rɔɔ-yùu-ná,,sent,Situations > Telephone/SMS > Quick SMS
+What happened?,เกิดอะไรขึ้น,gə̀ət-à~rai-kʉ̂n,,sent,Situations > Telephone/SMS > Quick SMS
+What are you mad about?,โกรธเรื่องอะไร,gròot-rʉ̂ʉang-à~rai,,sent,Situations > Telephone/SMS > Quick SMS
+Can we meet now?,เจอกันตอนนี้ได้มั้ย,jəə-gan-dtɔɔn-níi-dâai-mái,,sent,Situations > Telephone/SMS > Quick SMS
+Won't be home tonight.,คืนนี้ไม่กลับบ้าน,kʉʉn-níi-mâi-glàp-bâan,,sent,Situations > Telephone/SMS > Quick SMS
+Call me.,โทรหาด้วย,too-hǎa-dûuai,,sent,Situations > Telephone/SMS > Quick SMS
+I'll be there a little late.,จะไปถึงช้าหน่อย,jà-bpai-tʉ̌ng-cháa-nɔ̀i,,sent,Situations > Telephone/SMS > Quick SMS
+Meeting is canceled.,การประชุมถูกยกเลิก,gaan-bprà~chum-tùuk-yók-lə̂ək,,sent,Situations > Telephone/SMS > Quick SMS
+senior,อาวุโส,aa-wú-sǒo,,adj
+elder (senior),ผู้สูงอายุ,pûu-sǔung-aa-yú,,n
+senior,เป็นรุ่นพี่,bpen-rûn-pîi,,adj
+tolerate (endure),อดทนต่อ,òt-ton-dtɔ̀ɔ,,vt
+wet,เปียก,bpìiak,,adj,Situations > Weather
+floor (surface),พื้น,pʉ́ʉn,,n,Situations > Construction > Building | Situations > Shopping > Household
+floor (surface),ฟลอร์,flɔɔ,slang,n,Situations > Construction > Building | Situations > Shopping > Household
+carry or hide on the body,พก,pók,,v
+sarong,ซิ่น,sîn,,n
+woman | element placed before nouns or verbs to form female agent nouns | title placed before the first name of a married woman,นาง,naang,,n
+Southeast Asia,เอเชียอาคเนย์,ee-chiia-aa-ká~nee,,n
+building | facility (building),อาคาร,aa-kaan,,n,Situations > Construction > Building
+everywhere,ทุกที่,túk-tîi,,adv
+everywhere,ทุกแห่ง,túk-hɛ̀ng,,adv
+stock (where stock is kept),คลังสินค้า,klang-sǐn-káa,,n
+stock (inventory),สต๊อก,sà~dtɔ́k,,n
+grand council held by Buddhists for the purpose of revising the Tripitaka,สังคายนา,sǎng-kaa-yá~naa,monk,n
+mindful (heedful),เอาใจใส่,ao-jai-sài,,adj
+mind (care),ใส่ใจ,sài-jai,,v
+what a shame! (it's too bad!),น่าเสียดาย,nâa-sǐia-daai,,sent
+conscience (shame of sins or wrong doings),หิริโอตตัปปะ,hì-rì-òot-dtàp-bpà,monk,n
+humiliation (shame),ความอับอาย,kwaam-àp-aai,,n
+shame (regretful matter),เรื่องที่น่าเสียใจ,rʉ̂ʉang-tîi-nâa-sǐia-jai,,n
+shameless (showing no shame),หน้าด้าน,nâa-dâan,slang,adj
+shameless (showing no shame),หน้าหนา,nâa-nǎa,slang,adj
+shameless (showing no shame),ไร้ยางอาย,rái-yaang-aai,,adj

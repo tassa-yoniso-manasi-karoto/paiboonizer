@@ -1,15 +1,8 @@
-module github.com/tassa-yoniso-manasi-karoto/paiboonizer
+module paiboonizer-test
 
 go 1.23.11
 
-replace github.com/tassa-yoniso-manasi-karoto/go-pythainlp => /home/voiduser/go/src/go-pythainlp
-
-require (
-	github.com/gookit/color v1.5.4
-	github.com/k0kubun/pp v3.0.1+incompatible
-	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-00010101000000-000000000000
-	golang.org/x/text v0.27.0
-)
+require paiboonizer v0.0.0
 
 require (
 	dario.cat/mergo v1.0.1 // indirect
@@ -87,6 +80,7 @@ require (
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/google/uuid v1.6.0 // indirect
+	github.com/gookit/color v1.5.4 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0 // indirect
@@ -101,6 +95,7 @@ require (
 	github.com/jonboulle/clockwork v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/k0kubun/pp v3.0.1+incompatible // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/kevinburke/ssh_config v1.2.0 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
@@ -156,6 +151,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.10.0 // indirect
 	github.com/tassa-yoniso-manasi-karoto/dockerutil v0.0.0-20250803110715-1ae365840edf // indirect
+	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-00010101000000-000000000000 // indirect
 	github.com/theupdateframework/notary v0.7.0 // indirect
 	github.com/tilt-dev/fsnotify v1.4.8-0.20220602155310-fff9c274a375 // indirect
 	github.com/tonistiigi/dchapes-mode v0.0.0-20241001053921-ca0759fec205 // indirect
@@ -190,6 +186,7 @@ require (
 	golang.org/x/sync v0.16.0 // indirect
 	golang.org/x/sys v0.32.0 // indirect
 	golang.org/x/term v0.31.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 	golang.org/x/time v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20240123012728-ef4313101c80 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240903143218-8af14fe29dc1 // indirect
@@ -212,3 +209,7 @@ require (
 	sigs.k8s.io/yaml v1.4.0 // indirect
 	tags.cncf.io/container-device-interface v0.8.0 // indirect
 )
+
+replace paiboonizer => ../
+
+replace github.com/tassa-yoniso-manasi-karoto/go-pythainlp => /home/voiduser/go/src/go-pythainlp

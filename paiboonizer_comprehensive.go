@@ -1,4 +1,4 @@
-package main
+package paiboonizer
 
 import (
 	"strings"
@@ -21,6 +21,10 @@ type ComprehensiveSyllable struct {
 // parseThaiSyllable parses a Thai syllable comprehensively
 func parseThaiSyllable(syl string) ComprehensiveSyllable {
 	var cs ComprehensiveSyllable
+
+	// Remove silent consonants (consonant + ์) before parsing
+	syl = RemoveSilentConsonants(syl)
+
 	runes := []rune(syl)
 	i := 0
 	
@@ -416,22 +420,41 @@ func findSyllableEndComprehensive(runes []rune, start int) int {
 // using comprehensive syllable parsing, pattern recognition, and tone rules.
 // It handles complex vowel patterns, consonant clusters, and special cases.
 func ComprehensiveTransliterate(word string) string {
-	// Try syllable dictionary first for known syllables
+	// Try special cases first (irregular words, loanwords)
+	if trans, ok := specialCasesGlobal[word]; ok {
+		return trans
+	}
+
+	// Try syllable dictionary for known syllables
 	if trans, ok := syllableDict[word]; ok {
 		return trans
 	}
-	
-	// Try to find longest matching syllables from dictionary
+
+	// Try to find longest matching syllables from dictionary and special cases
 	results := []string{}
 	runes := []rune(word)
 	i := 0
-	
+
 	for i < len(runes) {
 		found := false
-		// Try longest possible match first
-		for length := len(runes) - i; length > 0; length-- {
+		// Try longest possible match first (maximal matching)
+		// Limit search to reasonable syllable lengths (max 8 runes for a syllable)
+		maxLen := len(runes) - i
+		if maxLen > 8 {
+			maxLen = 8
+		}
+
+		for length := maxLen; length > 0; length-- {
 			if i+length <= len(runes) {
 				substr := string(runes[i : i+length])
+				// Check special cases first
+				if trans, ok := specialCasesGlobal[substr]; ok {
+					results = append(results, trans)
+					i += length
+					found = true
+					break
+				}
+				// Then check syllable dictionary
 				if trans, ok := syllableDict[substr]; ok {
 					results = append(results, trans)
 					i += length
@@ -440,14 +463,19 @@ func ComprehensiveTransliterate(word string) string {
 				}
 			}
 		}
-		
+
 		if !found {
 			// Extract one syllable using improved rules
 			end := findSyllableEndComprehensive(runes, i)
 			if end > i {
 				syl := string(runes[i:end])
-				parsed := parseThaiSyllable(syl)
-				trans := buildPaiboonFromSyllable(parsed)
+				// Try pattern matching on single syllable
+				trans := improvedTransliterate(syl)
+				if trans == "" {
+					// Fall back to comprehensive parsing
+					parsed := parseThaiSyllable(syl)
+					trans = buildPaiboonFromSyllable(parsed)
+				}
 				if trans != "" {
 					results = append(results, trans)
 				}
@@ -463,7 +491,7 @@ func ComprehensiveTransliterate(word string) string {
 			}
 		}
 	}
-	
+
 	if len(results) == 0 {
 		return ""
 	}

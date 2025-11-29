@@ -1,0 +1,278 @@
+champagne,แชมเปญ,chɛm-bpeen,,n,Situations > Food/Drink > Drinks
+come (reach, arrive),มา,maa,,vi
+somebody, someone (as object),คน,kon,,pron
+package (parcel),พัสดุ,pát-sà~dù,,n
+pagoda,เจดีย์,jee-dii,,n
+sapota, chiko, sapodilla plum,ละมุด,lá~mút,,n,Situations > Food/Drink > Fruit
+supermarket,ซูเปอร์มาร์เก็ต,súp-bpə̂ə-maa-gét,,n
+close (door),งับ,ngáp,,vi
+venerable (title),พระ,prá,,n
+help, help out | second (assist) | oblige (favor) | contribute (help, assist),ช่วยเหลือ,chûuai-lʉ̌ʉa,,v
+white (color),สีขาว,sǐi-kǎao,,n
+matter | action (act) | affair (activity, action) | work (activity, affair, matter),การ,gaan,,n
+making merit at the temple,ไปวัดทำบุญ,bpai-wát-tam-bun,,n,Glossary > Hobbies
+ceremony,พิธี,pí-tii,,n
+arrive,มาถึง,maa-tʉ̌ng,,vi
+robe of a Buddhist monk,จีวร,jii-wɔɔn,,n,Situations > Religion > Buddhist
+kathina robe,ผ้ากฐิน,pâak-gà~tǐn,monk,n
+robe left for the monks to take as a discarded cloth,ผ้าป่า,pâa-bpàa,,n
+frock (robe),เสื้อคลุมยาว,sʉ̂ʉa-klum-yaao,,n
+shoulder bag,กระเป๋าสะพาย,grà~bpǎo-sà~paai,,n
+grow to | stem (arise) | start (begin) | come on (e.g. disease),เริ่ม,rə̂əm,,vi
+plane (airplane),เครื่องบิน,krʉ̂ʉang-bin,,n,Situations > Transportation > Vehicles
+next,ต่อไป,dtɔ̀ɔ-bpai,,adj
+next,ถัดไป,tàt-bpai,,adj
+next to,ข้างๆ,kâang-kâang,,prep
+previous (prior, before),แต่ก่อน,dtɛ̀ɛ-gɔ̀ɔn,,adj
+previous (prior, before),เมื่อก่อน,mʉ̂ʉa-gɔ̀ɔn,,adj
+straight,ตรงไป,dtrong-bpai,,adv,Situations > Transportation > Giving Directions
+Stop at the corner.,จอดที่หัวมุม,jɔ̀ɔt-tîi-hǔua-mum,,sent,Situations > Transportation > Giving Directions
+Keep going.,ไปเรื่อยๆ,bpai-rʉ̂ʉai-rʉ̂ʉai,,sent,Situations > Transportation > Giving Directions
+Go straight.,ตรงไป,dtrong-bpai,,vi,Situations > Transportation > Giving Directions
+shall, should have, had better, might like to | may (expresses possibility) | ought to (express probability) | should (probably will),น่าจะ,nâa-jà,,aux
+impossible,ไม่มีทาง,mâi-mii-taang,slang,adj
+feel (e.g. angry, warm, hurt),รู้สึก,rúu-sʉ̀k,,vi
+thousand,พัน,pan,,numb
+hundred,ร้อย,rɔ́ɔi,,numb
+next,ต่อไป,dtɔ̀ɔ-bpai,,adj
+deliver (e.g. mail),ส่ง,sòng,,vt
+leather (animal hide),หนัง,nǎng,,n
+kuti | monk's dwelling,กุฏิ,gùt-dtì,,n,Situations > Religion > Buddhist
+small dam,ฝาย,fǎai,,n
+for roads, rivers, canals, railways,สาย,sǎai,,clf,Glossary > Classifiers
+call (phone),สาย,sǎai,slang,n
+late | tardy (late),สาย,sǎai,,adj
+
+
+
+
+on (used with time, date),ใน,nai,,adv
+outside, external,นอก,nɔ̂ɔk,,adj
+outdoor (outside of the house),นอกบ้าน,nɔ̂ɔk-bâan,,adj,Situations > Shopping > Appliances
+excluding,นอกจาก,nɔ̂ɔk-jàak,,adj
+as soon as,พอ,pɔɔ,slang,conj
+as soon as,ทันทีที่,tan-tii-tîi,,conj
+interesting,น่าสนใจ,nâa-sǒn-jai,,adj
+interesting (enjoyable),น่าสนุก,nâa-sà~nùk,,adj
+interest <sone> (intrigue <sone>),ทำให้<sone>สนใจ,tam-hâi-<sone>sǒn-jai,,vt
+curiosity (desire to know),ความอยากรู้อยากเห็น,kwaam-yàak-rúu-yàak-hěn,,n
+cup (container),ถ้วย,tûuai,,n,Glossary > Containers | Situations > Shopping > Kitchenwares
+tissue paper,กระดาษชำระ,grà~dàat-cham-rá,,n,Situations > Shopping > Household
+mountain,เขา,kǎo,,n,Glossary > Geography
+type (sort),จำพวก,jam-pûuak,,n
+type (class),ประเภท,bprà~pêet,,n
+fridge,ตู้เย็น,dtûu-yen,,n
+sugar,น้ำตาล,nám-dtaan,,n,Situations > Food/Drink > Sensitive Foods | Situations > Food/Drink > Spices/Seasoning
+only (just) | just, simply (only),เท่านั้น,tâo-nán,,adv
+equal to, merely | only (just) | as far as (just, only) | just (only),เพียง,piiang,,adv
+piece (of anything) | part, slice (piece) | scrap (small piece, fragment),ชิ้น,chín,,n
+used (second-hand),มือสอง,mʉʉ-sɔ̌ɔng,,adj
+disciple | follower, pupil (student),ลูกศิษย์,lûuk-sìt,,n
+yes! (for male speakers),ครับผม,kráp-pǒm,,sent
+bike,ถีบจักรยาน,tìip-jàk-grà~yaan,slang,vi
+mug,ถ้วยกาแฟ,tûuai-gaa-fɛɛ,,n,Situations > Shopping > Kitchenwares
+mug,แก้วมัค,gɛ̂ɛo-mák,slang,n
+heel (body part),ส้น,sôn,slang,n,Essentials > Swearing/Insults | Glossary > Body Parts
+heel (body part),ส้นเท้า,sôn-táao,,n,Essentials > Swearing/Insults | Glossary > Body Parts
+long-handled umbrella,กลด,glòt,,n
+look like,ดูเหมือน,duu-mʉ̌ʉan,,vt
+by oneself,ด้วยตัวเอง,dûuai-dtuua-eeng,,adv
+alone (by oneself),ลำพัง,lam-pang,,adv
+without,โดยปราศจาก,dooi-bpràat-sà~jàak,,adv
+oneself, self | own (oneself),ตัวเอง,dtuua-eeng,,pron
+Take care of yourself. | take care!,ดูแลตัวเองด้วย,duu-lɛɛ-dtuua-eeng-dûuai,,sent,Essentials > Basics > Greetings/Intros
+restrain oneself, control oneself,ห้ามใจตัวเอง,hâam-jai-dtuua-eeng,,vi
+self-confident,มั่นใจตัวเอง,mân-jai-dtuua-eeng,slang,adj
+wait,รอ,rɔɔ,,vi
+check (verify),ตรวจ,dtrùuat,,v
+check (verify),เช็ค,chék,slang,v
+trash can, garbage can, bin, rubbish bin,ถังขยะ,tǎng-kà~yà,,n,Situations > Shopping > Household
+toilet paper,กระดาษชำระ,grà~dàat-cham-rá,,n,Situations > Shopping > Household
+spray bottle,ขวดสเปรย์,kùuat-sà~bpree,,n,Situations > Shopping > Household
+laundry detergent (powder),แฟ็บ,fɛ́p,,n,Situations > Shopping > Household
+laundry detergent (powder),ผงซักฟอก,pǒng-sák-fɔ̂ɔk,,n,Situations > Shopping > Household
+floor (surface),พื้น,pʉ́ʉn,,n,Situations > Construction > Building | Situations > Shopping > Household
+dish detergent, dish washing powder (powder),ผงล้างจาน,pǒng-láang-jaan,,n,Situations > Shopping > Household
+dish detergent, dish washing liquid (liquid),น้ำยาล้างจาน,nám-yaa-láang-jaan,,n,Situations > Shopping > Household
+computer,คอม,kɔɔm,slang,n,Situations > Shopping > Household
+boiler, electric kettle (kitchen),เครื่องต้มน้ำร้อน,krʉ̂ʉang-dtôm-náam-rɔ́ɔn,,n,Situations > Shopping > Household
+air conditioner, aircon,แอร์,ɛɛ,slang,n,Situations > Shopping > Household
+air conditioner, aircon,เครื่องปรับอากาศ,krʉ̂ʉang-bpràp-aa-gàat,,n,Situations > Shopping > Household
+walk (for pleasure),การเดินเล่น,gaan-dəən-lên,,n
+map,แผนที่,pɛ̌ɛn-tîi,,n,Situations > Transportation > General
+map (make a map of),ทำแผนที่,tam-pɛ̌ɛn-tîi,,vt
+world, earth, globe,โลก,lôok,,n,Glossary > Geography
+permissible (allowable),ที่อนุญาตได้,tîi-à-nú-yâat-dâai,,adj
+permission (consent),การยินยอม,gaan-yin-yɔɔm,,n
+authorization (permission, act of authorizing),การอนุญาต,gaan-à~nú-yâat,,n
+authoritative (highly reliable),เชื่อถือได้อย่างสูง,chʉ̂ʉa-tʉ̌ʉ-dâai-yàang-sǔung,,adj
+submit (present to authority),เสนอเพื่อพิจารณา,sà~nə̌ə-pʉ̂ʉa-pí-jaa-rá~naa,,v
+worldly matter,โลกีย์,loo-gii,,n
+any one (one from a group),ใครก็ได้,krai-gɔ̂ɔ-dâai,,n
+make a wild guess,สุ่ม,sùm,,v
+decent (proper, in good taste),พอเหมาะ,pɔɔ-mɔ̀,,adj
+we, us (in a general sense),คนเรา,kon-rao,,n
+pay one's respects (in order to greet),เยี่ยมทักทาย,yîiam-ták-taai,,vt
+glutinous rice wrapped in leaves and steamed,ข้าวต้มปัด,kâao-dtôm-bpàt,,n
+height,ความสูง,kwaam-sǔung,,n
+length,ความยาว,kwaam-yaao,,n
+leave <sth> (allow <sth> to remain),เหลือ<sth>ไว้,lʉ̌ʉa-<sth>wái,,vt
+leave (depart),จาก,jàak,,vt
+leave <n> (<n>),ทิ้ง<n>ไว้,tíng-<n>wái,,vt
+Leave me alone.,ขออยู่คนเดียว,kɔ̌ɔ-yùu-kon-diiao,,sent,Situations > Love/Romance > Arguments/Breakups
+remain (not leave),ยังอยู่,yang-yùu,,vi
+Can I leave my bag here?,ฝากกระเป๋าที่นี่ได้มั้ย,fàak-grà~bpǎo-tîi-nîi-dâai-mái,,sent,Situations > Transportation > Luggage Storage
+clean up (sanitize, make tidy),ทำความสะอาด,tam-kwaam-sà~àat,,v
+a moment ago (just),เพิ่ง,pə̂ng,,adv
+finish (end),สิ้นสุด,sîn-sùt,,vi
+finish (end),จบ,jòp,,vi
+finish <sth>,ทำ<sth>เสร็จ,tam-<sth>sèt,,vt
+complete <sth> (finish <sth>),ทำ<sth>ให้เสร็จ,tam-<sth>hâi-sèt,,vt
+almost,เกือบ,gʉ̀ʉap,,adv
+almost,จวน,juuan,,adv
+almost,แทบ,tɛ̂ɛp,,adv
+almost,หวิด,wìt,slang,adv
+almost,หวุดหวิด,wùt-wìt,slang,adv
+almost,รอมร่อ,rɔɔm-rɔ̂ɔ,slang,adv
+fabric (cloth),ผ้า,pâa,,n
+brother (younger),น้องชาย,nɔ́ɔng-chaai,,n
+brother (older),พี่ชาย,pîi-chaai,,n
+son,ลูกชาย,lûuk-chaai,,n,Glossary > Family Roles
+daughter,ลูกสาว,lûuk-sǎao,,n,Glossary > Family Roles
+husband,แฟน,fɛɛn,slang,n,Glossary > Family Roles
+husband,ผัว,pǔua,slang,n,Glossary > Family Roles
+wife,แฟน,fɛɛn,slang,n,Glossary > Family Roles
+wife,เมีย,miia,,n,Glossary > Family Roles
+father,พ่อ,pɔ̂ɔ,,n,Glossary > Family Roles
+mother,แม่,mɛ̂ɛ,,n,Glossary > Family Roles
+older sister,พี่,pîi,,n,Glossary > Family Roles
+older sister,พี่สาว,pîi-sǎao,,n,Glossary > Family Roles
+younger sister,น้องสาว,nɔ́ɔng-sǎao,,n,Glossary > Family Roles
+maternal grandfather (mother's father),ตา,dtaa,,n,Glossary > Family Roles
+paternal grandmother (father's mother),ย่า,yâa,,n,Glossary > Family Roles
+maternal grandmother (mother's mother),ยาย,yaai,,n,Glossary > Family Roles
+paternal grandfather (father's father),ปู่,bpùu,,n,Glossary > Family Roles
+parent,พ่อแม่,pɔ̂ɔ-mɛ̂ɛ,,n,Glossary > Family Roles
+Thai New Year's Day, Songkran,วันสงกรานต์,wan-sǒng-graan,,n,Glossary > Celebrations
+Visakha Bucha Day, Buddha Day,วันวิสาขบูชา,wan-wí-sǎa-kà-buu-chaa,,n,Glossary > Celebrations | Situations > Religion > Buddhist
+Ook Phansaa, Last Day of Buddhist Lent, Last Day of Vassa, Pavarana Day,วันออกพรรษา,wan-ɔ̀ɔk-pan-sǎa,,n,Glossary > Celebrations | Situations > Religion > Buddhist
+Khao Phansaa, First Day of Buddhist Lent, First Day of Vassa,วันเข้าพรรษา,wan-kâo-pan-sǎa,,n,Glossary > Celebrations | Situations > Religion > Buddhist
+continent,ทวีป,tá~wîip,,n,Glossary > Geography
+shore (e.g. of a sea),ฝั่ง,fàng,,n,Glossary > Geography
+pond (small body of water),สระน้ำ,sà-náam,,n,Glossary > Geography
+hill,เขา,kǎo,,n,Glossary > Geography | Situations > Construction > Building
+region (area),เขต,kèet,,n,Glossary > Geography
+countryside,บ้านนอก,bâan-nɔ̂ɔk,slang,n,Glossary > Geography
+watching Youtube,ดูยูทูบ,duu-yuu-tûup,,n,Glossary > Hobbies
+going to the mall,ไปเที่ยวห้าง,bpai-tîiao-hâang,,n,Glossary > Hobbies
+branch (of tree),กิ่ง,gìng,,n,Glossary > Nature > Plant Parts
+root (e.g. of a plant),ราก,râak,,n,Glossary > Nature > Plant Parts
+constellation (of stars),หมู่ดาว,mùu-daao,,n,Glossary > Nature > Space
+bamboo (tree),ต้นไผ่,dtôn-pài,,n,Glossary > Nature > Trees | Situations > Shopping > Material
+crescent moon,พระจันทร์ครึ่งเสี้ยว,prá-jan-krʉ̂ng-sîiao,,n,Glossary > Nature > Space
+full moon,พระจันทร์เต็มดวง,prá-jan-dtem-duuang,,n,Glossary > Nature > Space
+half moon,พระจันทร์ครึ่งดวง,prá-jan-krʉ̂ng-duuang,,n,Glossary > Nature > Space
+moon,เดือน,dʉʉan,slang,n,Glossary > Nature > Space
+moon,จันทร์,jan,,n,Glossary > Nature > Space
+star (in the sky),ดาว,daao,,n,Glossary > Nature > Space
+sun,ตะวัน,dtà~wan,slang,n,Glossary > Nature > Space
+sun,อาทิตย์,aa-tít,,n,Glossary > Nature > Space
+orange,สีส้ม,sǐi-sôm,,adj,Glossary > Colors
+student,นักเรียน,nák-riian,,n,Glossary > Professions
+teacher,อาจารย์,aa-jaan,,n,Glossary > Professions
+retired (from work),เกษียณ,gà~sǐian,,adj,Glossary > Professions
+government official,ข้าราชการ,kâa-râat-chá~gaan,,n,Glossary > Professions
+farmer (rice),ชาวนา,chaao-naa,,n,Glossary > Professions
+doctor,หมอ,mɔ̌ɔ,,n,Glossary > Professions
+contractor (e.g. construction),ผู้รับเหมา,pûu-ráp-mǎo,,n,Glossary > Professions | Situations > Construction > Building
+Ministry of Foreign Affairs,กระทรวงต่างประเทศ,grà~suuang-dtàang-bprà~têet,,n,Glossary > Thai Ministries
+judge (in court),ผู้พิพากษา,pûu-pí-pâak-sǎa,,n,Glossary > Civil Service Titles | Situations > Legal Cases > Legal Terms
+answer (solution to a problem, response to a question, etc.),คำตอบ,kam-dtɔ̀ɔp,,n
+mouthful bite, mouthful | bite (of food) | word (unit of speech or writing),คำ,kam,,n
+suggestion, instruction, guidance, counsel (advice) | advice (recommendation offered) | pointer (suggestion),คำแนะนำ,kam-nɛ́-nam,,n
+Maybe.,อาจจะ,àat-jà,,sent,Essentials > Basics > Yes/No
+aspire (have a great ambition),อาจเอื้อม,àat-ʉ̂ʉam,slang,vi
+subject to change,อาจเปลี่ยนแปลงได้,àat-bplìian-bplɛɛng-dâai,,adj
+insect,แมง,mɛɛng,slang,n
+insect,แมลง,má~lɛɛng,,n
+release, relinquish, unhand | untie (free, release) | relinquish, launch, unravel, vent, let out (release) | acquit (release, free) | discharge (release, let go) | unchain (set free) | unleash (set loose) | unfix (unfasten, unsettle, release),ปล่อย,bplɔ̀i,,vt
+renounce, jilt | throw away, put away, throw out, scrap (discard) | cast away (discard, drop) | discard, chuck out (throw away) | dump, trash (throw out),ทิ้ง,tíng,,vt
+throw away <sth> (discard <sth>) | discard <sth> (throw away <sth>),เขี่ย<sth>ทิ้ง,kìia-<sth>tíng,,vt
+I am allowed to <pred>. | It is possible for me to <pred>. | I am able to <pred>. | I can <pred>.,ผมสามารถ<pred>,pǒm-sǎa-mâat-<pred>,formal,sent,Essentials > Grammar > Can
+reduce, lower | discount (reduce price of),ลด,lót,,v
+Japan,ญี่ปุ่น,yîi-bpùn,,n
+Where have you traveled?,คุณไปเที่ยวที่ไหนมาบ้าง,kun-bpai-tîiao-tîi-nǎi-maa-bâang,,sent,Situations > Small Talk > Where have you traveled?
+Japanese (relating to Japan),ไอ้ยุ่น,âi-yûn,slang,adj
+What do you think about Japan?,คุณคิดว่าประเทศญี่ปุ่นเป็นยังไง,kun-kít-wâa-bprà~têet-yîi-bpùn-bpen-yang-ngai,,sent,Situations > Small Talk > Do you like it here?
+filthy (dirty),เปื้อน,bpʉ̂ʉan,,adj
+accept,ยอมรับ,yɔɔm-ráp,,v
+filthy (e.g. eating),มูมมาม,muum-maam,,adj
+deny (not accept),ไม่ยอมรับ,mâi-yɔɔm-ráp,,vt
+death,การเสียชีวิต,gaan-sǐia-chii-wít,,n
+anniversary,วันครบรอบปี,wan-króp-rɔ̂ɔp-bpii,,n
+cremation,การเผาศพ,gaan-pǎo-sòp,,n
+assuage, refrain from | halt (cause to stop) | muffle (deaden, e.g. sound) | suppress (e.g. news, symptoms) | intercept (halt) | stop (halt, repress) | withhold (hold back restrain) | appease (pacify) | repress (quell, subdue) | subdue, bottle up (repress) | quell (suppress) | forebear, hold back (withhold),ระงับ,rá~ngáp,,vt
+participate | show up (attend) | mingle (participate) | partake (participate, have a share),เข้าร่วม,kâo-rûuam,,vi
+attendant (subordinate),สมุน,sà~mǔn,slang,n
+arrive,มาถึง,maa-tʉ̌ng,,vi
+empty <sth> (discard contents of <sth>),ทำให้<sth>ว่าง,tam-hâi-<sth>wâang,,vt
+have empty stomach,ท้องว่าง,tɔ́ɔng-wâang,,vi
+I'm disappointed.,รู้สึกผิดหวัง,rúu-sʉ̀k-pìt-wǎng,,sent,Essentials > Basics > How We Feel
+I'm disappointed.,รู้สึกผิดหวัง,rúu-sʉ̀k-pìt-wǎng,,sent,Essentials > Basics > How We Feel
+I'm surprised.,รู้สึกประหลาดใจ,rúu-sʉ̀k-bprà~làat-jai,,sent,Essentials > Basics > How We Feel
+useful,มีประโยชน์,mii-bprà~yòot,,adj
+tea (beverage),ชา,chaa,,n,Situations > Food/Drink > Drinks
+tea (beverage),ชา,chaa,,n,Situations > Food/Drink > Drinks
+citronella,ตะไคร้หอม,dtà~krái-hɔ̌ɔm,,n
+far (distant),ไกล,glai,,adj
+close (near),ใกล้,glâi,,adj
+far (distant),ลิบลิ่ว,líp-lîu,,adj
+how far, how much, to what extent,แค่ไหน,kɛ̂ɛ-nǎi,,adv
+think way too far, get the wrong idea,คิดไปไกล,kít-bpai-glai,slang,vi
+it's all right!,ก็ได้,gɔ̂ɔ-dâai,,sent
+forget it!,ไม่ต้องก็ได้,mâi-dtɔ̂ng-gɔ̂ɔ-dâai,,sent
+disdain | loathe (detest) | detest (loathe),รังเกียจ,rang-gìiat,,vt
+mind (care),สนใจ,sǒn-jai,,v
+pay attention to, give attention to,ให้ความใส่ใจ,hâi-kwaam-sài-jai,,vt
+drop (dismiss) | ignore (disregard) | cold shoulder, tune out (ignore),ไม่ใส่ใจ,mâi-sài-jai,,vt
+disinterest (divest of interest) | neglect, pass over (ignore) | neglect, ignore (uninterested),ไม่สนใจ,mâi-sǒn-jai,,vt
+pay attention to, take an interest in,สนใจไยดี,sǒn-jai-yai-dii,,vi
+cord, lineage | line (e.g. string, wire) | string (narrow strip of flexible material),สาย,sǎai,,n
+by, in terms of,ในแง่,nai-ngɛ̂ɛ,,prep
+inward (into the mind) | in one's head | in one's mind,ในใจ,nai-jai,,adj
+enroll (child in a school) | consign (deposit) | deposit (money) | put something in the care of,ฝาก,fàak,,vt
+starting from,นับตั้งแต่,náp-dtâng-dtɛ̀ɛ,,adv
+starting from,เริ่มจาก,rə̂əm-jàak,,adv
+proceed (carry out) | dive in (start doing) | act (take action),ลงมือทำ,long-mʉʉ-tam,,vi
+squirrel,กระรอก,grà~rɔ̂ɔk,,n,Glossary > Nature > Animals
+last (final),สุดท้าย,sùt-táai,,adj,Essentials > Numbers > first, second, ...
+last (order),โหล่,lòo,slang,adj
+seat (e.g. chair),อาสนะ,àat-sà~ná,monk,n
+mother tongue,ภาษาแม่,paa-sǎa-mɛ̂ɛ,,n
+B.E. (Buddhist Era),พุทธศักราช,pút-tá~sàk-gà~ràat,,n
+know one's stuff,รู้เรื่องที่ตนทำเป็นอย่างดี,rúu-rʉ̂ʉang-tîi-dton-tam-bpen-yàang-dii,,vi
+slope off (leave without letting others know),หลบออกมา,lòp-ɔ̀ɔk-maa,,vi
+Buddhist monk, monk,พระสงฆ์,prá-sǒng,formal,n
+remaining,เหลือ,lʉ̌ʉa,,adj
+tag along (go along),ตามไปด้วย,dtaam-bpai-dûuai,,vi
+get along (compatible),เข้ากันได้,kâo-gan-dâai,,vi
+boss | Mr. (male title) | chief (master) | master (owner, boss, employer) | Mister, Mr. (title) | element placed before verbs or nouns to form agent nouns,นาย,naai,,n
+send | pass (convey, transfer, deliver) | deal (deliver) | hand in (e.g. homework) | turn in (e.g. homework, results) | throw (e.g. kiss) | deliver (e.g. mail) | submit (hand in) | give in (hand in, e.g. homework) | ship, hand, remit (send) | dispatch (send, transmit) | evolve (yield, emit, give off),ส่ง,sòng,,vt
+passage (article) | text, item (message) | statement (oral or written communication) | message (text),ข้อความ,kɔ̂ɔ-kwaam,,n
+anyhow (anyway) | anyway (in any case),ถึงยังไง,tʉ̌ng-yang-ngai,slang,adv
+to (e.g. to this day),ถึง,tʉ̌ng,,prep,Essentials > Grammar > Prepositions
+during (at one moment in the course of),ระหว่าง,rá~wàang,,prep
+during (at one moment in the course of),ระหว่าง,rá~wàang,,prep
+lid | crust (cover) | top (covering or lid) | cap (cover, lid) | wall (e.g. house, room) | cover (e.g. jar) | shell (of mollusks),ฝา,fǎa,,n
+infringe, transgress | breach (act contrary to, e.g. law, promise) | defy (disobey) | violate (law, rule, agreement) | sin against (offend against) | offend, go against, contravene (violate),ฝ่าฝืน,fàa-fʉ̌ʉn,,vt
+teacher, instructor, schoolteacher | educator, preceptor, pedagogue (teacher) | master (teacher, schoolmaster),ครู,kruu,,n,Glossary > Professions
+parcel (package) | package, article (parcel),พัสดุ,pát-sà~dù,,n
+return (borrowed item) | return (give back) | return (purchased product) | give back, restore, replace, put back (return),คืน,kʉʉn,,vt
+vendor (seller),ผู้ขาย,pûu-kǎai,,n
+insect repellent,ยาไล่แมลง,yaa-lâi-má~lɛɛng,,n,Situations > Health > Medicines/Supplies
+to (e.g. give to) | for (given to, sent to, for sake of),แก่,gɛ̀ɛ,formal,prep
+look at, glance at | look at (gaze at),มอง,mɔɔng,,vt
+hard (not easy),ยาก,yâak,,adj
+trash can, garbage can, bin, rubbish bin,ถังขยะ,tǎng-kà~yà,,n,Situations > Shopping > Household
+stiff, strong, firm, austere (hard) | callous (hardened) | hard (not soft) | rigid (stiff),แข็ง,kɛ̌ng,,adj
+

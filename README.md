@@ -1,54 +1,51 @@
 # Paiboonizer
 
-Thai to Paiboon romanization transliterator
+Experimental Thai-to-Paiboon romanization library for translitkit integration.
 
-## Features
+## Overview
 
-- Dictionary-based lookup for 4,981+ Thai words
-- Rule-based transliteration for unknown words
-- Comprehensive syllable parsing and tone rules
-- Integration with pythainlp for improved tokenization
-- 100% accuracy for dictionary words, 60% for arbitrary text
+Paiboonizer provides Thai text transliteration to the Paiboon romanization system. It's designed to be used with pythainlp for word/syllable tokenization, achieving ~83% accuracy on arbitrary Thai text.
 
 ## Usage
 
-### Main API
+### With translitkit (recommended)
+
+Use the `paiboon-hybrid` scheme which combines pythainlp tokenization with paiboonizer transliteration:
 
 ```go
-// Transliterate a Thai word to Paiboon romanization
-result := TransliterateWordRulesOnly("สวัสดี")
-// Returns: "sà~wàt-dii"
+// In translitkit, the scheme handles the pipeline automatically
+// pythainlp tokenizes → paiboonizer transliterates
 ```
 
-### Advanced Functions
+### Direct API
 
 ```go
-// Extract syllables from a Thai word
-syllables := ExtractSyllables("สวัสดี")
+import "github.com/tassa-yoniso-manasi-karoto/paiboonizer"
 
-// Use comprehensive transliteration (no dictionary)
-result := ComprehensiveTransliterate("ความสุข")
+// Check word dictionary first (~5000 entries)
+if trans, found := paiboonizer.LookupDictionary("หน้าต่าง"); found {
+    // Returns "nâa-dtàang"
+}
+
+// Check syllable dictionary
+if trans, found := paiboonizer.LookupSyllable("สวัส"); found {
+    // ...
+}
+
+// Rule-based transliteration (fallback)
+result := paiboonizer.ComprehensiveTransliterate("ความสุข")
+
+// Helper for silent consonant markers (์)
+clean := paiboonizer.RemoveSilentConsonants("สันต์") // Returns "สัน"
 ```
-
-## Command Line Usage
-
-```bash
-# Test accuracy against dictionary
-go run *.go -dictionary-check
-
-# Transliterate test.txt file
-go run *.go -test
-
-# Analyze specific failure cases
-go run *.go -analyze
-```
-
-## Dependencies
-
-- go-pythainlp for Thai text tokenization
-- Manual vocabulary files in `manual vocab/` directory
 
 ## Accuracy
 
-- Dictionary words: 100% (using exact lookup)
-- Unknown words: ~60% (using rule-based system)
+- **With pythainlp + dictionary**: ~85%+ (dictionary lookup first, then syllable rules)
+- **With pythainlp + rules only**: ~83%
+- **Pure rules (no pythainlp)**: ~70%
+
+## Dependencies
+
+- go-pythainlp for syllable tokenization (via Docker)
+- Vocabulary embedded from CSV files at build time

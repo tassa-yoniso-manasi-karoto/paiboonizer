@@ -1,0 +1,230 @@
+for newspapers and documents | for newspapers, letters, documents,ฉบับ,chà~bàp,,clf,Glossary > Classifiers
+meaning,ความหมาย,kwaam-mǎai,,n
+mean (have the meaning of),หมายถึง,mǎai-tʉ̌ng,,vt
+mean (intend),ตั้งใจ,dtâng-jai,,v
+walk (act of walking),การเดิน,gaan-dəən,,n
+send,ส่ง,sòng,,vt
+decrease (reduce),ลดลง,lót-long,,vi
+from,จาก,jàak,,prep,Essentials > Grammar > Prepositions
+closed (not open),ปิด,bpìt,,adj
+truthful (of person),จริงใจ,jing-jai,,adj
+honest, naive | ingenuous, simple (naive) | truthful (of person),ซื่อ,sʉ̂ʉ,,adj
+he, him, sir, she, her | Reverend (used as a title of respect) | you (used to address someone with respect) | second and third person pronoun used to address someone with respect,ท่าน,tân,formal,pron
+starting at 16:20 on Wednesday 4 July 2018,จากบ่าย 4 โมง 20 นาทีวันพุธที่ 4 กรกฎาคมปี 2018,jàak-bàai-sìi-moong-yîi-sìp-naa-tii-wan-pút-tîi-sìi-gà~rá-gà~daa-kom-bpii-sɔ̌ɔng-pan-sìp-bpɛ̀ɛt,,adv,Essentials > Time/Date > Basics
+3 times per day,3ต่อวัน,sǎam-dtɔ̀ɔ-wan,,adv,Essentials > Time/Date > Basics
+When are you free?,ว่างเมื่อไหร่,wâang-mʉ̂ʉa-rài,,sent,Essentials > Time/Date > Scheduling
+That works for me. (time/date),เวลานั้นสะดวก,wee-laa-nán-sà~dùuak,,sent,Essentials > Time/Date > Scheduling | Situations > Small Talk > Setting a Time
+Can I talk to you now?,พูดกับคุณตอนนี้ได้มั้ย,pûut-gàp-kun-dtɔɔn-níi-dâai-mái,,sent,Essentials > Basics > How We Feel
+Are you OK?,คุณโอเคมั้ย,kun-oo-kee-mái,,sent,Essentials > Basics > How We Feel
+I feel <adj>.,รู้สึก<adj>,rúu-sʉ̀k-<adj>,,sent,Essentials > Basics > How We Feel
+I'm sleepy.,ง่วงนอน,ngûuang-nɔɔn,,sent,Essentials > Basics > How We Feel
+I'm excited.,ตื่นเต้น,dtʉ̀ʉn-dtên,,sent,Essentials > Basics > How We Feel
+I'm busy.,ยุ่ง,yûng,,sent,Essentials > Basics > Greetings/Intros | Essentials > Basics > How We Feel
+It's embarrassing.,น่าอาย,nâa-aai,,sent,Essentials > Basics > How We Feel
+You'll see.,เดี๋ยวก็รู้,dǐiao-gɔ̂ɔ-rúu,,sent,Essentials > Basics > How We Feel
+Do you agree?,คุณเห็นด้วยมั้ย,kun-hěn-dûuai-mái,,sent,Essentials > Basics > How We Feel
+I need some rest.,อยากพักผ่อน,yàak-pák-pɔ̀n,,sent,Situations > Health > Talking with Doctors
+There is nothing to worry about.,ไม่มีอะไรน่าห่วง,mâi-mii-à~rai-nâa-hùuang,,sent,Situations > Health > Diagnosis
+I have insurance in my country.,ผมมีประกันที่ประเทศของผม,pǒm-mii-bprà~gan-tîi-bprà~têet-kɔ̌ɔng-pǒm,,sent,Situations > Health > Cost and Insurance
+I have health insurance.,ผมมีประกันสุขภาพ,pǒm-mii-bprà~gan-sùk-kà~pâap,,sent,Situations > Health > Cost and Insurance
+act of showing respect to a monk,นมัสการ,ná~mát-sà~gaan,,n
+reserved (manner) | coy (reserved),ไว้ตัว,wái-dtuua,,adj
+cannot, can't,ไม่ไหว,mâi-wǎi,slang,aux
+hold on (grab),จับไว้,jàp-wái,,vi
+quick-witted | witty (astute) | astute (clever) | resourceful (quick-witted) | intelligent (sagacious) | canny (sharp, skilled),มีไหวพริบ,mii-wǎi-príp,,adj
+not yet,ยัง,yang,,adv,Essentials > Grammar > Already/Not Yet
+kind (sort, type, category),อย่าง,yàang,,n
+mat (for sitting on the floor),เสื่อ,sʉ̀ʉa,,n,Situations > Shopping > Household
+mat (for wiping shoes or feet),พรมเช็ดเท้า,prom-chét-táao,,n
+mat (for wiping shoes or feet),พรมเช็ดเท้า,prom-chét-táao,,n
+matter (importance),ความสำคัญ,kwaam-sǎm-kan,,n
+matter (essence of a matter),สาระ,sǎa-rá,,n
+mature (ripe),สุก,sùk,,adj
+different (not same),ต่างกัน,dtàang-gan,,adj
+go out and have fun,ลั้นลา,lán-laa,slang,vi
+I'm staying at <n>.,ผมพักอยู่ที่<n>,pǒm-pák-yùu-tîi-<n>,,sent,Situations > Customs/Immigration
+and, also; non-standard form of และ lɛ́,แระ,rɛ́,slang,conj
+and, with; non-standard form of กับ gàp,ก่า,gàa,slang,conj
+already; non-standard form of เสียแล้ว sǐia-lɛ́ɛo,ซะหล่ะ,sá-là,slang,adv
+I need an interpreter.,ต้องการล่าม,dtɔ̂ng-gaan-lâam,,sent,Essentials > Language Difficulties > Interpreter/Translator
+go against the rules,ชกใต้เข็มขัด,chók-dtâai-kěm-kàt,slang,vi
+Here are my documents.,นี่เอกสารของผม,nîi-èek-gà~sǎan-kɔ̌ɔng-pǒm,,sent,Situations > Customs/Immigration
+carried away (e.g. lost oneself),เพลิน,pləən,slang,adj
+drive one crazy (annoy someone very much),กวนประสาท,guuan-bprà~sàat,slang,vt
+obligatory gifts to friends and family,ภาษีสังคม,paa-sǐi-sǎng-kom,slang,n
+gossip about,เผา,pǎo,slang,vt
+self-assurance (self-confidence),ความมั่นใจในตนเอง,kwaam-mân-jai-nai-dton-eeng,,n
+Are you feeling better?,คุณรู้สึกดีขึ้นมั้ย,kun-rúu-sʉ̀k-dii-kʉ̂n-mái,,sent,Situations > Health > Talking with Doctors
+buy (accept or believe),ยอมรับ,yɔɔm-ráp,slang,vt
+buy (accept or believe),เชื่อ,chʉ̂ʉa,slang,vt
+what's up? (how are you?),เป็นไง,bpen-ngai,slang,sent
+care about,แคร์,kɛɛ,slang,vt
+ordination (act of ordaining),การบวช,gaan-bùuat,,n
+haughty (arrogant, conceited),เหลิง,lə̌əng,slang,adj
+temptress (alluring woman),หญิงยั่วยวน,yǐng-yûua-yuuan,,n
+run around (move about quickly),วิ่งจนหัวปั่น,wîng-jon-hǔua-bpàn,slang,vi
+play along (go along),เล่นด้วย,lên-dûuai,slang,vi
+plane (airplane),เครื่องบิน,krʉ̂ʉang-bin,,n,Situations > Transportation > Vehicles
+buy into (accept an idea),ยอมรับความคิด,yɔɔm-ráp-kwaam-kít,slang,vt
+plenty (numerous, abundant),เยอะแยะ,yə́-yɛ́,slang,adj
+acknowledgement, acknowledgment (act of acknowledgin),การแสดงเจตนารมณ์,gaan-sà~dɛɛng-jèet-dtà~naa-rom,formal,n
+be attracted or impressed, be addicted to,ติดใจ,dtìt-jai,,vi
+surely (absolutely),แหงแก๋,ngɛ̌ɛ-gɛ̌ɛ,slang,adv
+surely (absolutely),แหงแก๋,ngɛ̌ɛ-gɛ̌ɛ,slang,adv
+surely (absolutely),แหงแก๋,ngɛ̌ɛ-gɛ̌ɛ,slang,adv
+in any case,ไม่ว่าจะยังไงก็ตาม,mâi-wâa-jà-yang-ngai-gɔ̂ɔ-dtaam,slang,adv
+apprehensive (worried),ประหวั่น,bprà~wàn,slang,adj
+as you wish,จัดให้,jàt-hâi,slang,sent
+I apologize.,ขออภัยด้วย,kɔ̌ɔ-à~pai-dûuai,,sent,Essentials > Basics > Excuse Me/Sorry
+approximate (estimate),กะ,gà,slang,vt
+alternative (between two or more things),เผื่อเลือก,pʉ̀ʉa-lʉ̂ʉak,slang,adj
+abstain from,อด,òt,slang,vt
+abstain from,งดเว้น,ngót-wén,,vt
+admiration,การชื่นชม,gaan-chʉ̂ʉn-chom,,n
+at this time,ในตอนนี้,nai-dtɔɔn-níi,slang,adv
+great! (awesome!),เจ๋ง,jěng,slang,sent
+absolutely (without any doubt),แหงแก๋,ngɛ̌ɛ-gɛ̌ɛ,slang,adv
+sensuality (arousal),ความมักมาก,kwaam-mák-mâak,,n
+sensuality (arousal),กาม,gaam,slang,n
+rebirth,การเกิดใหม่,gaan-gə̀ət-mài,,n
+alley, soi (lane),ซอย,sɔɔi,,n,Situations > Transportation > Driving
+clean (with liquid),ล้าง,láang,,vt
+Buddhist monk's form of addressing laymen,โยม,yoom,monk,n
+cloth | fabric (cloth),ผ้า,pâa,,n
+Please wash these white clothes with bleach.,ช่วยซักผ้าขาวนี้ด้วยน้ำยาฟอกขาว,chûuai-sák-pâa-kǎao-níi-dûuai-nám-yaa-fɔ̂ɔk-kǎao,,sent,Situations > Domestic Help > Maid
+Here is a list of things I want from the store.,นี่เป็นรายการของที่ผมอยากได้จากร้าน,nîi-bpen-raai-gaan-kɔ̌ɔng-tîi-pǒm-yàak-dâai-jàak-ráan,,sent,Situations > Domestic Help > Maid
+relatives,ญาติๆ,yâat-yâat,,n
+relatives,ญาติโกโหติกา,yâat-dtì-goo-hǒo-dtì-gaa,slang,n
+particle used at the end of a question, command or entreaty,ล่ะ,lâ,slang,part
+do not, don't (forbiddance),อย่า,yàa,,aux
+forbid,ห้าม,hâam,,vt
+hurry, hasten (hasten),รีบ,rîip,,vi
+serious (severe),งอม,ngɔɔm,,adj
+guilty (at fault) | bad, erroneous (incorrect) | wrong (incorrect, not suitable) | mistaken (wrong),ผิด,pìt,,adj,Situations > Legal Cases > Legal Terms
+offense (violation),การละเมิด,gaan-lá~mə̂ət,,n
+door,ประตู,bprà~dtuu,,n,Situations > Construction > Building | Situations > Shopping > Household
+let (permit, allow),อนุญาตให้,à-nú-yâat-hâi,,vt
+let <sone> go (dismiss, e.g. from work <sone>),ให้<sone>ออก,hâi-<sone>ɔ̀ɔk,,vt
+medicine (drug) | drug, pill, medication, remedy (medicine) | pharmaceuticals (product),ยา,yaa,,n
+stairs,บันได,ban-dai,,n,Situations > Construction > Building | Situations > Shopping > Household
+tree (plant),ต้นไม้,dtôn-máai,,n,Situations > Construction > Building
+bleach, liquid bleach (liquid),น้ำยาซักผ้าขาว,nám-yaa-sák-pâa-kǎao,,n,Situations > Shopping > Household
+chair (furniture),เก้าอี้,gâo-îi,,n,Situations > Shopping > Furniture | Situations > Shopping > Household
+visa,วีซ่า,wii-sâa,,n,Situations > Transportation > General
+credit card,บัตรเครดิต,bàt-kree-dìt,,n,Situations > Transportation > General
+credit card,บัตรเครดิต,bàt-kree-dìt,,n,Situations > Transportation > General
+ATM machine, cash machine,ตู้เอทีเอ็ม,dtûu-ee-tii-em,,n,Situations > Transportation > General
+hotel,โรงแรม,roong-rɛɛm,,n,Situations > Transportation > General
+hotel,โฮเต็ล,hoo-dten,slang,n,Situations > Transportation > General
+Turn left.,เลี้ยวซ้าย,líiao-sáai,,vi,Situations > Transportation > Giving Directions
+Turn right.,เลี้ยวขวา,líiao-kwǎa,,vi,Situations > Transportation > Giving Directions
+Stop here.,จอดตรงนี้,jɔ̀ɔt-dtrong-níi,,sent,Situations > Transportation > Giving Directions
+Are you available?,ว่างมั้ย,wâang-mái,,sent,Situations > Transportation > Taxi/Van/Motorbike
+Take me to this hotel.,ไปโรงแรมนี้,bpai-roong-rɛɛm-níi,,sent,Situations > Transportation > Taxi/Van/Motorbike
+Please use the meter.,ใช้มิเตอร์ด้วย,chái-míi-dtə̂ə-dûuai,,sent,Situations > Transportation > Taxi/Van/Motorbike
+The room is too noisy.,ห้องเสียงดังเกินไป,hɔ̂ng-sǐiang-dang-gəən-bpai,,sent,Situations > Hotel > Talking with Staff
+Please do not disturb.,กรุณาอย่ารบกวน,gà~rú~naa-yàa-róp-guuan,,sent,Situations > Hotel > Talking with Staff
+I want to stay a bit longer.,อยากพักต่อ,yàak-pák-dtɔ̀ɔ,,sent,Situations > Hotel > Talking with Staff
+busy (having work or errand),มีธุระ,mii-tú-rá,,adj
+busy (occupied with activity),ยุ่ง,yûng,,adj
+
+ask around (ask a number of people for information),ถามดูหลายๆคน,tǎam-duu-lǎai-lǎai-kon,slang,vi
+by means of, by way of | on (by means of) | through, thru (by way of) | of (by, with) | by (created by) | by (vehicle, e.g. car, plane) | per (via),โดย,dooi,,prep,Essentials > Grammar > Prepositions
+for (given to, sent to, for sake of),เพื่อ,pʉ̂ʉa,,prep,Essentials > Grammar > Prepositions
+on <n> (top of),บน<n>,bon-<n>,,prep,Essentials > Grammar > Prepositions
+between <n> and <n> (physically or numerically),ระหว่าง<n>และ<n>,rá~wàang-<n>lɛ́-<n>,,prep,Essentials > Grammar > Prepositions
+after,หลังจาก,lǎng-jàak,,adv,Essentials > Time/Date > Basics | Situations > Transportation > Giving Directions
+continually, continuously,ต่อ,dtɔ̀ɔ,,adv
+lengthen | link (bond) | construct (build) | connect to (e.g. phone, network) | contact (e.g. telephone) | add on, join (extend) | prolong (in length) | connect (join) | eke (lengthen),ต่อ,dtɔ̀ɔ,,vt
+Keep the change.,ไม่ต้องทอน,mâi-dtɔ̂ng-tɔɔn,,sent,Situations > Food/Drink > Ordering | Situations > Price Haggling | Situations > Transportation > Taxi/Van/Motorbike
+like (be pleased with) | prefer (favor) | favor (like),นิยม,ní-yom,,vt
+societal values, moral values,ค่านิยม,kâa-ní-yom,,n
+liking | taste (aesthetics) | preference (taste),รสนิยม,rót-ní-yom,,n
+intend to,ตั้งใจ,dtâng-jai,,vi
+first (in a list),แรก,rɛ̂ɛk,,adj
+please (in polite requests),โปรด,bpròot,,adv
+darling, pet (favorite) | favorite (liked),โปรด,bpròot,,adj
+camp (monk retreat),ธุดงค์,tú-dong,monk,vi
+act of showing respect to a monk,นมัสการ,ná~mát-sà~gaan,,n
+mosquito,ยุง,yung,,n,Glossary > Nature > Animals
+mosquito net,มุ้ง,múng,,n
+mosquito repellent,ยากันยุง,yaa-gan-yung,,n
+mosquito wire screen,มุ้งลวด,múng-lûuat,,n
+shave (act),การโกน,gaan-goon,,n
+just now | a moment ago (just),เมื่อกี้,mʉ̂ʉa-gîi,,adv
+usual,ปกติ,bpà~gà~dtì,,adj
+only (solely),เดียว,diiao,,adj
+only (just),แค่,kɛ̂ɛ,,adv
+only (just),เพียงแต่,piiang-dtɛ̀ɛ,,adv
+only (just),เพียง,piiang,,adv
+way (method),วิธี,wí-tii,,n
+way (path or course),เส้นทาง,sên-taang,,n
+way (path or course),เส้นทาง,sên-taang,,n
+means (way of doing),วิธีการ,wí-tii-gaan,,n
+means (way of doing),วิธีการ,wí-tii-gaan,,n
+method (way, procedure),แนว,nɛɛo,,n
+way (course, direction),แนวทาง,nɛɛo-taang,,n
+Right now it's 16:20.,ตอนนี้เวลาบ่าย 4 โมง 20 นาที,dtɔɔn-níi-wee-laa-bàai-sìi-moong-yîi-sìp-naa-tii,,sent,Essentials > Time/Date > Basics
+half past midnight, half midnight (30 minutes after top of hour),หกทุ่มครึ่ง,hòk-tûm-krʉ̂ng,,n,Essentials > Time/Date > Basics
+hour,ชั่วโมง,chûua-moong,,n,Essentials > Time/Date > Basics | Glossary > Units of Time
+never,ไม่เลย,mâi-ləəi,,adv,Essentials > Grammar > Never/Ever | Essentials > Time/Date > Basics
+midnight, 12:00 midnight,เที่ยงคืน,tîiang-kʉʉn,,n,Essentials > Time/Date > Hours of the Day
+1:00 am,ตีหนึ่ง,dtii-nʉ̀ng,,n,Essentials > Time/Date > Hours of the Day
+2:00 am,ตีสอง,dtii-sɔ̌ɔng,,n,Essentials > Time/Date > Hours of the Day
+3:00 am,ตีสาม,dtii-sǎam,,n,Essentials > Time/Date > Hours of the Day
+4:00 am,ตีสี่,dtii-sìi,,n,Essentials > Time/Date > Hours of the Day
+5:00 am,ตีห้า,dtii-hâa,,n,Essentials > Time/Date > Hours of the Day
+6:00 am,หกโมงเช้า,hòk-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+7:00 am,เจ็ดโมงเช้า,jèt-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+7:00 am,โมงเช้า,moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+8:00 am,แปดโมงเช้า,bpɛ̀ɛt-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+7:00 am,หนึ่งโมงเช้า,nʉ̀ng-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+8:00 am,สองโมงเช้า,sɔ̌ɔng-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+9:00 am,เก้าโมงเช้า,gâao-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+9:00 am,สามโมงเช้า,sǎam-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+9:00 am,สามโมงเช้า,sǎam-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+10:00 am,สิบโมงเช้า,sìp-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+10:00 am,สี่โมงเช้า,sìi-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+11:00 am,สิบเอ็ดโมงเช้า,sìp-èt-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+11:00 am,ห้าโมงเช้า,hâa-moong-cháao,,n,Essentials > Time/Date > Hours of the Day
+noon, 12:00 noon,เที่ยง,tîiang,,n,Essentials > Time/Date > Hours of the Day
+noon, 12:00 noon,เที่ยงวัน,tîiang-wan,,n,Essentials > Time/Date > Hours of the Day
+1:00 pm,บ่ายหนึ่งโมง,bàai-nʉ̀ng-moong,,n,Essentials > Time/Date > Hours of the Day
+1:00 pm,บ่ายโมง,bàai-moong,,n,Essentials > Time/Date > Hours of the Day
+2:00 pm,บ่ายสองโมง,bàai-sɔ̌ɔng-moong,,n,Essentials > Time/Date > Hours of the Day
+2:00 pm,บ่ายสอง,bàai-sɔ̌ɔng,,n,Essentials > Time/Date > Hours of the Day
+3:00 pm,บ่ายสามโมง,bàai-sǎam-moong,,n,Essentials > Time/Date > Hours of the Day
+3:00 pm,บ่ายสาม,bàai-sǎam,,n,Essentials > Time/Date > Hours of the Day
+4:00 pm,บ่ายสี่โมง,bàai-sìi-moong,,n,Essentials > Time/Date > Hours of the Day
+4:00 pm,บ่ายสี่,bàai-sìi,,n,Essentials > Time/Date > Hours of the Day
+4:00 pm,สี่โมงเย็น,sìi-moong-yen,,n,Essentials > Time/Date > Hours of the Day
+5:00 pm,ห้าโมงเย็น,hâa-moong-yen,,n,Essentials > Time/Date > Hours of the Day
+6:00 pm,หกโมงเย็น,hòk-moong-yen,,n,Essentials > Time/Date > Hours of the Day
+7:00 pm,หนึ่งทุ่ม,nʉ̀ng-tûm,,n,Essentials > Time/Date > Hours of the Day
+7:00 pm,ทุ่มหนึ่ง,tûm-nʉ̀ng,,n,Essentials > Time/Date > Hours of the Day
+7:00 pm,ทุ่ม,tûm,,n,Essentials > Time/Date > Hours of the Day
+8:00 pm,สองทุ่ม,sɔ̌ɔng-tûm,,n,Essentials > Time/Date > Hours of the Day
+9:00 pm,สามทุ่ม,sǎam-tûm,,n,Essentials > Time/Date > Hours of the Day
+10:00 pm,สี่ทุ่ม,sìi-tûm,,n,Essentials > Time/Date > Hours of the Day
+11:00 pm,ห้าทุ่ม,hâa-tûm,,n,Essentials > Time/Date > Hours of the Day
+I would like to schedule an appointment at 16:20 this weekend.,อยากได้เวลานัดบ่าย 4 โมง 20 นาทีเสาร์อาทิตย์หน้า,yàak-dâai-wee-laa-nát-bàai-sìi-moong-yîi-sìp-naa-tii-sǎo-aa-tít-nâa,,sent,Essentials > Time/Date > Scheduling
+January,มกรา,mók-gà~raa,slang,n,Essentials > Time/Date > Months
+January,มกราคม,mók-gà~raa-kom,,n,Essentials > Time/Date > Months
+February,กุมภาพันธ์,gum-paa-pan,,n,Essentials > Time/Date > Months
+March,มีนาคม,mii-naa-kom,,n,Essentials > Time/Date > Months
+April,เมษายน,mee-sǎa-yon,,n,Essentials > Time/Date > Months
+May,พฤษภาคม,prʉ́t-sà~paa-kom,,n,Essentials > Time/Date > Months
+June,มิถุนายน,mí-tù-naa-yon,,n,Essentials > Time/Date > Months
+July,กรกฎาคม,gà~rá-gà~daa-kom,,n,Essentials > Time/Date > Months
+August,สิงหาคม,sǐng-hǎa-kom,,n,Essentials > Time/Date > Months
+September,กันยายน,gan-yaa-yon,,n,Essentials > Time/Date > Months
+October,ตุลาคม,dtù-laa-kom,,n,Essentials > Time/Date > Months
+November,พฤศจิกายน,prʉ́t-sà~jì-gaa-yon,,n,Essentials > Time/Date > Months
+December,ธันวาคม,tan-waa-kom,,n,Essentials > Time/Date > Months
+At 14:30 (time of day),บ่าย 2 โมงครึ่ง,bàai-sɔ̌ɔng-moong-krʉ̂ng,,adv,Essentials > Time/Date > Basics | Essentials > Units/Conversion > Time of Day
+word (unit of speech or writing),คำ,kam,,n
+word (unit of speech or writing),พจน์,pót,,n
+vocabulary,คำศัพท์,kam-sàp,,n
+at (place),ที่,tîi,,prep
+mistake (fault),ความผิดพลาด,kwaam-pìt-plâat,,n
+mistake (fault, shortcoming),ข้อบกพร่อง,kɔ̂ɔ-bòk-prɔ̂ng,,n

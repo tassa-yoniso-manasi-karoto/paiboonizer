@@ -1,0 +1,287 @@
+few,เล็กน้อย,lék-nɔ́ɔi,,adj
+few,ไม่มาก,mâi-mâak,,adj
+few,โหรงเหรง,rǒong-rěeng,,adj
+fewer than,น้อยกว่า,nɔ́ɔi-gwàa,,prep
+secretary,เลขา,lee-kǎa,,n,Glossary > Professions | Situations > Business > Job Titles
+artist,ศิลปิน,sǐn-lá~bpin,,n,Glossary > Professions
+author (writer),คนแต่ง,kon-dtɛ̀ng,slang,n
+author (writer),นักเขียน,nák-kǐian,,n
+heaven, paradise | sky (heaven) | ether (heavens) | bliss (paradise),สวรรค์,sà~wǎn,,n
+sprite, divinity (angel) | angel (male),เทวดา,tee-wá~daa,,n
+morale | courage, spirits (morale),ขวัญ,kwǎn,,n
+war,สงคราม,sǒng-kraam,,n
+peace (silence, serenity),ความเงียบสงบ,kwaam-ngîiap-sà~ngòp,,n
+peace (freedom of the mind from annoyance),ความผาสุก,kwaam-pǎa-sùk,,n
+peace (mutual harmony between people),ความสงบสุข,kwaam-sà~ngòp-sùk,,n
+science,วิทยาศาสตร์,wít-tá~yaa-sàat,,n
+science (knowledge),ศาสตร์,sàat,,n
+art,ศิลป์,sǐn,slang,n
+cheese,เนยแข็ง,nəəi-kɛ̌ng,,n,Situations > Food/Drink > Dairy
+cheese,ชีส,chíis,,n,Situations > Food/Drink > Dairy
+art,ศิลป์,sǐn,slang,n
+bread,ขนมปัง,kà~nǒm-bpang,,n,Situations > Food/Drink > Staples/Grains
+knife,มีด,mîit,,n,Situations > Shopping > Household | Situations > Shopping > Kitchenwares
+lock,ล็อก,lɔ́k,,n,Situations > Shopping > Household
+lock,กุญแจ,gun-jɛɛ,,n,Situations > Shopping > Household
+internet,อินเตอร์เน็ต,in-dtəə-nèt,,n,Situations > Shopping > Household
+ocean,มหาสมุทร,má~hǎa-sà~mùt,,n
+sea,ทะเล,tá~lee,,n,Glossary > Geography
+river,แม่น้ำ,mɛ̂ɛ-náam,,n,Glossary > Geography
+star (in the sky),ดาว,daao,,n,Glossary > Nature > Space
+grass,หญ้า,yâa,,n
+stone,หิน,hǐn,,n
+metal,โลหะ,loo-hà,,n,Situations > Shopping > Material
+dust (dry particles),ฝุ่น,fùn,,n
+dust (dry particles),ผง,pǒng,,n
+sound,เสียง,sǐiang,,n
+copy (artwork prepared for reproduction) | style (design) | scheme (form) | pattern (model) | type (pattern, style, form) | form (structure) | model (style or design),แบบ,bɛ̀ɛp,,n
+bottom (lower floor),ชั้นล่าง,chán-lâang,,n
+bottom (lowest part),ล่างสุด,lâang-sùt,,adj
+bottom (lowest part),ก้น,gôn,,n
+yell,ตะโกน,dtà~goon,,v
+yell,ร้องเสียงดัง,rɔ́ɔng-sǐiang-dang,,vi
+lovable | attractive (cute) | nice (cute, good-mannered) | adorable (cute, lovable) | lovely, cute, sweet, darling (lovable) | cute, pretty (lovely),น่ารัก,nâa-rák,,adj
+So cute! (used with little children or babies),น่าเกลียดน่าชังจังเลย,nâa-glìiat-nâa-chang-jang-ləəi,,sent
+rich (wealthy),ล่ำซำ,lâm-sam,slang,adj
+rich (wealthy),รวย,ruuai,,adj
+poor (indigent),จน,jon,,adj
+poor (suffering hardship),ลำเค็ญ,lam-ken,,adj
+next,ถัดไป,tàt-bpai,,adj
+beside <n>,ข้างๆ<n>,kâang-kâang-<n>,,prep,Essentials > Grammar > Prepositions
+next to,ถัดจาก,tàt-jàak,,prep
+next to, alongside | against (in contact with, beside),ติดกับ,dtìt-gàp,,prep
+in front of <n>, ahead of <n>,หน้า<n>,nâa-<n>,,adv,Situations > Transportation > Giving Directions
+next | future, farther, further (next),ต่อไป,dtɔ̀ɔ-bpai,,adj
+pursue, go on, prosecute, press on (continue) | proceed (continue one's discourse, go on to do something) | go ahead (do more) | hang (persist),ทำต่อไป,tam-dtɔ̀ɔ-bpai,,vi
+white, free from blame, pale | pure (pale),ขาว,kǎao,,adj
+type of sticky rice with a deep purple color,ข้าวก่ำ,kâao-gàm,,n
+breakfast,ข้าวเช้า,kâao-cháao,slang,n
+tapioca (pudding),สาคู,sǎa-kuu,,n,Situations > Food/Drink > Staples/Grains
+pasta,พาสต้า,páat-sà~dtâa,,n,Situations > Food/Drink > Staples/Grains
+donut, doughnut,โดนัท,doo-nát,,n,Situations > Food/Drink > Staples/Grains
+baguette,ขนมปังบาแก็ต,kà~nǒm-bpang-baa-gɛ́t,,n,Situations > Food/Drink > Staples/Grains
+dinner,ข้าวเย็น,kâao-yen,,n
+non-glutinous rice,ข้าวเจ้า,kâao-jâao,,n
+time (during the period of) | phase (lunar) | interval (period) | point (period of time) | extent, gamut (range) | section (time) | span (time or distance),ช่วง,chûuang,,n
+funeral,งานศพ,ngaan-sòp,,n
+scrap (small piece, fragment),เศษเล็กๆ,sèet-lék-lék,,n
+scrap (small piece, fragment),ชิ้นเล็กๆ,chín-lék-lék,,n
+crematorium,เมรุ,meen,,n
+crematorium,เมรุ,mee-rú,,n
+cremate a body,เผาศพ,pǎo-sòp,,vi
+crematory, crematorium | bier (funeral pyre, crematorium),เชิงตะกอน,chəəng-dtà~gɔɔn,,n
+ideal, slam-bang (excellent) | cool (good),เยี่ยม,yîiam,,adj
+have a look at,เยี่ยมชม,yîiam-chom,,vt
+drop by | visit (go visit),ไปเยี่ยม,bpai-yîiam,,v
+rhinoceros,แรด,rɛ̂ɛt,,n,Glossary > Nature > Animals
+horn (e.g. rhinoceros),นอ,nɔɔ,,n
+toward (in the direction of) | into (toward),ไปยัง,bpai-yang,,prep,Essentials > Grammar > Prepositions
+convey (e.g. ideas, feelings) | project (regard something within the mind) | broadcast, hand on, relay (transmit) | communicate (transmit, e.g. disease, thoughts),ถ่ายทอด,tàai-tɔ̂ɔt,,vt
+transfuse (e.g. blood) | shoot (e.g. photograph, video) | film (with a camera) | transcribe (write sound in any form),ถ่าย,tàai,,vt
+taking photos,ถ่ายรูป,tàai-rûup,,n,Glossary > Hobbies
+texting,ส่งข้อความ,sòng-kɔ̂ɔ-kwaam,,n,Glossary > Hobbies
+Tweeting,ส่งข้อความทางทวิทเตอร์,sòng-kɔ̂ɔ-kwaam-taang-tá~wit-dtə̂ə,,n,Glossary > Hobbies
+surfing the net,เล่นอินเตอร์เน็ต,lên-in-dtəə-nèt,,n,Glossary > Hobbies
+streaming movies,สตรีมหนัง,sà~dtriim-nǎng,,n,Glossary > Hobbies
+shopping,ชอปปิ้ง,chɔ̂p-bpîng,,n,Glossary > Hobbies
+shopping,ไปซื้อของ,bpai-sʉ́ʉ-kɔ̌ɔng,,n,Glossary > Hobbies
+hanging out with friends,ใช้เวลากับเพื่อนๆ,chái-wee-laa-gàp-pʉ̂ʉan-pʉ̂ʉan,,n,Glossary > Hobbies
+watching Youtube,ดูยูทูบ,duu-yuu-tûup,,n,Glossary > Hobbies
+come from,มาจาก,maa-jàak,,vt
+go away (depart),จากไป,jàak-bpai,,vi
+Listen!,ฟังก่อน,fang-gɔ̀ɔn,,sent,Essentials > Basics > Calling Attention
+Go away.,ไปให้พ้น,bpai-hâi-pón,,sent,Essentials > Basics > Calling Attention
+garden,สวน,sǔuan,,n,Situations > Construction > Building | Situations > Shopping > Household
+plant (grow) | cultivate (plant) | grow (plant, cultivate),ปลูก,bplùuk,,vt
+go to bed | turn in, retire (go to bed),เข้านอน,kâo-nɔɔn,,vi
+for a while (momentarily),สักพัก,sàk-pák,,adv
+about (around),สัก,sàk,,adv
+poetry (verse),โคลงกลอน,kloong-glɔɔn,,n
+poetry (verse),บทกวี,bòt-gà~wii,,n
+coupon | ticket (card) | card (e.g. credit, I.D.),บัตร,bàt,,n
+reservation, booking (e.g. ticket),การจอง,gaan-jɔɔng,,n,Situations > Transportation > General
+round-trip ticket, return ticket,ตั๋วไปกลับ,dtǔua-bpai-glàp,,n,Situations > Transportation > General
+perhaps (maybe) | possibly (perhaps),คงจะ,kong-jà,,adv
+weird (strange),ประหลาด,bprà~làat,,adj
+weird (uncanny),อัศจรรย์,àt-sà~jan,,adj
+answer (solution to a problem, response to a question, etc.),คำตอบ,kam-dtɔ̀ɔp,,n
+answer (speak in response),ขานรับ,kǎan-ráp,poetic,vt
+answer back,เถียงกลับ,tǐiang-glàp,,vi
+answer back,สวนตอบ,sǔuan-dtɔ̀ɔp,,vi
+answer back,สวน,sǔuan,slang,vi
+answer back,เถียง,tǐiang,slang,vi
+answer back,ย้อนกลับ,yɔ́ɔn-glàp,slang,vi
+firefly,หิ่งห้อย,hìng-hɔ̂i,,n,Glossary > Nature > Animals
+perform (do, execute),ปฏิบัติ,bpà~dtì-bàt,formal,v
+happen | come forth (appear) | appear (be in sight, manifest) | transpire (happen),ปรากฏ,bpraa-gòt,,vi
+skirt (garment),กระโปรง,grà~bproong,,n,Situations > Shopping > Clothes/Accessories
+case (box) | box (e.g. cardboard),กล่อง,glɔ̀ng,,n,Glossary > Containers
+traverse (cross) | cross (e.g. street) | go across (get across),ข้าม,kâam,,v
+step over | jump (bypass, e.g. class) | get across, get over (cross) | skip (pass over, leave out) | rove (traverse),ข้าม,kâam,,vt
+Nakhon Ratchasima, Korat, Khorat (province),โคราช,koo-râat,,plc,Places > Thai Places
+though (although, even if),ถึงแม้ว่า,tʉ̌ng-mɛ́ɛ-wâa,,conj
+though (although, even if),ถึง,tʉ̌ng,,conj
+though (although, even if),แม้ว่า,mɛ́ɛ-wâa,,conj
+improve (become better),ดีขึ้น,dii-kʉ̂n,,vi
+cultivate, build up (develop) | get on (progress),พัฒนา,pát-tá~naa,,vt
+step ahead | advance (improve, make progress) | thrive (make steady progress) | progress (move forward) | get along, go forward, get ahead (progress),ก้าวหน้า,gâao-nâa,,vi
+meet (have an encounter) | hook up (meet),เจอกัน,jəə-gan,,vi
+lunch,อาหารกลางวัน,aa-hǎan-glaang-wan,formal,n
+pack (luggage),เก็บของ,gèp-kɔ̌ɔng,slang,vi
+strength (power) | power (strength),พลัง,pá~lang,poetic,n
+pool (pond) | pond (small body of water),สระ,sà,slang,n
+transact | manipulate, settle, see about (arrange) | fix (arrrange) | get along with, straighten out (deal with) | streak, flop (dispose) | contrive, administer, administrate, work (manage) | arrange (provide, prepare),จัดการ,jàt-gaan,,vt
+arrange (make plans) | make out (manage),จัดการ,jàt-gaan,,vi
+agile, nimble, adroit | dynamic, snappy (active) | dexterous (adroit) | active (fast, agile, nimble) | facile (fluent, effortless) | slick (glib) | skillful (having skill) | ingenious, cunning (skillful) | fluent (smooth),คล่องแคล่ว,klɔ̂ng-klɛ̂o,,adj
+remind | tip off (caution) | warn (caution, remind) | chase up (remind) | alert, caution (warn) | alarm (warn of danger),เตือน,dtʉʉan,,vt
+persist in, concentrate one's attention, be engrossed in, immerse oneself in,ตั้งหน้าตั้งตา,dtâng-nâa-dtâng-dtaa,,v
+during (throughout a period),ตลอดเวลา,dtà~lɔ̀ɔt-wee-laa,,prep
+committed | serious (somber, sincere),เอาจริง,ao-jing,,adj
+unpack <sth> (<sth>) | remove <sth> (delete, erase) | remove <sth> (delete, erase <sth>) | eject <sth> (e.g. CD <sth>) | take <sth> out (extract or remove <sth>) | work off <sth>, empty <sth> out, offload <sth>, tissue <sth>, clear <sth> away (remove <sth>) | strip <sth> off (skin <sth>),เอา<sth>ออก,ao-<sth>ɔ̀ɔk,,vt
+meditation (intuitive vision),วิปัสสนา,wí-bpàt-sà~naa,monk,n
+pray (make a wish),ภาวนา,paa-wá~naa,,vi
+take bus here (towards speaker),เอารถบัสมา,ao-rót-bát-maa,,vt,Essentials > Grammar > Bring/Take
+bring <sth> here, take <sth> here (towards speaker),เอา<sth>มา,ao-<sth>maa,,vt,Essentials > Grammar > Bring/Take
+parent, look after | bring up (care for during childhood) | raise (e.g. child, horse) | mother (feed) | nurse (look after carefully, cherish, nurture) | foster (raise),เลี้ยงดู,líiang-duu,,vt
+nourish | feed (give food to) | take care of (raise) | breed (raise, e.g. cattle) | keep (take care of, domesticate),เลี้ยง,líiang,,vt
+earn a living,หาเลี้ยงชีพ,hǎa-líiang-chîip,,vi
+big, large,โต,dtoo,,adj
+debatable (able to be debated) | disputable (debatable),โต้แย้งได้,dtôo-yɛ́ɛng-dâai,,adj
+Shinto,ชินโต,chin-dtoo,,adj,Situations > Religion > Religions
+heal (recover) | recover (totally, from sickness) | disappear (vanish from sight) | be healed or cured | be lost from sight,หาย,hǎai,,vi
+truthful (corresponding with reality),ตรงกับความเป็นจริง,dtrong-gàp-kwaam-bpen-jing,,adj
+honestly, truthfully, sincerely | honestly (truthfully),อย่างจริงใจ,yàang-jing-jai,,adv
+honesty, loyalty | fidelity (e.g. to loved one, company) | truth (honesty, truthfulness),ความซื่อสัตย์,kwaam-sʉ̂ʉ-sàt,,n
+loyal, honest | true, candid (honest) | hard-core (loyal) | truthful (of person) | true-blue (staunch),ซื่อสัตย์,sʉ̂ʉ-sàt,,adj
+unsophisticated (innocent) | simple-minded (unsophisticated),ซื่อๆ,sʉ̂ʉ-sʉ̂ʉ,,adj
+serious, earnest | sincere (earnest) | truthful (of person) | earnest (serious) | serious (somber, sincere),จริงจัง,jing-jang,,adj
+down-to-earth (realistic) | true (truthful),เป็นจริง,bpen-jing,,adj
+massage therapist,หมอนวด,mɔ̌ɔ-nûuat,,n,Glossary > Professions
+disrespectful, pushy (aggressive) | offensive (agressive) | aggressive (boldly assertive, pushy) | objectionable (offensive),ก้าวร้าว,gâao-ráao,,adj
+superglue,ซูเปอร์กลู,súp-bpə̂ə-gluu,,n
+guess (educated) | approximate, gauge, size up (estimate) | calculate (form an estimate, compute) | estimate (reckon),กะ,gà,slang,vt
+king,พระมหากษัตริย์,prá-má~hǎa-gà~sàt,,n
+bless (give or wish something good to),ให้ศีลให้พร,hâi-sǐin-hâi-pɔɔn,monk,vt
+bless (give or wish something good to),ให้พร,hâi-pɔɔn,,vt
+give alms (donate),ให้ทาน,hâi-taan,,vi
+enroll (child in a school) | consign (deposit) | deposit (money) | put something in the care of,ฝาก,fàak,,vt
+Singapore (Singapore),สิงคโปร์,sǐng-ká~bpoo,,plc,Places > World Capital Cities | Places > World Cities
+microphone, mic,ไมค์,mai,slang,n
+microphone, mic,ไมโครโฟน,mai-kroo-foon,,n
+3 = 4 | 3 is not equal to 4,3ไม่เท่ากับ4,sǎam-mâi-tâo-gàp-sìi,,sent,Essentials > Numbers > Math Symbols
+each (every),ทุกอัน,túk-an,,pron
+each (every),ทุก,túk,,adj
+each (per item),ต่ออัน,dtɔ̀ɔ-an,,adv
+each (every),แต่ละอัน,dtɛ̀ɛ-lá~an,,pron
+That is neither a/an <sth> nor a/an <sth>.,นั่นไม่ใช่ทั้ง<sth>และ<sth>,nân-mâi-châi-táng-<sth>lɛ́-<sth>,,sent,Essentials > Grammar > Conjunctions
+That is either a/an <sth> or a/an <sth>. (either name ok) | That is both a/an <sth> and a/an <sth>. (either name ok),นั่นเป็นทั้ง<sth>และ<sth>,nân-bpen-táng-<sth>lɛ́-<sth>,,sent,Essentials > Grammar > Conjunctions
+That is either a/an <sth> or a/an <sth>. (one or the other, not both),นั่นเป็นได้เพียง<sth>หรือ<sth>,nân-bpen-dâai-piiang-<sth>rʉ̌ʉ-<sth>,,sent,Essentials > Grammar > Conjunctions
+Please give me a/an <n> or a/an <n>.,ขอ<sth>หรือ<sth>ด้วย,kɔ̌ɔ-<sth>rʉ̌ʉ-<sth>dûuai,,sent,Essentials > Grammar > Conjunctions
+Is that a/an <sth> or a/an <sth>?,นั่น<sth>หรือว่า<sth>,nân-<sth>rʉ̌ʉ-wâa-<sth>,,sent,Essentials > Grammar > Conjunctions
+and,กะ,gà,slang,conj,Essentials > Grammar > Conjunctions
+or,รึ,rʉ́,slang,conj,Essentials > Grammar > Conjunctions
+although,ทั้งที่,táng-tîi,slang,conj,Essentials > Grammar > Conjunctions
+full of | full (e.g. tank, room) | chock-full (full),เต็ม,dtem,,adj
+sky,ฟ้า,fáa,,n
+guest, invitee | visitor (guest) | Middle Easterners,แขก,kɛ̀ɛk,,n
+Indian (people),แขก,kɛ̀ɛk,slang,n
+I'm so-so. | I'm doing so-so! | so-so! (doing so-so),เรื่อยๆ,rʉ̂ʉai-rʉ̂ʉai,,sent,Essentials > Basics > Greetings/Intros
+incessant (continuous) | easygoing (relaxed),เรื่อยๆ,rʉ̂ʉai-rʉ̂ʉai,,adj
+break in repeatedly (as while someone is speaking),ขัดคออยู่เรื่อย,kàt-kɔɔ-yùu-rʉ̂ʉai,,vi
+plow on, grind away, peg away (keep working),ทำไปเรื่อยๆ,tam-bpai-rʉ̂ʉai-rʉ̂ʉai,,vi
+expensive, pricey | high, dear, exclusive (expensive),แพง,pɛɛng,,adj
+Thai year, Buddhist Era, B.E. (543 years before Western Era) | BE, B.E. (Thai Buddhist era),พ.ศ.,pɔɔ-sɔ̌ɔ,,n,Glossary > Year Systems
+savings,เงินสะสม,ngən-sà-sǒm,,n
+display | convey (e.g. ideas, feelings) | express (e.g. opinion) | execute (perform, e.g. play) | perpetrate (present) | present, say, put up (show),แสดง,sà~dɛɛng,,vt
+demonstrate (by example) | play, show (perform) | exhibit, perform (show),แสดง,sà~dɛɛng,,v
+point (indicate position or direction),ชี้,chíi,,v
+think | consider (ponder),นึก,nʉ́k,,v
+hit upon (have an idea),นึกออก,nʉ́k-ɔ̀ɔk,,vt
+envision (picture) | picture (visualize),นึกภาพ,nʉ́k-pâap,,vt
+appreciate (e.g. good one has done) | realize (e.g. one's mistake),สำนึก,sǎm-nʉ́k,,vt
+gray matter (intellect),สมอง,sà~mɔ̌ɔng,,n
+three,ตรัย,dtrai,poetic,numb
+three,ตรี,dtrii,,numb
+establish | appoint (e.g. time or place) | form, settle (establish) | formulate (form, e.g. method, systems) | site (locate on a site) | set (place, put in place, set watch, clock) | locate (position) | place (set) | pitch (set up),ตั้ง,dtâng,,vt
+repair (fix, mend) | fix, service, mend, doctor, restore, cobble (repair),ซ่อม,sɔ̂m,,vt
+dish detergent, dish washing liquid (liquid),น้ำยาล้างจาน,nám-yaa-láang-jaan,,n,Situations > Shopping > Household
+3 years ago,3ปีที่แล้ว,sǎam-bpii-tîi-lɛ́ɛo,,adv,Essentials > Time/Date > Basics
+footpath, walkway, sidewalk | curbside (sidewalk),ทางเท้า,taang-táao,,n,Situations > Construction > Building
+so much, much | so (extremely),นัก,nák,,adv
+expert, participant in,นัก-,nák-,,n
+close (eyes),หลับ,làp,,vt
+meditate,เข้าฌาณ,kâo-chaan,,vi
+spread out (place out in the sun, wind),ตาก,dtàak,,v
+move | dislodge (displace) | relocate, dislocate, displace, vacate, shift (move) | remove (move away, clear),ย้าย,yáai,,vt
+make up one's mind | decide (determine) | act (make a decision),ตัดสินใจ,dtàt-sǐn-jai,,vi
+time (during the period of) | phase (lunar) | interval (period) | point (period of time) | extent, gamut (range) | section (time) | span (time or distance),ช่วง,chûuang,,n
+trademark | marque (brand),ยี่ห้อ,yîi-hɔ̂ɔ,,n
+trademark | marque (brand),ยี่ห้อ,yîi-hɔ̂ɔ,,n
+cool (chilly) | brisk (cool) | cold (cool, chilly) | iced (e.g. beverages) | phlegmatic (self-possessed, calm),เย็น,yen,,adj,Situations > Food/Drink > Preparations | Situations > Weather
+this evening,เย็นวันนี้,yen-wan-níi,,n
+unfriendly (cold hearted),ชาเย็น,chaa-yen,slang,adj
+take it easy (relax) | lighten up! (stop taking things so seriously),ใจเย็นๆ,jai-yen-yen,,vi
+Thai iced tea (Made from strongly-brewed black tea (red tea in East Asia). Additional ingredients may include orange blossom water, star anise, crushed tamarind seed and sometimes other spices. The tea is sweetened with sugar and condensed milk and served chilled. Source: Wikipedia.),ชาเย็น,chaa-yen,,n,Situations > Food/Drink > Drinks
+secure and peaceful,ร่มเย็น,rôm-yen,,adj
+dinner,มื้อเย็น,mʉ́ʉ-yen,slang,n
+in the evening,ตอนเย็น,dtɔɔn-yen,,adv,Essentials > Time/Date > Basics
+soft (easy) | cut-and-dried (simple),ง่ายๆ,ngâai-ngâai,,adj
+egg | ovum (egg),ไข่,kài,,n,Situations > Food/Drink > Dairy | Situations > Food/Drink > Sensitive Foods
+chicken,ไก่,gài,,n,Situations > Food/Drink > Meat | Situations > Food/Drink > Sensitive Foods
+sick | ill (sick) | ailing (very sick),ป่วย,bpùai,,adj,Situations > Health > Symptoms
+more, farther, further, at all, onward | past (beyond) | indeed (really),เลย,ləəi,,adv
+excessive | hammy (exaggerated) | ultra (extreme),เลยเถิด,ləəi-tə̀ət,slang,adj
+whatever,ใดๆเลย,dai-dai-ləəi,formal,adj
+ignore (disregard) | neglect, disregard, blow off (ignore) | overlook (ignore, disregard) | omit (neglect),ละเลย,lá-ləəi,,vt
+go ahead,ได้เลย,dâi-ləəi,,vi
+
+
+
+go for it!,เอาเลย,ao-ləəi,,sent
+leftover (unwanted piece),เศษเลย,sèet-ləəi,,n
+overboard | go overboard,เกินเลย,gəən-ləəi,slang,adv
+stay up,ไม่นอนเลย,mâi-nɔɔn-ləəi,,vi
+bygone (former) | old (not new) | ancient, earlier, early (old) | former (previous) | hand-me-down (used),เก่า,gào,,adj
+muff, fumble (bungle) | pass up (e.g. chance) | miss (e.g. the bus) | bungle (handle badly) | miss out on (lose a chance) | lose out on, throw away (miss),พลาด,plâat,,vt
+desert (leave a person, place, etc.) | omit (leave out),ละ,lá,,vt
+and then, otherwise,ละก็,lá~gɔ̂ɔ,,part
+per (5 A per B, B ละ lá 5 A),ละ,lá,,prep
+right away, at once | outright (at once) | sharp, straightaway (immediately) | immediately (instantly),ทันที,tan-tii,,adv
+sudden (immediate) | immediate, prompt (instant) | instant (quick) | abrupt (quick, immediate) | swift (sudden),ทันที,tan-tii,,adj
+keep up with, overtake (catch up with),ทัน,tan,,vt
+laughable | funny (humorous),ขัน,kǎn,,adj
+screw (rotate, e.g. fastener) | tighten by turning or twisting,ขัน,kǎn,,vt
+miss the bus,ตกรถ,dtòk-rót,slang,vi
+I'd love to. | I agree.,ตกลง,dtòk-long,,sent,Situations > Love/Romance > Getting Married
+downhill (worsening in condition),ตกต่ำ,dtòk-dtàm,,adv
+scrap (left over),ตกค้าง,dtòk-káang,,adj
+expect (hope),คาดหวัง,kâat-wǎng,,vt
+look to (anticipate) | reckon on (expect, hope) | expect (hope) | anticipate (look forward to),คาดหวัง,kâat-wǎng,,vt
+expect (anticipate) | deduce (speculate),คาดคะเน,kâat-ká~nee,,vt
+expect (anticipate),คาดหมาย,kâat-mǎai,,vt
+urgent | critical (emergency) | exigent (urgent),ฉุกเฉิน,chùk-chə̌ən,,adj
+urgent,เร่งด่วน,rêng-dùuan,,adj
+urgent | express (fast) | pressing, hurried (urgent),ด่วน,dùuan,,adj
+avow, admit (confess),สารภาพ,sǎa-rá~pâap,,vt
+cut down | chop, shear, chop up, slash, crop (cut) | cleave, sever (cut off) | pare (cut, reduce),ตัด,dtàt,,vt
+puzzled | stunned, dazed (confused) | confused, dizzy (puzzled) | silly (stunned),งง,ngong,,adj
+Pali,บาลี,baa-lii,,n
+temple (Buddhist) | pantheon (temple),วิหาร,wí-hǎan,,n
+aperture | space (blank space) | slot (e.g. for a coin) | channel (e.g. TV) | hole (gap, slot) | cavity (hollow space) | opening (slot, gap) | compartment (slot, small space) | gap (space, opening),ช่อง,chɔ̂ng,,n
+tag onto (add) | put on (e.g. weight) | build up, advance (increase),เพิ่ม,pə̂əm,,vt
+number (numeral),หมายเลข,mǎai-lêek,,n
+expect (aim at) | mark (make a mark),หมาย,mǎai,,vt
+camera,กล้อง,glɔ̂ng,,n,Situations > Taking Pictures
+stay in (not go out),อยู่บ้าน,yùu-bâan,,vi
+respond, reply | answer (reply, reply to),ตอบ,dtɔ̀ɔp,,v
+vanish | evaporate, go away, die out (disappear) | die away (fade away) | dissipate, clear off (vanish) | disappear (vanish from sight),หายไป,hǎai-bpai,,vi
+innocent, vestal | pure (free from extraneous matter) | innocent, clean (not guilty) | virtuous, perfect, chaste, unmixed, virgin, virginal, immaculate (pure) | pristine (pure, uncorrupted) | sincere (pure, unmixed) | chaste (virgin) | intact (virginal),บริสุทธิ์,bɔɔ-rí~sùt,,adj,Situations > Legal Cases > Legal Terms
+get ready,เตรียมพร้อม,dtriiam-prɔ́ɔm,,vi
+alert (prepared) | ready (prepared or available),เตรียมพร้อม,dtriiam-prɔ́ɔm,,adj
+get ready, gear up | prepare, stand by (get ready),เตรียมพร้อม,dtriiam-prɔ́ɔm,,vi
+get ready | prepare (get ready) | train (prepared for) | prepare oneself,เตรียมตัว,dtriiam-dtuua,,vi
+oil, gas, gasoline, petrol | fat (oil) | fuel (petrol, gasoline),น้ำมัน,nám-man,,n
+respond, reply | answer (reply, reply to),ตอบ,dtɔ̀ɔp,,v
+re- (used after verb),ตอบ,dtɔ̀ɔp,,adv
+investigate (interrogate, make an inquiry) | interrogate (investigate),สอบสวน,sɔ̀ɔp-sǔuan,,v
+alleviate | relieve (alleviate),ทุเลา,tú-lao,,vt

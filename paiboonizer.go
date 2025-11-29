@@ -1,28 +1,510 @@
-package main
+package paiboonizer
 
 import (
 	"context"
-	"flag"
+	"embed"
+	//"flag"
 	"fmt"
 	"html"
-	"os"
-	"path/filepath"
+	"io/fs"
 	"regexp"
 	"strings"
 	"unicode"
 
 	"github.com/gookit/color"
-	"github.com/k0kubun/pp"
-	pythainlp "github.com/tassa-yoniso-manasi-karoto/go-pythainlp"
+	//"github.com/k0kubun/pp"
+	"github.com/tassa-yoniso-manasi-karoto/go-pythainlp"
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
 	"github.com/rivo/uniseg"
 )
 
+//go:embed csv/*.txt
+var vocabFS embed.FS
+
 // Global dictionary built from manual vocab
 var dictionary = make(map[string]string)
 var syllableDict = make(map[string]string)
+
+// specialCasesGlobal contains special transliterations for irregular words
+// (Sanskrit/Pali loanwords, irregular patterns, etc.)
+var specialCasesGlobal = map[string]string{
+	// รร patterns (Sanskrit/Pali double ร)
+	"ธรรม": "tam", "กรรม": "gam", "พรรค": "pák", "วรรค": "wák",
+	"สรร": "sǎn", "บรร": "ban", "จรร": "jan",
+	// ทย patterns
+	"วิทย": "wít-tá~yá", "วิทยุ": "wít-tá~yú", "วิทยา": "wít-tá~yaa",
+	"ศึกษา": "sʉ̀k-sǎa",
+	// Common irregular words
+	"สัตว์": "sàt", "จริง": "jing", "ทราบ": "sâap",
+	"ศิลป": "sǐn-lá~bpà", "ศิลปะ": "sǐn-lá~bpà",
+	// Sanskrit/Pali loanwords
+	"สงฆ์": "sǒng", "นิพพาน": "níp-paan", "ปรินิพพาน": "bpà~rí-níp-paan",
+	"ประสงค์": "bprà~sǒng", "มนต์": "mon", "สวดมนต์": "sùuat-mon",
+	"อภัย": "à~pai", "เมตตา": "mêet-dtaa", "กรุณา": "gà~rú~naa",
+	"ลักษณะ": "lák-sà~nà", "พฤษภาคม": "prʉ́t-sà~paa-kom",
+	// Vowel patterns that are commonly misparsed
+	"งอ": "ngɔɔ", "งา": "ngaa", "งู": "nguu", "แง": "ngɛɛ",
+	"อยู่": "yùu", "อยาก": "yàak", "อะไร": "à~rai",
+	// Common words
+	"น้ำ": "nám", "ใจ": "jai", "น้ำใจ": "nám-jai",
+	"หนังสือ": "nǎng-sʉ̌ʉ", "ประเทศ": "bprà~têet",
+	"ฝรั่ง": "fà~ràng", "ฝรั่งเศส": "fà~ràng-sèet",
+
+	// Common prefixes/suffixes (กระ, ประ patterns)
+	"กระ": "grà", "ประ": "bprà", "ตระ": "dtrà",
+	"กระหาย": "grà~hǎai", "กระทำ": "grà~tam", "กระตุ้น": "grà~dtûn",
+	"กระเป๋า": "grà~bpǎo", "กระดาษ": "grà~dàat", "กระจก": "grà~jòk",
+	"ประสาท": "bprà~sàat", "ประชา": "bprà~chaa", "ประโยชน์": "bprà~yòot",
+
+	// ธุระ patterns
+	"ธุระ": "tú~rá", "ธุรกิจ": "tú~rá~gìt",
+
+	// Common syllables for maximal matching
+	"หาย": "hǎai", "บาย": "baai", "สาย": "sǎai", "ดาย": "daai",
+	"ขาว": "kǎao", "เข้า": "kâo", "ขา": "kǎa", "ข้าว": "kâao",
+	"ดี": "dii", "มี": "mii", "ที่": "tîi", "นี้": "níi",
+	"ได้": "dâai", "ไป": "bpai", "มา": "maa", "หา": "hǎa",
+	"รู้": "rúu", "จัก": "jàk", "เกิด": "gə̀ət", "ให้": "hâi",
+	"รอบ": "rɔ̂ɔp", "ดู": "duu", "ก็": "gɔ̂ɔ", "แล้ว": "lɛ́ɛo",
+	"เรียบ": "rîiap", "เรียง": "riiang", "คำ": "kam", "พูด": "pûut",
+
+	// Common words with ห-clusters
+	"หนัก": "nàk", "หนา": "nǎa", "หมด": "mòt", "หมาย": "mǎai",
+	"หมู": "mǔu", "หลาย": "lǎai", "หลัง": "lǎng", "หลับ": "làp",
+	"หวัง": "wǎng", "หวาน": "wǎan", "หว่าง": "wàang",
+
+	// เ-ือ patterns
+	"เดือน": "dʉʉan", "เรือ": "rʉʉa", "เสือ": "sʉ̌ʉa", "เพื่อ": "pʉ̂ʉa",
+	"เมือง": "mʉʉang", "เลือก": "lʉ̂ʉak", "เลือด": "lʉ̂ʉat",
+
+	// Common finals with ห
+	"หลอน": "lɔ̌ɔn", "หลอม": "lɔ̌ɔm",
+
+	// Common syllables that get misparsed
+	"บวช": "bùuat", "สวด": "sùuat", "สวม": "sǔam", "ควร": "kuuan",
+	"จับ": "jàp", "วัด": "wát", "ผล": "pǒn", "ใคร": "krai",
+	"อายุ": "aa-yú", "จุด": "jùt", "เหตุ": "hèet",
+	"บวก": "bùuak", "พวก": "pûuak", "ผัว": "pǔa", "ตัว": "dtua",
+
+	// อ-initial patterns
+	"อนุ": "à~nú", "อัศ": "àt", "อาทิตย์": "aa-tít",
+
+	// เ-ือ patterns with ง
+	"เบื้อง": "bʉ̂ʉang", "เมื่อ": "mʉ̂ʉa", "เรื่อง": "rʉ̂ʉang",
+
+	// ฉล patterns
+	"ฉลาด": "chà~làat", "ฉลอง": "chà~lɔ̌ɔng",
+
+	// Common words
+	"กาน": "gaan", "สิงหา": "sǐng-hǎa", "คม": "kom",
+	"ออก": "ɔ̀ɔk", "นี่": "nîi", "เลา": "lao",
+
+	// เ-ี้ย patterns (common misparsed)
+	"เลี้ยง": "líiang", "เสี่ยง": "sìiang", "เปลี่ยน": "bplìian",
+	"เรียน": "riian", "เขียน": "kǐian", "เรื่อย": "rʉ̂ʉai",
+
+	// หว patterns (ห is silent, w is initial) - หวาน, หวัง already defined above
+	"หวาด": "wàat", "หวั่น": "wàn", "หวาย": "wǎai", "หวอ": "wɔ̌ɔ",
+
+	// ผ patterns
+	"ผ้า": "pâa", "ผู้": "pûu", "ผี": "pǐi",
+
+	// เท่า patterns - เข้า already defined above
+	"เท่า": "tâo", "เก่า": "gào",
+
+	// ธน patterns
+	"ธนา": "tá~naa", "ธน": "ton",
+
+	// กัน pattern
+	"กัน": "gan",
+
+	// ชิด pattern
+	"ชิด": "chít",
+
+	// Common multi-syllable fixes
+	"โกน": "goon", "การโกน": "gaan-goon",
+	"เลี้ยงดู": "líiang-duu",
+	"บันเทิง": "ban-təəng",
+
+	// Commonly misparsed syllables
+	"วัน": "wan", "แน่": "nɛ̂ɛ", "นอน": "nɔɔn",
+	"ลอย": "lɔɔi", "คาย": "kaai", "ถู": "tǔu",
+	"เหยียบ": "yìiap", "พรุ่ง": "prûng",
+	"ปอง": "bpɔɔng", "กฏ": "gòt", "ปรากฏ": "bpraa-gòt",
+
+	// ตัญ patterns
+	"ตัญ": "dtan", "ตัญญู": "dtan-yuu",
+
+	// สถาน patterns
+	"สถาน": "sà~tǎan", "สถานที่": "sà~tǎan-tîi",
+
+	// ทัศน patterns
+	"ทัศน": "tát-sà~ná", "ทัศนะ": "tát-sà~ná",
+
+	// More commonly misparsed syllables
+	"ทาง": "taang", "แดด": "dɛ̀ɛt", "ตาก": "dtàak",
+	"ลำ": "lam", "ท่า": "tâa", "แย้ง": "yɛ́ɛng",
+	"ทวน": "tuuan", "ทบ": "tóp", "ลิขิต": "lí-kìt",
+	"กวด": "gùuat", "ปลอม": "bplɔɔm", "ยา": "yaa",
+	"ฉีด": "chìit", "บอก": "bɔ̀ɔk", "นึก": "nʉ́k",
+	"ถึง": "tʉ̌ng", "ใน": "nai",
+
+	// ๆ patterns - common duplications
+	"งั้น": "ngán", "ญาติ": "yâat",
+
+	// More common syllables
+	"เลี่ยง": "lîiang", "หลีก": "lìik", "เช้า": "cháao",
+	"โมง": "moong", "เครื่อง": "krʉ̂ʉang", "สนุก": "sà~nùk",
+	"โทร": "too", "แสวง": "sà~wɛ̌ɛng", "สรง": "sǒng",
+	"มะพร้าว": "má~práao", "เฉิด": "chə̀ət", "ฉัน": "chǎn",
+	"สนับ": "sà~nàp", "สนุน": "sà~nǔn",
+
+	// Remaining common words
+	"เอง": "eeng", "มั่น": "mân", "เบน": "been",
+	"บี่ยง": "bìiang", "สมุ": "sà~mù", "ทัย": "tai",
+
+	// เ-ือ patterns (misparsed as ʉʉan instead of ʉʉa)
+	"เชื้อ": "chʉ́ʉa", "เหยื่อ": "yʉ̀ʉa", "เสื้อ": "sʉ̂ʉa",
+	"เนื้อ": "nʉ́ʉa", "เกลื้อ": "glʉ̂ʉa",
+
+	// เ-ือ with finals (หม cluster has high tone class)
+	"เหมือน": "mʉ̌ʉan", "เหมือ": "mʉ̌ʉa",
+	"เสมือน": "sà~mʉ̌ʉan",
+
+	// เ-ีย-ว patterns (complex diphthong with tone)
+	"เลี้ยว": "líiao", "เปลี่ยว": "bplìiao", "เคี้ยว": "kíiao",
+	"เที่ยว": "tîiao", "เสียว": "sǐiao",
+
+	// อ-อ patterns (อ as silent initial + อ as vowel)
+	"อ้อม": "ɔ̂ɔm", "อ่อน": "ɔ̀ɔn", "อ้อย": "ɔ̂ɔi",
+	"อ่อย": "ɔ̀ɔi", "อ้อ": "ɔ̂ɔ", "อ่อ": "ɔ̀ɔ",
+
+	// เดี๋ยว pattern
+	"เดี๋ยว": "dǐiao",
+
+	// Common syllables
+	"สูง": "sǔung", "มูล": "muun", "ค่า": "kâa",
+	"กุญ": "gun", "แจ": "jɛɛ", "สิน": "sǐn", "บน": "bon",
+	"ว่า": "wâa", "ชื่อ": "chʉ̂ʉ", "เสียง": "sǐiang",
+	"จ่าย": "jàai", "ไฟ": "fai", "รส": "rót", "ชาติ": "châat",
+	"ทะ": "tá", "เบียน": "biian", "ระ": "rá", "เหย": "hə̌əi",
+	"เจร": "jee-rá", "จา": "jaa",
+
+	// Common syllables with final consonants that get extra ɔɔ
+	"ของ": "kɔ̌ɔng", "เพื่อน": "pʉ̂ʉan", "คอน": "kɔn", "ตอน": "dtɔɔn",
+	"เปิด": "bpə̀ət", "สอง": "sɔ̌ɔng", "โลง": "loong", "โล่ง": "lôong",
+	"เคลื่อน": "klʉ̂ʉan", "จอง": "jɔɔng", "ต้อง": "dtɔ̂ɔng", "ต่าง": "dtàang",
+	"รอง": "rɔɔng", "ร้อง": "rɔ́ɔng", "ล้อง": "lɔ́ɔng",
+	"คง": "kong", "สง": "sǒng", "สงคราม": "sǒng-kraam",
+
+	// หล digraph (ห is silent, ล is initial with rising tone)
+	"หลง": "lǒng", "หลวง": "lǔuang", "หลาก": "làak", "หลอก": "lɔ̀ɔk",
+	"หลุม": "lǔm", "หลาน": "lǎan", "หลอด": "lɔ̀ɔt", "หล่อ": "lɔ̀ɔ",
+	"หล่น": "lòn", "หลู่": "lùu",
+
+	// หน digraph (ห is silent, น is initial with rising tone)
+	"หนี": "nǐi", "หนึ่ง": "nʉ̀ng", "หน่วย": "nùuai", "หน้า": "nâa",
+	"หนอง": "nɔ̌ɔng", "หนัง": "nǎng", "หนอ": "nɔ̌ɔ", "หน่อ": "nɔ̀ɔ",
+
+	// หม digraph (ห is silent, ม is initial with rising tone)
+	"หมอง": "mɔ̌ɔng", "หมอ": "mɔ̌ɔ", "หม้อ": "mɔ̂ɔ", "หมอน": "mɔ̌ɔn",
+
+	// หย digraph (ห is silent, ย is initial with rising tone)
+	"หยุด": "yùt", "หยาบ": "yàap", "หยิบ": "yìp", "หย่อน": "yɔ̀ɔn",
+
+	// Common syllables ending in ng
+	"ตรง": "dtrong", "ปลง": "bplong", "จง": "jong", "ลง": "long",
+	"ขึ้น": "kʉ̂n", "รัง": "rang", "ยัง": "yang", "ดัง": "dang",
+
+	// Common ไม้ patterns
+	"ไม่": "mâi", "ไม้": "máai", "ไหม": "mǎi",
+
+	// Common polysyllabic patterns
+	"ระหว่าง": "rá~wàang", "อำนวย": "am-nuuai",
+
+	// More syllables with final consonants (fixing extra ɔɔ)
+	"ขาม": "kǎam", "มะขาม": "má~kǎam", "ท้อน": "tɔ́ɔn", "สะท้อน": "sà~tɔ́ɔn",
+	"ร้อน": "rɔ́ɔn", "นิด": "nít", "หน่อย": "nɔ̀i", "เครดิต": "kree-dìt",
+	"ชาร์จ": "cháat", "ล็อก": "lɔ́k", "อิน": "in", "แชม": "chɛm",
+
+	// เราะ patterns (short ɔ with ะ ending)
+	"เคราะห์": "krɔ́", "วิเคราะห์": "wí-krɔ́", "เราะ": "rɔ́", "ไพเราะ": "pai-rɔ́",
+
+	// เ-ีย patterns (glide)
+	"เกลียด": "glìiat", "เลียด": "lìiat",
+
+	// Note: อะไร already defined above
+
+	// ร่า patterns
+	"ร่า": "râa", "ร่าเริง": "râa-rəəng",
+
+	// ฤ patterns
+	"ฤดู": "rʉ́-duu",
+
+	// Common endings without extra ɔɔ
+	"กิน": "gin", "ดิน": "din", "บิน": "bin", "มิน": "min",
+	"จิน": "jin", "ลิน": "lin", "ชิน": "chin", "พิน": "pin",
+	// Note: กัน, วัน already defined above
+	"ลัน": "lan",
+
+	// เอื้อ pattern
+	"เอื้อ": "ʉ̂ʉa", "เอื้อม": "ʉ̂ʉam",
+
+	// สกปรก pattern
+	"สก": "sòk", "ปรก": "bpà~ròk", "สกปรก": "sòk-gà~bpròk",
+
+	// Common word fixes
+	"สนทนา": "sǒn-tá~naa", "พรหม": "prom",
+	"เกี่ยว": "gìiao", "ข้อง": "kɔ̂ng",
+	// Note: ลิขิต already defined above
+
+	// More syllables with final ง getting extra ɔɔ
+	"คอง": "kɔɔng", "ประคอง": "bprà~kɔɔng",
+	"รถ": "rót", "บัส": "bát",
+
+	// Note: ชื่อ already defined above
+
+	// เพี้ย pattern
+	"เพี้ยน": "píian",
+
+	// เครียด pattern
+	"เครียด": "krîiat",
+
+	// Sanskrit/Pali loanwords
+	"อุณห": "un-hà", "อุณหภูมิ": "un-hà~puum",
+	"มาตร": "mâat", "ฐาน": "tǎan", "มาตรฐาน": "mâat-dtrà~tǎan",
+
+	// หิ่งห้อย pattern
+	"หิ่ง": "hìng", "ห้อย": "hɔ̂i", "หิ่งห้อย": "hìng-hɔ̂i",
+
+	// More common syllables
+	"คลาย": "klaai", "สะพาย": "sà~paai",
+	"ถ่วง": "tùuang", "ถ้วง": "tûuang",
+	"เซฟ": "séep",
+
+	// ธรรมชาติ needs ม between ธรรม and ชาติ in some words
+	"ธรรมชาติ": "tam-má~châat",
+
+	// กระเป๋า pattern
+	"เป๋า": "bpǎo",
+
+	// เอิก pattern
+	"เกริก": "gà~rə̀ək",
+
+	// มรณ pattern
+	"มรณ": "mɔɔ-rá~ná",
+
+	// ธรรม-related patterns
+	"ธรรมดา": "tam-má~daa",
+
+	// เกียรติ pattern (complex)
+	"เกียรติ": "gìiat", "เกียร": "gìia",
+
+	// More syllables with extra ɔɔ at end
+	"เหี้ยม": "hîiam", "น้อย": "nɔ́ɔi", "น้อง": "nɔ́ɔng",
+	"รีด": "rîit", "เกต": "gèet", "เกตุ": "gèet",
+
+	// Month names
+	"ตุลา": "dtù-laa", "ตุลาคม": "dtù-laa-kom",
+	"กรกฎา": "gà~rá-gà~daa", "กรกฎาคม": "gà~rá-gà~daa-kom",
+
+	// More Sanskrit/Pali
+	"อาจารย์": "aa-jaan", "อาจาร": "aa-jaan",
+	"อธิษฐาน": "à~tít-tǎan",
+	"บิณฑบาต": "bin-tá~bàat",
+
+	// พย pattern
+	"พยา": "pá~yaa", "พยาบาล": "pá~yaa-baan",
+
+	// พฤติ pattern
+	"พฤติ": "prʉ́t-dtì",
+
+	// More ลา patterns
+	"ลามก": "laa-mók",
+
+	// สถาน patterns (สถาน already defined above)
+	"สถานการณ์": "sà~tǎa-ná~gaan",
+
+	// มิตร pattern
+	"มิตร": "mít",
+
+	// เปรื่อง pattern
+	"เปรื่อง": "bprʉ̀ʉang",
+
+	// ฤ patterns (short vowel)
+	"ฤ": "rʉ́",
+
+	// กวน/ถ้วน patterns (no extra ɔɔ)
+	"กวน": "guuan", "รบกวน": "róp-guuan",
+	"ถ้วน": "tûuan", "ถี่": "tìi",
+
+	// ไม้ pattern (short ai)
+	"ไม้ไผ่": "mái-pài",
+
+	// เก้าอี้ pattern
+	"เก้า": "gâo", "อี้": "îi", "เก้าอี้": "gâo-îi",
+
+	// ภา patterns
+	"ภาษา": "paa-sǎa",
+
+	// มาตรฐาน full pattern
+	"สองมาตรฐาน": "sɔ̌ɔng-mâat-dtrà~tǎan",
+
+	// สาป pattern
+	"สาป": "sàap", "แช่ง": "chɛ̂ng", "สาปแช่ง": "sàap-chɛ̂ng",
+
+	// กระวน pattern
+	"กระวน": "grà~won",
+
+	// Note: กระดาษ already defined above
+
+	// สิกขา pattern
+	"สิกขา": "sìk-kǎa", "บท": "bòt",
+
+	// เอ้อ pattern
+	"เอ้อ": "ə̂ə", "เอ้อระเหย": "ə̂ə-rá~hə̌əi",
+
+	// แคมป์ pattern
+	"แคมป์": "kɛ́m",
+
+	// สไตล์ pattern
+	"สไตล์": "sà~dtaai",
+
+	// ร่ำ pattern
+	"ร่ำ": "râm", "ร่ำรวย": "râm-ruuai",
+
+	// ปราศ pattern
+	"ปราศจาก": "bpràat-sà~jàak",
+
+	// พิมพ์ pattern
+	"พิมพ์": "pim",
+
+	// กล่อม pattern
+	"กล่อม": "glɔ̀m", "กลม": "glom",
+
+	// Common syllables with extra ɔɔ at end
+	"จอด": "jɔ̀ɔt", "ประกาศ": "bprà~gàat",
+	"ลวด": "lûuat", "ว่าย": "wâai",
+
+	// เชี่ยว pattern
+	"เชี่ยว": "chîiao", "ชาญ": "chaan",
+
+	// บันเทิง pattern
+	"เทิง": "təəng",
+
+	// จีวร pattern
+	"จีวร": "jii-wɔɔn",
+
+	// นายก pattern
+	"นายก": "naa-yók",
+
+	// ปลอด pattern
+	"ปลอด": "bplɔ̀ɔt",
+
+	// ไส้ pattern
+	"ไส้": "sâi",
+
+	// สแลง pattern
+	"สแลง": "sà~lɛɛng",
+
+	// เซง pattern
+	"เซง": "seng", "เป็ด": "bpèt",
+
+	// สมาธิ pattern
+	"สมาธิ": "sà~maa-tí",
+
+	// น้ำ patterns
+	"สมน้ำหน้า": "sǒm-nám-nâa",
+
+	// รั้ว pattern
+	"รั้ว": "rúua",
+
+	// ทุเรศ pattern
+	"ทุเรศ": "tú-rêet",
+
+	// More patterns with extra ɔɔ
+	"กอบ": "gɔ̀ɔp", "ประกอบ": "bprà~gɔ̀ɔp",
+	"ร่วม": "rûuam", "จำนวน": "jam-nuuan",
+	"พยางค์": "pá~yaang", "เชื่อม": "chʉ̂ʉam",
+
+	// อะไร variation
+	"ว่าอะไร": "wâa-à~rai",
+
+	// ศาสนา pattern
+	"ศาสนา": "sàat-sà~nǎa",
+
+	// พุทธ pattern
+	"พุทธ": "pút",
+
+	// เดี่ยว pattern
+	"เดี่ยว": "dìiao", "โดดเดี่ยว": "dòot-dìiao",
+
+	// เทศ pattern
+	"เทศนา": "têet-sà~nǎa",
+
+	// วรรณ pattern
+	"วรรณ": "wan-ná",
+
+	// ชาติพันธุ์ pattern
+	"ชาติพันธุ์": "châat-dtì~pan",
+
+	// Note: อำนวย already defined above
+
+	// เจรจา pattern
+	"เจรจา": "jee-rá~jaa",
+
+	// ประมาณ pattern
+	"ประมาณ": "bprà~maan",
+
+	// ความเวทนา pattern
+	"เวทนา": "wêet-tá~naa",
+
+	// อริยะ pattern
+	"อริยะ": "à~rí~yá", "อริ": "à~rí",
+
+	// สมมุติ pattern
+	"สมมุติ": "sǒm-mút",
+
+	// Individual syllables that pythainlp returns
+	"กาศ": "gàat", "เมื่อย": "mʉ̂ʉai",
+	"ขอน": "kɔ̌n", "จริต": "jà~rìt", "สุจริต": "sùt-jà~rìt",
+	"ตรอง": "dtrɔɔng", "ระลึก": "rá~lʉ́k",
+	"สาร": "sǎa", "ภาพ": "pâap", "สารภาพ": "sǎa-rá~pâap",
+	"ธุดงค์": "tú-dong", "พระธุดงค์": "prá-tú-dong",
+	"ระเบิด": "rá~bə̀ət", "พิจารณา": "pí-jaa-rá~naa",
+	"องค์": "ong", "องค์กร": "ong-gɔɔn",
+	"เกณฑ์": "geen",
+	// Note: ฐาน, ฝรั่ง already defined above
+	"โฮเต็ล": "hoo-dten", "เต็ล": "dten",
+	"ราเมง": "raa-meng", "เมง": "meng",
+	"ส้มโอ": "sôm-oo",
+
+	// More syllables from failures
+	// Note: สะพาย, อะไร, ปรากฏ already defined above
+	"สติ": "sà~dtì", "ตะกอน": "dtà~gɔɔn", "ลบ": "lóp", "ติด": "dtìt",
+	"พัฒนา": "pát-tá~naa", "เยี่ยม": "yîiam",
+	"นาม": "naam", "สกุล": "sà~gun",
+	"ปกติ": "bpà~gà~dtì", "เงื่อน": "ngʉ̂ʉan",
+	"คริสต์มาส": "krít-sà~mât",
+	"ปริมาณ": "bpà~rí~maan", "ดราม่า": "draa-mâa",
+	"นิยม": "ní-yom",
+	"น้ำลาย": "nám-laai", "ลาย": "laai",
+
+	// More common syllables
+	// Note: ธรรมดา, กรรม, สถานการณ์ already defined above
+	"คุณ": "kun", "ณ": "ná", "คุณภาพ": "kun-ná~pâap",
+	"ทาย": "taa", "ยาท": "yâat", "ทายาท": "taa-yâat",
+	"พรรณ": "pan", "สต็อก": "sà~dtɔ́k", "สังฆ": "sǎng-ká",
+	"ปฏิบัติ": "bpà~dtì-bàt", "บัติ": "bàt",
+	"พฤษภา": "prʉ́t-sà~paa",
+	"สามเณร": "sǎam-má~neen", "เณร": "neen",
+	"ได้ยิน": "dâi-yin", "ปริยัติ": "bpà~rí-yát",
+	"เซน": "sen", "ศัลย": "sǎn-yá",
+	"สะดวก": "sà~dùuak", "ปรารถนา": "bpràat-tà~nǎa",
+	"กะเหรี่ยง": "gà~rìiang", "เหรี่ยง": "rìiang",
+}
 
 // Consonant mappings
 var initialConsonants = map[string]string{
@@ -65,51 +547,75 @@ var (
 
 // Common clusters
 var clusters = map[string]string{
+	// ก-class clusters
 	"กร": "gr", "กล": "gl", "กว": "gw",
+	// ข-class clusters
 	"ขร": "kr", "ขล": "kl", "ขว": "kw",
+	// ค-class clusters
 	"คร": "kr", "คล": "kl", "คว": "kw",
+	// ป-class clusters
 	"ปร": "bpr", "ปล": "bpl",
+	// พ-class clusters
 	"พร": "pr", "พล": "pl",
+	// ผ-class clusters
 	"ผล": "pl",
+	// ฟ-class clusters
 	"ฟร": "fr", "ฟล": "fl",
-	"ตร": "dtr", "ทร": "s",
-	"ดร": "dr",
+	// ต/ท/ด-class clusters
+	"ตร": "dtr", "ทร": "s", "ดร": "dr",
+	// ห-leading clusters (ห is silent, affects tone class to high)
+	"หร": "r", "หล": "l", "หม": "m", "หน": "n", "หว": "w", "หย": "y", "หง": "ng",
+	// ส/ศ/ซ-class clusters
+	"สร": "s", "ศร": "s", "ซร": "s",
+	"สว": "sw", "ซว": "sw",
+	// บ-class clusters
+	"บร": "br", "บล": "bl",
 }
 
-// Global pythainlp manager
-var nlpManager *pythainlp.PyThaiNLPManager
+// clusterToneClass maps clusters to their effective tone class for tone calculation
+// ห-leading clusters use high class for tone rules
+var clusterToneClass = map[string]string{
+	"หร": "high", "หล": "high", "หม": "high", "หน": "high", "หว": "high", "หย": "high", "หง": "high",
+}
 
-// Initialize pythainlp manager
-func initPyThaiNLP(ctx context.Context) error {
+// Manager handles PyThaiNLP integration for paiboonizer
+type Manager struct {
+	nlpManager *pythainlp.PyThaiNLPManager
+}
+
+var dictionaryLoaded = false
+var globalManager *Manager
+
+// NewManager creates a new paiboonizer manager
+func NewManager(ctx context.Context) (*Manager, error) {
+	m := &Manager{}
 	var err error
-	nlpManager, err = pythainlp.NewManager(ctx)
+	m.nlpManager, err = pythainlp.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("failed to initialize pythainlp: %w", err)
+		return nil, fmt.Errorf("failed to initialize pythainlp: %w", err)
 	}
 	
 	// Initialize the service
-	if err := nlpManager.Init(ctx); err != nil {
-		return fmt.Errorf("failed to start pythainlp service: %w", err)
+	if err := m.nlpManager.Init(ctx); err != nil {
+		return nil, fmt.Errorf("failed to start pythainlp service: %w", err)
 	}
 	
+	return m, nil
+}
+
+// Close releases resources
+func (m *Manager) Close() error {
+	if m.nlpManager != nil {
+		return m.nlpManager.Close()
+	}
 	return nil
 }
 
 // ThaiToRoman is the main transliteration function using go-pythainlp
-func ThaiToRoman(text string) string {
+func (m *Manager) ThaiToRoman(ctx context.Context, text string) (string, error) {
 	// First, try direct dictionary lookup for the whole text
 	if trans, ok := dictionary[text]; ok {
-		return trans
-	}
-	
-	ctx := context.Background()
-	
-	// Initialize pythainlp if not already done
-	if nlpManager == nil {
-		if err := initPyThaiNLP(ctx); err != nil {
-			fmt.Printf("Warning: pythainlp not available, using fallback: %v\n", err)
-			return fallbackTransliteration(text)
-		}
+		return trans, nil
 	}
 	
 	// Tokenize using pythainlp
@@ -119,10 +625,9 @@ func ThaiToRoman(text string) string {
 		SyllableEngine: "han_solo",
 	}
 	
-	result, err := nlpManager.AnalyzeWithOptions(ctx, text, opts)
+	result, err := m.nlpManager.AnalyzeWithOptions(ctx, text, opts)
 	if err != nil {
-		fmt.Printf("Warning: tokenization failed, using fallback: %v\n", err)
-		return fallbackTransliteration(text)
+		return "", fmt.Errorf("tokenization failed: %w", err)
 	}
 	
 	// Process word by word
@@ -140,7 +645,7 @@ func ThaiToRoman(text string) string {
 		}
 		
 		// Fall back to syllable-by-syllable transliteration
-		wordResult := transliterateWordWithSyllables(word, result.Syllables)
+		wordResult := TransliterateWordWithSyllables(word, result.Syllables)
 		if wordResult != "" {
 			results = append(results, wordResult)
 		}
@@ -150,13 +655,13 @@ func ThaiToRoman(text string) string {
 	if len(results) > 1 {
 		// Check if the original text has spaces (multi-word phrase)
 		if strings.Contains(text, " ") {
-			return strings.Join(results, " ")
+			return strings.Join(results, " "), nil
 		}
 		// Otherwise it's a compound word, join with hyphens
-		return strings.Join(results, "-")
+		return strings.Join(results, "-"), nil
 	}
 	
-	return strings.Join(results, "")
+	return strings.Join(results, ""), nil
 }
 
 // fallbackTransliteration when pythainlp is not available
@@ -167,11 +672,11 @@ func fallbackTransliteration(text string) string {
 	}
 	
 	// Fall back to simple transliteration
-	return transliterateWord(text)
+	return TransliterateWord(text)
 }
 
-// transliterateWordWithSyllables handles a word with known syllables from pythainlp
-func transliterateWordWithSyllables(word string, allSyllables []string) string {
+// TransliterateWordWithSyllables handles a word with known syllables from pythainlp
+func TransliterateWordWithSyllables(word string, allSyllables []string) string {
 	// Try dictionary first
 	if trans, ok := dictionary[word]; ok {
 		return trans
@@ -230,11 +735,35 @@ func transliterateWordWithSyllables(word string, allSyllables []string) string {
 	return strings.Join(results, "")
 }
 
-// transliterateWord handles a single Thai word without known syllables
-// transliterateWord converts a Thai word to Paiboon romanization.
+// TransliterateWord handles a single Thai word without known syllables
+// TransliterateWord converts a Thai word to Paiboon romanization.
+// LookupDictionary checks if a word exists in the dictionary and returns its
+// Paiboon romanization. Returns (transliteration, true) if found, ("", false) otherwise.
+// This is useful for providers that want to check the dictionary before falling
+// back to other transliteration methods.
+func LookupDictionary(word string) (string, bool) {
+	trans, ok := dictionary[word]
+	return trans, ok
+}
+
+// LookupSyllable checks if a syllable exists in the syllable dictionary.
+// Returns (transliteration, true) if found, ("", false) otherwise.
+func LookupSyllable(syllable string) (string, bool) {
+	trans, ok := syllableDict[syllable]
+	return trans, ok
+}
+
+// LookupSpecialCase checks if a word/syllable exists in special cases.
+// Returns (transliteration, true) if found, ("", false) otherwise.
+func LookupSpecialCase(text string) (string, bool) {
+	trans, ok := specialCasesGlobal[text]
+	return trans, ok
+}
+
 // It first attempts dictionary lookup for known words, then falls back to
 // rule-based transliteration using pythainlp tokenization when available.
-func transliterateWord(word string) string {
+// TransliterateWord transliterates a single Thai word to Paiboon romanization
+func TransliterateWord(word string) string {
 	// Try dictionary first
 	if trans, ok := dictionary[word]; ok {
 		return trans
@@ -274,9 +803,9 @@ func TransliterateWordRulesOnly(word string) string {
 	}
 	
 	// Try syllable tokenization if pythainlp is available
-	if nlpManager != nil {
+	if globalManager != nil && globalManager.nlpManager != nil {
 		ctx := context.Background()
-		result, err := nlpManager.SyllableTokenize(ctx, word)
+		result, err := globalManager.nlpManager.SyllableTokenize(ctx, word)
 		if err == nil && result != nil && len(result.Syllables) > 0 {
 			// Multi-syllable word - transliterate each syllable
 			results := []string{}
@@ -485,43 +1014,47 @@ func findSyllableEnd(runes []rune, start int) int {
 
 // transliterateSyllable converts a Thai syllable to Paiboon
 func transliterateSyllable(syllable string) string {
-	// Special cases and common words
+	// Special cases and common words (including Sanskrit/Pali loanwords)
 	specialCases := map[string]string{
-		"ธรรม": "tam",
-		"กรรม": "gam",
-		"สัตว์": "sàt",
-		"จริง": "jing",
-		"นอน": "nɔɔn",
-		"แดง": "dɛɛng",
-		"โชค": "chôok",
-		"ลูก": "lûuk",
-		"เขียว": "kǐao",
-		"สวัส": "sàwàt",
-		"อร่อ": "àròɔ",
-		"สวัสดี": "sàwàtdii",
-		"ขอบ": "kɔ̀ɔp",
-		"คุณ": "kun",
-		"ความ": "kwaam",
-		"สุข": "sùk",
-		"อร่อย": "àròɔi",
-		"ไม้": "mái",
-		"สวย": "sǔai",
-		"ขอบคุณ": "kɔ̀ɔp-kun",
-		"ความสุข": "kwaam-sùk",
-		"ภาษา": "paasǎa",
-		"ภาษาไทย": "paasǎa-tai",
-		"ประ": "bprà",
-		"เทศ": "têet",
-		"ประเทศ": "bpràtêet",
+		// รร patterns (Sanskrit/Pali double ร)
+		"ธรรม": "tam", "กรรม": "gam", "พรรค": "pák", "วรรค": "wák",
+		"สรร": "sǎn", "บรร": "ban", "จรร": "jan",
+		"รรม": "am", "รรค": "ák", "รรณ": "an", "รรพ": "áp",
+		// ทย patterns
+		"ทย": "tá~yá", "วิทย": "wít-tá~yá", "วิทยุ": "wít-tá~yú",
+		"วิทยา": "wít-tá~yaa", "ศึกษา": "sʉ̀k-sǎa",
+		// Common irregular words
+		"สัตว์": "sàt", "จริง": "jing", "ทราบ": "sâap",
+		"ศิลป": "sǐn-lá~bpà", "ศิลปะ": "sǐn-lá~bpà",
+		// Basic common words
+		"นอน": "nɔɔn", "แดง": "dɛɛng", "โชค": "chôok", "ลูก": "lûuk",
+		"เขียว": "kǐao", "สวัส": "sàwàt", "อร่อ": "àròɔ",
+		"สวัสดี": "sàwàtdii", "ขอบ": "kɔ̀ɔp", "คุณ": "kun",
+		"ความ": "kwaam", "สุข": "sùk", "อร่อย": "àròɔi",
+		"ไม้": "mái", "สวย": "sǔai", "ขอบคุณ": "kɔ̀ɔp-kun",
+		"ความสุข": "kwaam-sùk", "ภาษา": "paasǎa", "ภาษาไทย": "paasǎa-tai",
+		"ประ": "bprà", "เทศ": "têet", "ประเทศ": "bpràtêet",
 		"ประเทศไทย": "bpràtêet-tai",
+		// More Sanskrit/Pali loanwords
+		"สงฆ์": "sǒng", "นิพพาน": "níp-paan", "ปรินิพพาน": "bpà~rí-níp-paan",
+		"ประสงค์": "bprà~sǒng", "มนต์": "mon", "สวดมนต์": "sùuat-mon",
+		"อภัย": "à~pai", "เมตตา": "mêet-dtaa", "กรุณา": "gà~rú~naa",
+		// Common prefixes/suffixes
+		"ระ": "rá", "กระ": "grà", "ตระ": "dtrà",
+		// Vowel patterns that are commonly misparsed
+		"งอ": "ngɔɔ", "งา": "ngaa", "งู": "nguu",
+		"อยู่": "yùu", "อยาก": "yàak",
 	}
 	
 	if trans, ok := specialCases[syllable]; ok {
 		return trans
 	}
-	
+
+	// Remove silent consonants (consonant + ์) before parsing
+	cleanedSyllable := RemoveSilentConsonants(syllable)
+
 	// Parse syllable components
-	components := parseSyllableComponents(syllable)
+	components := parseSyllableComponents(cleanedSyllable)
 	
 	// Build transliteration
 	result := components.Initial + components.Vowel + components.Final
@@ -924,6 +1457,47 @@ func applyTone(text string, comp SyllableComponents) string {
 }
 
 // Helper functions
+
+// RemoveSilentConsonants removes consonants followed by ์ (thanthakhat)
+// which marks them as silent in Thai orthography.
+// Handles both: consonant + ์ and consonant + vowel + ์
+// Exported for use by translitkit providers.
+func RemoveSilentConsonants(text string) string {
+	runes := []rune(text)
+	result := make([]rune, 0, len(runes))
+
+	for i := 0; i < len(runes); i++ {
+		r := runes[i]
+
+		// Check if this consonant is followed by ์ (directly)
+		if i+1 < len(runes) && runes[i+1] == '์' {
+			// Skip both the consonant and the ์
+			i++ // Skip the ์ as well (loop will increment again)
+			continue
+		}
+
+		// Check if this consonant + vowel is followed by ์
+		// Pattern: consonant + vowel + ์ (e.g., ธุ์ in พันธุ์)
+		if i+2 < len(runes) && isConsonantRune(r) && isVowelRune(runes[i+1]) && runes[i+2] == '์' {
+			// Skip consonant, vowel, and ์
+			i += 2 // Skip vowel and ์ (loop will increment again)
+			continue
+		}
+
+		result = append(result, r)
+	}
+
+	return string(result)
+}
+
+func isConsonantRune(r rune) bool {
+	return strings.ContainsRune("กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ", r)
+}
+
+func isVowelRune(r rune) bool {
+	return strings.ContainsRune("ะัาิีึืุูเแโใไๅำ", r)
+}
+
 func isConsonant(s string) bool {
 	return strings.Contains("กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ", s)
 }
@@ -946,7 +1520,7 @@ func isRomanVowel(r rune) bool {
 
 // Testing functions
 func test(th, trg string) {
-	r := ThaiToRoman(th)
+	r := TransliterateWordRulesOnly(th)
 	t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
 	r, _, _ = transform.String(t, r)
 	fmt.Println(isPassed(r, trg), th, "\t\t\t\t", r, "→", trg)
@@ -968,17 +1542,15 @@ var m = make(map[string]string)
 var re = regexp.MustCompile(`(.*),(.*\p{Thai}.*)`)
 
 func init() {
-	pp.Println("Building dictionary from manual vocab...")
-	path := "/home/voiduser/go/src/paiboonizer/manual vocab/"
-	a, err := os.ReadDir(path)
+	// Use embedded filesystem for vocab files
+	entries, err := fs.ReadDir(vocabFS, "csv")
 	check(err)
-	
-	for _, e := range a {
-		file := filepath.Join(path, e.Name())
-		dat, err := os.ReadFile(file)
+
+	for _, e := range entries {
+		dat, err := fs.ReadFile(vocabFS, "csv/"+e.Name())
 		check(err)
 		arr := strings.Split(string(dat), "\n")
-		
+
 		for _, str := range arr {
 			raw := re.FindStringSubmatch(str)
 			if len(raw) == 0 {
@@ -987,14 +1559,14 @@ func init() {
 			row := strings.Split(raw[2], ",")[:2]
 			th := html.UnescapeString(row[0])
 			translit := html.UnescapeString(row[1])
-			
+
 			// Add to test data
 			words = append(words, th)
 			m[th] = translit
-			
+
 			// Build dictionary
 			dictionary[th] = translit
-			
+
 			// Try to extract single syllables for syllable dictionary
 			// Add short words and very common syllables
 			if !strings.Contains(th, " ") {
@@ -1007,8 +1579,47 @@ func init() {
 			}
 		}
 	}
-	
+
+	// Extract syllables from multi-syllable dictionary entries
+	extractSyllablesFromDictionary()
+
 	fmt.Printf("Dictionary built: %d entries, %d syllables\n", len(dictionary), len(syllableDict))
+}
+
+// extractSyllablesFromDictionary extracts individual syllables from multi-syllable
+// dictionary entries to expand the syllable dictionary for maximal matching
+func extractSyllablesFromDictionary() {
+	// Process entries with hyphens (multi-syllable words)
+	for th, translit := range dictionary {
+		if strings.Contains(translit, "-") {
+			// Split Thai text into syllables using rule-based extraction
+			thaiSyllables := ExtractSyllables(th)
+			// Split romanization by hyphens
+			romanSyllables := strings.Split(translit, "-")
+
+			// Only use if counts match (reliable mapping)
+			if len(thaiSyllables) == len(romanSyllables) {
+				for i, thaiSyl := range thaiSyllables {
+					romanSyl := romanSyllables[i]
+					// Only add if not already in dictionary and reasonable length
+					if _, exists := syllableDict[thaiSyl]; !exists {
+						if len([]rune(thaiSyl)) >= 2 && len([]rune(thaiSyl)) <= 6 {
+							syllableDict[thaiSyl] = romanSyl
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Also add common Thai syllable patterns from special cases
+	for th, translit := range specialCasesGlobal {
+		if !strings.Contains(translit, "-") && len([]rune(th)) <= 5 {
+			if _, exists := syllableDict[th]; !exists {
+				syllableDict[th] = translit
+			}
+		}
+	}
 }
 
 func check(e error) {
@@ -1017,6 +1628,7 @@ func check(e error) {
 	}
 }
 
+/*
 func main() {
 	// Define command line flags
 	dictionaryCheck := flag.Bool("dictionary-check", false, "Test transliterator accuracy against dictionary")
@@ -1027,10 +1639,9 @@ func main() {
 	
 	// Clean up pythainlp on exit
 	defer func() {
-		if nlpManager != nil {
+		if Manager.nlpManager != nil {
 			ctx := context.Background()
-			nlpManager.Stop(ctx)
-			nlpManager.Close()
+			Manager.nlpManager.Stop(ctx)
 		}
 	}()
 	
@@ -1052,7 +1663,7 @@ func main() {
 	
 	// Default test
 	fmt.Println("Use -dictionary-check, -analyze, or -test flags to run tests")
-}
+}*/
 
 func testWiktionary() {
 	test("น้ำ", "nám")

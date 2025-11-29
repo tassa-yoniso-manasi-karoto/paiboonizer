@@ -1,4 +1,4 @@
-package main
+package paiboonizer
 
 import (
 	"bufio"
@@ -51,9 +51,9 @@ func testTransliterate() {
 		
 		// Transliterate Thai text
 		result := ""
-		if nlpManager != nil {
+		if globalManager != nil && globalManager.nlpManager != nil {
 			ctx := context.Background()
-			tokens, err := nlpManager.Tokenize(ctx, line)
+			tokens, err := globalManager.nlpManager.Tokenize(ctx, line)
 			if err == nil && tokens != nil && len(tokens.Raw) > 0 {
 				// Tokenize and transliterate each word
 				results := []string{}
