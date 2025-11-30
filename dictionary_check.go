@@ -34,41 +34,38 @@ const (
 // Track pythainlp failures that fell back to pure rules
 var pythainlpFallbackCount int
 
-func TestDictionary(useDictionary bool) {
-	if useDictionary {
-		TestDictionaryWithMode(TestModeFullDictionary)
-	} else {
-		TestDictionaryWithMode(TestModePureRules)
-	}
+// DictTestFailure represents a single test failure
+type DictTestFailure struct {
+	Thai     string
+	Expected string
+	Got      string
 }
 
-// TestDictionaryWithMode tests transliteration with specific mode
-func TestDictionaryWithMode(mode TestMode) {
-	switch mode {
-	case TestModePureRules:
-		fmt.Println("=== Testing Rule-Based Transliterator (No Dictionary, No Pythainlp) ===")
-		fmt.Println("Testing pure rule-based syllable extraction + transliteration")
-	case TestModePythainlp:
-		fmt.Println("=== Testing Pythainlp Tokenization + Rule-Based Transliteration ===")
-		fmt.Println("Testing pythainlp syllable tokenization + rule-based transliteration")
+// DictTestResults contains the results of dictionary testing
+type DictTestResults struct {
+	Mode               TestMode
+	Total              int
+	Passed             int
+	Failed             int
+	Accuracy           float64
+	PythainlpFallbacks int
+	Failures           []DictTestFailure
+	ToneErrors         int
+	VowelErrors        int
+	ConsonantErrors    int
+}
+
+// RunDictionaryTest runs dictionary test and returns results
+func RunDictionaryTest(mode TestMode) DictTestResults {
+	if mode == TestModePythainlp {
 		pythainlpFallbackCount = 0
-	case TestModeFullDictionary:
-		fmt.Println("=== Testing With Full Dictionary Lookup ===")
-		fmt.Println("Testing WITH dictionary lookup (baseline)")
 	}
-	fmt.Println("Dictionary entries available:", len(dictionary))
-	fmt.Println("Syllable dictionary entries:", len(syllableDict), "\n")
 
 	passed := 0
 	total := 0
-	failures := []struct {
-		thai     string
-		expected string
-		got      string
-	}{}
+	var failures []DictTestFailure
 
 	// Sort dictionary keys for deterministic iteration order
-	// This ensures consistent accuracy measurements across runs
 	sortedKeys := make([]string, 0, len(dictionary))
 	for k := range dictionary {
 		sortedKeys = append(sortedKeys, k)
@@ -102,81 +99,40 @@ func TestDictionaryWithMode(mode TestMode) {
 		// Strip special markers from expected result too
 		cleanExpected := stripSpecialMarkers(expected)
 
-		// Remove hyphens and tildes for comparison (syllable separation style not important)
+		// Remove hyphens and tildes for comparison
 		expectedNoSep := strings.ReplaceAll(strings.ReplaceAll(cleanExpected, "-", ""), "~", "")
 		resultNoSep := strings.ReplaceAll(strings.ReplaceAll(result, "-", ""), "~", "")
 
-		// Legacy variable names for compatibility
-		expectedNoHyphen := expectedNoSep
-		resultNoHyphen := resultNoSep
-		
 		// Also normalize Unicode for fair comparison
 		t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
-		resultNorm, _, _ := transform.String(t, resultNoHyphen)
-		expectedNorm, _, _ := transform.String(t, expectedNoHyphen)
-		
-		if resultNoHyphen == expectedNoHyphen || resultNorm == expectedNorm {
+		resultNorm, _, _ := transform.String(t, resultNoSep)
+		expectedNorm, _, _ := transform.String(t, expectedNoSep)
+
+		if resultNoSep == expectedNoSep || resultNorm == expectedNorm {
 			passed++
 		} else {
-			// Collect failures for analysis
-			if len(failures) < 50 { // Keep first 50 failures for analysis
-				failures = append(failures, struct{
-					thai string
-					expected string
-					got string
-				}{thai, expected, result})
+			if len(failures) < 50 {
+				failures = append(failures, DictTestFailure{
+					Thai:     thai,
+					Expected: expected,
+					Got:      result,
+				})
 			}
 		}
-		
-		// Show progress every 500 words
-		if total % 500 == 0 {
-			fmt.Printf("Progress: %d/%d tested, %.1f%% accuracy so far\n", 
-				total, len(dictionary), float64(passed)*100/float64(total))
-		}
 	}
-	
-	accuracy := float64(passed) * 100 / float64(total)
-	
-	fmt.Println("\n=== RESULTS ===")
-	fmt.Printf("Total words tested: %d\n", total)
-	fmt.Printf("Passed: %d\n", passed)
-	fmt.Printf("Failed: %d\n", total-passed)
-	if mode == TestModePythainlp && pythainlpFallbackCount > 0 {
-		fmt.Printf("Pythainlp fallbacks: %d (%.1f%% of tests used pure rules due to pythainlp failures)\n",
-			pythainlpFallbackCount, float64(pythainlpFallbackCount)*100/float64(total))
-	}
-	fmt.Printf("\nREAL ACCURACY: %.2f%%\n", accuracy)
-	
-	if accuracy >= 90.0 {
-		fmt.Println("\n🎉 SUCCESS! Achieved 90%+ accuracy on dictionary dataset!")
-	} else {
-		fmt.Printf("\n❌ Need %.2f%% more to reach 90%% target\n", 90.0-accuracy)
-	}
-	
-	// Show some failures for debugging
-	fmt.Println("\n=== Sample Failures (first 20) ===")
-	for i, f := range failures {
-		if i >= 20 {
-			break
-		}
-		fmt.Printf("%s: got '%s', expected '%s'\n", f.thai, f.got, f.expected)
-	}
-	
+
 	// Analyze failure patterns
-	fmt.Println("\n=== Failure Analysis ===")
 	toneErrors := 0
 	vowelErrors := 0
 	consonantErrors := 0
-	
+
 	for _, f := range failures {
-		// Simple heuristic analysis
-		if len(f.got) != len(f.expected) {
+		if len(f.Got) != len(f.Expected) {
 			vowelErrors++
 		} else {
-			// Check if it's mainly tone differences
 			t := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
-			gotNorm, _, _ := transform.String(t, f.got)
-			expNorm, _, _ := transform.String(t, f.expected)
+			gotNorm, _, _ := transform.String(t, f.Got)
+			expNorm, _, _ := transform.String(t, f.Expected)
 			if gotNorm == expNorm {
 				toneErrors++
 			} else {
@@ -184,11 +140,18 @@ func TestDictionaryWithMode(mode TestMode) {
 			}
 		}
 	}
-	
-	if len(failures) > 0 {
-		fmt.Printf("Tone errors: ~%d (%.1f%%)\n", toneErrors, float64(toneErrors)*100/float64(len(failures)))
-		fmt.Printf("Vowel/length errors: ~%d (%.1f%%)\n", vowelErrors, float64(vowelErrors)*100/float64(len(failures)))
-		fmt.Printf("Consonant/other errors: ~%d (%.1f%%)\n", consonantErrors, float64(consonantErrors)*100/float64(len(failures)))
+
+	return DictTestResults{
+		Mode:               mode,
+		Total:              total,
+		Passed:             passed,
+		Failed:             total - passed,
+		Accuracy:           float64(passed) * 100 / float64(total),
+		PythainlpFallbacks: pythainlpFallbackCount,
+		Failures:           failures,
+		ToneErrors:         toneErrors,
+		VowelErrors:        vowelErrors,
+		ConsonantErrors:    consonantErrors,
 	}
 }
 

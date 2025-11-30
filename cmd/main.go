@@ -53,7 +53,40 @@ func main() {
 	// Test 3: Dictionary accuracy test (paiboonizer rules vs dictionary ground truth)
 	// Reuses the pythainlp container via default manager
 	header.Println("\n=== DICTIONARY TEST (PAIBOONIZER ACCURACY) ===")
-	paiboonizer.TestDictionaryWithMode(paiboonizer.TestModePythainlp)
+	dictResults := paiboonizer.RunDictionaryTest(paiboonizer.TestModePythainlp)
+	printDictResults(dictResults)
+}
+
+// printDictResults formats dictionary test results with color
+func printDictResults(r paiboonizer.DictTestResults) {
+	fmt.Println("Testing pythainlp syllable tokenization + rule-based transliteration")
+	fmt.Printf("Dictionary entries: %d, Syllable dict: %d\n\n", 4981, 2772) // TODO: export these
+
+	fmt.Println("=== RESULTS ===")
+	fmt.Printf("Total: %d | Passed: %d | Failed: %d\n", r.Total, r.Passed, r.Failed)
+	if r.PythainlpFallbacks > 0 {
+		fmt.Printf("Pythainlp fallbacks: %d (%.1f%%)\n", r.PythainlpFallbacks, float64(r.PythainlpFallbacks)*100/float64(r.Total))
+	}
+
+	boldGreen := color.New(color.Bold, color.FgGreen)
+	boldGreen.Printf("\nDICTIONARY ACCURACY: %.2f%%\n", r.Accuracy)
+
+	// Sample failures
+	if len(r.Failures) > 0 {
+		fmt.Println("\n=== Sample Failures (first 20) ===")
+		for i, f := range r.Failures {
+			if i >= 20 {
+				break
+			}
+			fmt.Printf("%s: got '%s', expected '%s'\n", f.Thai, f.Got, f.Expected)
+		}
+
+		fmt.Println("\n=== Failure Analysis ===")
+		fmt.Printf("Tone: ~%d (%.1f%%) | Vowel/length: ~%d (%.1f%%) | Consonant: ~%d (%.1f%%)\n",
+			r.ToneErrors, float64(r.ToneErrors)*100/float64(len(r.Failures)),
+			r.VowelErrors, float64(r.VowelErrors)*100/float64(len(r.Failures)),
+			r.ConsonantErrors, float64(r.ConsonantErrors)*100/float64(len(r.Failures)))
+	}
 }
 
 // getTestDir returns the directory containing the test files
