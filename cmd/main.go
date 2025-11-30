@@ -121,11 +121,85 @@ func normalize(s string) string {
 	s = norm.NFC.String(s)
 	s = strings.TrimSpace(s)
 	s = strings.ToLower(s)
+	// Normalize hyphens to spaces (treat as equivalent word separators)
+	s = strings.ReplaceAll(s, "-", " ")
 	// Normalize multiple spaces to single space
 	for strings.Contains(s, "  ") {
 		s = strings.ReplaceAll(s, "  ", " ")
 	}
+	// Normalize numbers to Thai romanization for fair comparison
+	s = normalizeNumbers(s)
 	return s
+}
+
+// normalizeNumbers converts Arabic numerals to Thai number romanization
+func normalizeNumbers(s string) string {
+	// Find and replace number sequences
+	var result strings.Builder
+	i := 0
+	runes := []rune(s)
+
+	for i < len(runes) {
+		if runes[i] >= '0' && runes[i] <= '9' {
+			// Collect the full number
+			numStart := i
+			for i < len(runes) && runes[i] >= '0' && runes[i] <= '9' {
+				i++
+			}
+			numStr := string(runes[numStart:i])
+			thai := numberToThai(numStr)
+			if result.Len() > 0 && result.String()[result.Len()-1] != ' ' {
+				result.WriteString(" ")
+			}
+			result.WriteString(thai)
+		} else {
+			result.WriteRune(runes[i])
+			i++
+		}
+	}
+	return result.String()
+}
+
+// numberToThai converts an Arabic numeral string to Thai romanization
+func numberToThai(num string) string {
+	units := []string{"", "nʉ̀ng", "sɔ̌ɔng", "sǎam", "sìi", "hâa", "hòk", "jèt", "bpɛ̀ɛt", "gâao"}
+	tens := []string{"", "sìp", "yîi sìp", "sǎam sìp", "sìi sìp", "hâa sìp", "hòk sìp", "jèt sìp", "bpɛ̀ɛt sìp", "gâao sìp"}
+
+	// Handle single digit
+	if len(num) == 1 {
+		d := int(num[0] - '0')
+		if d == 0 {
+			return "sǔun"
+		}
+		return units[d]
+	}
+
+	// Handle two digits (10-99)
+	if len(num) == 2 {
+		t := int(num[0] - '0')
+		u := int(num[1] - '0')
+		result := tens[t]
+		if u > 0 {
+			if u == 1 && t > 0 {
+				result += " èt" // Special: 11, 21, 31... use "èt" not "nʉ̀ng"
+			} else {
+				result += " " + units[u]
+			}
+		}
+		return result
+	}
+
+	// For larger numbers, just convert digit by digit for simplicity
+	var parts []string
+	for _, r := range num {
+		d := int(r - '0')
+		if d == 0 {
+			parts = append(parts, "sǔun")
+		} else {
+			parts = append(parts, units[d])
+		}
+	}
+	return strings.Join(parts, " ")
 }
 
 // runCorpusTranslitkit runs corpus test via translitkit with full failure analysis
