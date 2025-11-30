@@ -11,6 +11,7 @@ import (
 	"github.com/fatih/color"
 	"golang.org/x/text/unicode/norm"
 
+	"github.com/tassa-yoniso-manasi-karoto/go-pythainlp"
 	"github.com/tassa-yoniso-manasi-karoto/paiboonizer"
 
 	_ "github.com/tassa-yoniso-manasi-karoto/translitkit"
@@ -45,7 +46,11 @@ func main() {
 	header.Println("\n=== CORPUS TEST (TRANSLITKIT) ===")
 	runCorpusTranslitkit(module)
 
-	// Test 2: Dictionary accuracy test (paiboonizer rules vs dictionary ground truth)
+	// Test 2: Corpus test with pure rules (pythainlp tokenization + paiboonizer rules, no dictionary)
+	header.Println("\n=== CORPUS TEST (PURE RULES) ===")
+	runCorpusPureRules()
+
+	// Test 3: Dictionary accuracy test (paiboonizer rules vs dictionary ground truth)
 	// Reuses the pythainlp container via default manager
 	header.Println("\n=== DICTIONARY TEST (PAIBOONIZER ACCURACY) ===")
 	paiboonizer.TestDictionaryWithMode(paiboonizer.TestModePythainlp)
@@ -216,6 +221,90 @@ func runCorpusTranslitkit(module *common.Module) {
 	fmt.Println()
 	bold.Printf("Line-level accuracy: %.2f%% (%d/%d lines)\n", lineAccuracy, lineCorrect, totalLines)
 	boldCyan.Printf("CORPUS WORD-LEVEL ACCURACY: %.2f%% (%d/%d words)\n", wordAccuracy, wordCorrect, totalWords)
+}
+
+// runCorpusPureRules runs corpus test with pythainlp tokenization + pure rule-based transliteration
+// (no dictionary lookup). Silent output - just accuracy %.
+func runCorpusPureRules() {
+	dir := getTestDir()
+	inputPath := filepath.Join(dir, testFile)
+	expectedPath := filepath.Join(dir, expectedFile)
+
+	inputs, err := loadLines(inputPath)
+	if err != nil {
+		fmt.Printf("Error loading input file: %v\n", err)
+		return
+	}
+
+	expected, err := loadLines(expectedPath)
+	if err != nil {
+		fmt.Printf("Error loading expected file: %v\n", err)
+		return
+	}
+
+	if len(inputs) != len(expected) {
+		fmt.Printf("Line count mismatch: %d inputs vs %d expected\n", len(inputs), len(expected))
+		return
+	}
+
+	wordCorrect := 0
+	totalWords := 0
+
+	for i := 0; i < len(inputs); i++ {
+		input := strings.TrimSpace(inputs[i])
+		// Remove BOM
+		input = strings.TrimPrefix(input, "\ufeff")
+		exp := normalize(expected[i])
+
+		if input == "" || exp == "" {
+			continue
+		}
+
+		// Use pythainlp for word tokenization (via package-level function)
+		tokenResult, err := pythainlp.Tokenize(input)
+		if err != nil || tokenResult == nil || len(tokenResult.Raw) == 0 {
+			continue
+		}
+
+		// Transliterate each word using pure rules (no dictionary)
+		var romanParts []string
+		for _, word := range tokenResult.Raw {
+			word = strings.TrimSpace(word)
+			if word == "" {
+				continue
+			}
+			// Check if it's Thai text
+			if containsThai(word) {
+				roman := paiboonizer.ComprehensiveTransliterate(word)
+				romanParts = append(romanParts, roman)
+			} else {
+				// Non-Thai passes through (spaces, punctuation, numbers)
+				romanParts = append(romanParts, word)
+			}
+		}
+
+		got := normalize(strings.Join(romanParts, " "))
+
+		// Word-level accuracy
+		expWords := splitWords(exp)
+		gotWords := splitWords(got)
+		totalWords += len(expWords)
+		wordCorrect += countMatchingWords(expWords, gotWords)
+	}
+
+	wordAccuracy := float64(wordCorrect) / float64(totalWords) * 100
+	boldMagenta := color.New(color.Bold, color.FgMagenta)
+	boldMagenta.Printf("CORPUS PURE RULES WORD-LEVEL ACCURACY: %.2f%% (%d/%d words)\n", wordAccuracy, wordCorrect, totalWords)
+}
+
+// containsThai checks if a string contains Thai characters
+func containsThai(s string) bool {
+	for _, r := range s {
+		if r >= 0x0E00 && r <= 0x0E7F {
+			return true
+		}
+	}
+	return false
 }
 
 // splitWords splits a romanized string into words by spaces
