@@ -19,7 +19,7 @@ You have deep knowledge of:
 
 1. **Before Output**: The transliteration demo output BEFORE code changes were made (baseline)
 2. **After Output**: The transliteration demo output AFTER code changes were applied (candidate)
-3. **Reference File**: The authoritative `paiboon_examples.txt` containing official Paiboon transliterations
+3. **Reference File**: The authoritative `cmd/testing_files/paiboon_examples.txt` containing official Paiboon transliterations
 
 ## Your Analysis Process
 
