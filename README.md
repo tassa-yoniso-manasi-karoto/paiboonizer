@@ -1,14 +1,19 @@
-# Paiboonizer
+Experimental Thai-to-Paiboon romanization library for translitkit integration. It is designed for replacing the scraper of thai2english that translitkit uses to support paiboon transliteration. It is meant to be used with pythainlp for word/syllable tokenization.
 
-Experimental Thai-to-Paiboon romanization library for translitkit integration.
+## Accuracy
 
-## Overview
+Against:
+- **CORPUS: With pythainlp word tokenization + dictionary + syllable segmentation of pythainlp**: ~83%
+- CORPUS: With pythainlp word tokenization + *pure Golang rules only*: ~37%
+- **DICTIONARY: pure Golang rules only**: ~84.5%
 
-Paiboonizer provides Thai text transliteration to the Paiboon romanization system. It's designed to be used with pythainlp for word/syllable tokenization, achieving ~83% accuracy on arbitrary Thai text.
+Corpus is ~800 thai sentences extracted from a subtitle file.
+
+Ground truth is a transliteration of this corpus made by Claude Opus 4.5 and "peer-reviewed" by Gemini 3.
 
 ## Usage
 
-### With translitkit (recommended)
+### 👉 With [translitkit](https://github.com/tassa-yoniso-manasi-karoto/translitkit) (RECOMMENDED FOR BEST ACCURACY) 👈
 
 Use the `paiboon-hybrid` scheme which combines pythainlp tokenization with paiboonizer transliteration:
 
@@ -17,7 +22,7 @@ Use the `paiboon-hybrid` scheme which combines pythainlp tokenization with paibo
 // pythainlp tokenizes → paiboonizer transliterates
 ```
 
-### Direct API
+### Direct API (good enough for transliterating individual words)
 
 ```go
 import "github.com/tassa-yoniso-manasi-karoto/paiboonizer"
@@ -38,12 +43,6 @@ result := paiboonizer.ComprehensiveTransliterate("ความสุข")
 // Helper for silent consonant markers (์)
 clean := paiboonizer.RemoveSilentConsonants("สันต์") // Returns "สัน"
 ```
-
-## Accuracy
-
-- **With pythainlp + dictionary**: ~85%+ (dictionary lookup first, then syllable rules)
-- **With pythainlp + rules only**: ~83%
-- **Pure rules (no pythainlp)**: ~70%
 
 ## Dependencies
 
