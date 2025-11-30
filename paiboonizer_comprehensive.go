@@ -2,7 +2,9 @@ package paiboonizer
 
 import (
 	"strings"
+
 	"github.com/rivo/uniseg"
+	"golang.org/x/text/unicode/norm"
 )
 
 // ComprehensiveSyllable represents a parsed Thai syllable
@@ -364,8 +366,9 @@ func buildPaiboonFromSyllable(cs ComprehensiveSyllable) string {
 		}
 		result = newResult.String()
 	}
-	
-	return result
+
+	// Normalize to NFC for consistent comparison
+	return norm.NFC.String(result)
 }
 
 // findSyllableEndComprehensive finds syllable boundaries with better pattern recognition
@@ -422,12 +425,12 @@ func findSyllableEndComprehensive(runes []rune, start int) int {
 func ComprehensiveTransliterate(word string) string {
 	// Try special cases first (irregular words, loanwords)
 	if trans, ok := specialCasesGlobal[word]; ok {
-		return trans
+		return norm.NFC.String(trans)
 	}
 
 	// Try syllable dictionary for known syllables
 	if trans, ok := syllableDict[word]; ok {
-		return trans
+		return norm.NFC.String(trans)
 	}
 
 	// Try to find longest matching syllables from dictionary and special cases
@@ -461,14 +464,14 @@ func ComprehensiveTransliterate(word string) string {
 
 				// Check special cases first
 				if trans, ok := specialCasesGlobal[substr]; ok {
-					results = append(results, trans)
+					results = append(results, norm.NFC.String(trans))
 					i += length
 					found = true
 					break
 				}
 				// Then check syllable dictionary
 				if trans, ok := syllableDict[substr]; ok {
-					results = append(results, trans)
+					results = append(results, norm.NFC.String(trans))
 					i += length
 					found = true
 					break
@@ -507,5 +510,6 @@ func ComprehensiveTransliterate(word string) string {
 	if len(results) == 0 {
 		return ""
 	}
-	return strings.Join(results, "")
+	// Normalize to NFC to match dictionary expectations (precomposed characters)
+	return norm.NFC.String(strings.Join(results, ""))
 }

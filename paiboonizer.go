@@ -491,6 +491,17 @@ var specialCasesGlobal = map[string]string{
 	"ระเบิด": "rá~bə̀ət", "พิจารณา": "pí-jaa-rá~naa",
 	"องค์": "ong", "องค์กร": "ong-gɔɔn",
 	"เกณฑ์": "geen",
+
+	// Common กระ- syllables (pythainlp often splits these wrong)
+	"กระจอก": "grà~jɔ̀ɔk", "กระทบ": "grà~tóp", "กระป๋อง": "grà~bpɔ̌ng",
+	"กระรอก": "grà~rɔ̂ɔk", "กระหม่อม": "grà~mɔ̀m",
+	"กระเบียด": "grà~bìiat", "กระเสียร": "grà~sǐian",
+	"กตัญญู": "gà~dtan-yuu",
+
+	// Sanskrit/Pali words with irregular patterns
+	"อธิบาย": "à-tí-baai", "กรรมฐาน": "gam-má~tǎan",
+	"กรรไกร": "gan-grai", "กรอบ": "grɔ̀ɔp",
+
 	// Note: ฐาน, ฝรั่ง already defined above
 	"โฮเต็ล": "hoo-dten", "เต็ล": "dten",
 	"ราเมง": "raa-meng", "เมง": "meng",
@@ -829,7 +840,7 @@ func TransliterateWord(word string) string {
 func TransliterateWordRulesOnly(word string) string {
 	// Try dictionary lookup first
 	if trans, ok := dictionary[word]; ok {
-		return trans
+		return norm.NFC.String(trans)
 	}
 	
 	// Try syllable tokenization if pythainlp is available
@@ -1483,7 +1494,8 @@ func applyTone(text string, comp SyllableComponents) string {
 	if !tonePlaced {
 		return text // No vowel found
 	}
-	return result.String()
+	// Normalize to NFC for consistent comparison with dictionary
+	return norm.NFC.String(result.String())
 }
 
 // Helper functions

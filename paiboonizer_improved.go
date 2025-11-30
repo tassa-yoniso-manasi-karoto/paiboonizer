@@ -3,6 +3,8 @@ package paiboonizer
 import (
 	"sort"
 	"strings"
+
+	"golang.org/x/text/unicode/norm"
 )
 
 // VowelPattern represents a Thai vowel pattern for transliteration
@@ -493,7 +495,8 @@ func addToneDiacritic(text string, toneNum int) string {
 			// Insert tone mark after this vowel
 			before := string(result[:i+1])
 			after := string(result[i+1:])
-			return before + marks[toneNum] + after
+			// Normalize to NFC for consistent comparison
+			return norm.NFC.String(before + marks[toneNum] + after)
 		}
 	}
 
