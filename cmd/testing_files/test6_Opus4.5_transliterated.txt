@@ -81,7 +81,7 @@ jà mâi mii krai maa hěn châi bplào
 mâi mii krai kâo maa rɔ̀ɔk
 goo-dang gào pɔ̂ɔ
 mâi dâai chái maa sìp bpii lɛ́ɛo
-hə́i bép
+hə́əi bép
 rúu bplào
 wâa bpɛ̀ɛt tâo-gàp à~rai
 à~rai
@@ -96,7 +96,7 @@ bép
 mâi châi ləəi
 nîi nîi man sǐn-lá~bpà sîn boo-dɛɛng ləəi ná
 - mâi lâ\N- mʉ̌ʉan bɛ̀ɛp wɛɛn-góʔ
-hə́i pûuak gɛɛ
+hə́əi pûuak gɛɛ
 jing-jang gan nɔ̀i sì
 pɛ̌ɛn kráng níi man mâi mʉ̌ʉan\Npɛ̌ɛn kráng ʉ̀ʉn ná wə́əi
 gɔ̀ɔn-nâa-níi rao kɛ̂ɛ goong kɔ̂ɔ-sɔ̀ɔp
@@ -181,7 +181,7 @@ hâi dao ao eeng bpai mûua-mûua yàang níi rə̌ə
 hǎa kon nai sì
 hâi kon tîi kǎo tam-ngaan tîi nân\Nmaa chûuai rao wâang-pɛ̌ɛn
 greet rúu-jàk gàp aa-jèk chaai mâak kɛ̂ɛ-nǎi
-hə́i
+hə́əi
 nîi gɛɛ kít jà dtìt-sǐn-bon aa-jèk rə̌ə
 mâi dâai dèt-kàat ná wə́əi
 aa-jèk rúu-jàk gàp pɔ̂ɔ rao
@@ -272,7 +272,7 @@ gɔ̂ɔ gɔ̂ɔ nâa-jà bpen bpai dâai
 tâa ngán sǒm-mùt wâa pǒm sòng mʉʉ-tʉ̌ʉ\Nkâo bpai hâi pîi nai roong-pim dâai
 pîi gɔ̂ɔ ɛ̀ɛp ao gun-jɛɛ kâo bpai kǎi hɔ̂ng kà~yà
 lɛ́ɛo tàai-rûup kɔ̂ɔ-sɔ̀ɔp\Nsòng maa hâi pûuak pǒm dâai châi mái kráp
-hə́i
+hə́əi
 tii-rɛ̂ɛk nɔ́ɔng bɔ̀ɔk wâa\Npîi mâi dtɔ̂ng tam à~rai ləəi mâi châi rə̌ə
 nǎi wâa jà kɛ̂ɛ bprʉ̀k-sǎa chə̌əi-chə̌əi ngai
 pîi mâi tam man sìiang gəən bpai
@@ -293,7 +293,7 @@ pîi yang bplìian-jai dâai ná kráp
 pûuak pǒm jà rɔɔ pîi yùu tîi nîi
 pûuak gɛɛ
 tâa gə̀ət wâa pîi kǎo ao rʉ̂ʉang kɔ̌ɔng rao\Nbpai bɔ̀ɔk kon ʉ̀ʉn lâ
-hə́i
+hə́əi
 guu mâi yɔɔm sǐia ngən sɛ̌ɛn nʉ̀ng\Nlɛ́ɛo doon jàp ná wə́əi
 mâi dtɔ̂ng hùuang rɔ̀ɔk
 yang-ngai pîi kǎo gɔ̂ɔ glàp maa
@@ -589,9 +589,9 @@ hòk kʉʉ tîiang-kʉʉn
 kâao glɔ̀ng jà maa sòng
 greet
 - gɛɛ sèt yang\N- glâi lɛ́ɛo
-hə́i
+hə́əi
 kâao-pàt-mǔu-gûng-pí~sèet-mâi-pàk\Nkɔ̌ɔng guu ná wə́əi
-hə́i krai ao kâao-pàt-mǔu-gûng guu bpai
+hə́əi krai ao kâao-pàt-mǔu-gûng guu bpai
 âao hîia
 greet
 gɛɛ prɔ́ɔm yang
@@ -640,7 +640,7 @@ pîi pǒm sài sèt lɛ́ɛo pǒm kɔ̌ɔ dtuua gɔ̀ɔn ná pîi
 âao
 yâak hěn dtɔɔn tam yàang níi
 bprîiang-bprîiang
-- man mâi mʉ̌ʉan ngai dtaam làk…\N- hə́i
+- man mâi mʉ̌ʉan ngai dtaam làk…\N- hə́əi
 kâao guu yùu nǎi
 mʉng yang mâi dâai gin ìik rə̌ə nîia
 guu nʉ́k wâa mʉng gin bpai lɛ́ɛo ná nîia
@@ -653,7 +653,7 @@ kâao gɔ̂ɔ kâo bpai dtâng naan lɛ́ɛo
 pîi flúk mâi yɔɔm ao mʉʉ-tʉ̌ʉ\Nsòng kɔ̂ɔ-kwaam maa sàk tii
 nîi man gɔ̂ɔ tîiang-kʉʉn hâa-sìp lɛ́ɛo ná
 yang lʉ̌ʉa wee-laa ìik sìp naa-tii
-- hə́i mʉng sài plèet rîiap-rɔ́ɔi lɛ́ɛo ná\N- rîiap-rɔ́ɔi kráp jèk
+- hə́əi mʉng sài plèet rîiap-rɔ́ɔi lɛ́ɛo ná\N- rîiap-rɔ́ɔi kráp jèk
 dii mâak túk kon kâo bprà~jam dtam-nɛ̀ng bpai reo
 túk kon kâo tîi bprà~jam dtam-nɛ̀ng ləəi bpai-bpai
 dtii-nʉ̀ng pîi flúk dtɔ̂ng tam hâi fai-fáa\Nnai roong-pim dàp gɔ̀ɔn jà rə̂əm pim
