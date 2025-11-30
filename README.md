@@ -7,9 +7,9 @@ Against:
 - CORPUS: With pythainlp word tokenization + *pure Golang rules only*: ~37%
 - **DICTIONARY: pure Golang rules only**: ~84.5%
 
-Corpus is ~800 thai sentences extracted from a subtitle file.
+Corpus is 11714 thai sentences extracted from subtitle files.
 
-Ground truth is a transliteration of this corpus made by Claude Opus 4.5 and "peer-reviewed" by Gemini 3.
+Ground truth is a transliteration of this corpus made by Claude Opus 4.5.
 
 ## Usage
 

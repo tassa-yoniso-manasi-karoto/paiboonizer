@@ -198,6 +198,7 @@ func extractNumber(s string) int {
 }
 
 // loadLines reads a file and returns all lines
+// Aegisub \N markers are replaced with single spaces
 func loadLines(path string) ([]string, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -208,7 +209,10 @@ func loadLines(path string) ([]string, error) {
 	var lines []string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		line := scanner.Text()
+		// Replace Aegisub subtitle line breaks with single space
+		line = strings.ReplaceAll(line, "\\N", " ")
+		lines = append(lines, line)
 	}
 	return lines, scanner.Err()
 }
@@ -357,6 +361,10 @@ func runCorpusTranslitkit(module *common.Module) {
 		if input == "" || exp == "" {
 			continue
 		}
+		// Skip Aegisub header lines
+		if strings.HasPrefix(input, "#") && strings.Contains(input, "Aegisub") {
+			continue
+		}
 		totalLines++
 
 		// Use translitkit for transliteration
@@ -491,6 +499,10 @@ func runCorpusPureRules() {
 		exp := normalize(allExpected[i])
 
 		if input == "" || exp == "" {
+			continue
+		}
+		// Skip Aegisub header lines
+		if strings.HasPrefix(input, "#") && strings.Contains(input, "Aegisub") {
 			continue
 		}
 
