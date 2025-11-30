@@ -24,7 +24,6 @@ go.work.sum
 # env files
 .env
 
-test.txt
 paiboonizer-test
 cmd/paiboonizer-test
-paiboon_examples.txt
+cmd/testing_files/failures_translitkit.txt

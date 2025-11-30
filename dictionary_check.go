@@ -8,6 +8,7 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/tassa-yoniso-manasi-karoto/go-pythainlp"
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
@@ -194,19 +195,26 @@ func TestDictionaryWithMode(mode TestMode) {
 // transliterateWithPythainlp uses pythainlp for syllable tokenization
 // then transliterates each syllable using rules (no whole-word dictionary lookup)
 func transliterateWithPythainlp(word string) string {
-	// Ensure pythainlp manager is initialized
-	if globalManager == nil || globalManager.nlpManager == nil {
-		// Fall back to pure rules if pythainlp not available
-		return ComprehensiveTransliterate(word)
-	}
+	var syllables []string
 
-	ctx := context.Background()
-	result, err := globalManager.nlpManager.SyllableTokenize(ctx, word)
-	if err != nil || result == nil || len(result.Syllables) == 0 {
-		pythainlpFallbackCount++
-		return ComprehensiveTransliterate(word)
+	if globalManager != nil && globalManager.nlpManager != nil {
+		// Use paiboonizer's own manager (standalone mode)
+		ctx := context.Background()
+		result, err := globalManager.nlpManager.SyllableTokenize(ctx, word)
+		if err != nil || result == nil || len(result.Syllables) == 0 {
+			pythainlpFallbackCount++
+			return ComprehensiveTransliterate(word)
+		}
+		syllables = result.Syllables
+	} else {
+		// Try package-level function (uses default manager set by translitkit)
+		result, err := pythainlp.SyllableTokenize(word)
+		if err != nil || result == nil || len(result.Syllables) == 0 {
+			pythainlpFallbackCount++
+			return ComprehensiveTransliterate(word)
+		}
+		syllables = result.Syllables
 	}
-	syllables := result.Syllables
 
 	// Transliterate each syllable using rules (syllable dict + pattern matching)
 	results := []string{}
