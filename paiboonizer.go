@@ -24,9 +24,15 @@ import (
 //go:embed csv/*.txt
 var vocabFS embed.FS
 
+//go:embed opus_dictionary.tsv
+var opusDictFS embed.FS
+
 // Global dictionary built from manual vocab
 var dictionary = make(map[string]string)
 var syllableDict = make(map[string]string)
+
+// Opus dictionary - LLM-generated, lower priority than official dictionary
+var opusDictionary = make(map[string]string)
 
 // specialCasesGlobal contains special transliterations for irregular words
 // (Sanskrit/Pali loanwords, irregular patterns, etc.)
@@ -783,8 +789,15 @@ func TransliterateWordWithSyllables(word string, allSyllables []string) string {
 // This is useful for providers that want to check the dictionary before falling
 // back to other transliteration methods.
 func LookupDictionary(word string) (string, bool) {
-	trans, ok := dictionary[word]
-	return trans, ok
+	// Check official dictionary first (highest authority)
+	if trans, ok := dictionary[word]; ok {
+		return trans, true
+	}
+	// Fall back to Opus dictionary (LLM-generated, lower authority)
+	if trans, ok := opusDictionary[word]; ok {
+		return trans, true
+	}
+	return "", false
 }
 
 // LookupSyllable checks if a syllable exists in the syllable dictionary.
@@ -1625,7 +1638,41 @@ func init() {
 	// Extract syllables from multi-syllable dictionary entries
 	extractSyllablesFromDictionary()
 
+	// Load Opus dictionary (LLM-generated, optional)
+	loadOpusDictionary()
+
 	fmt.Printf("Dictionary built: %d entries, %d syllables\n", len(dictionary), len(syllableDict))
+	if len(opusDictionary) > 0 {
+		fmt.Printf("Opus dictionary: %d entries\n", len(opusDictionary))
+	}
+}
+
+// loadOpusDictionary loads the LLM-generated dictionary from TSV file.
+// Format: thai\troman (tab-separated)
+// This dictionary has lower priority than the official dictionary.
+func loadOpusDictionary() {
+	data, err := opusDictFS.ReadFile("opus_dictionary.tsv")
+	if err != nil {
+		// File doesn't exist or is empty - that's fine, it's optional
+		return
+	}
+
+	lines := strings.Split(string(data), "\n")
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		parts := strings.SplitN(line, "\t", 2)
+		if len(parts) != 2 {
+			continue
+		}
+		thai := strings.TrimSpace(parts[0])
+		roman := strings.TrimSpace(parts[1])
+		if thai != "" && roman != "" {
+			opusDictionary[thai] = roman
+		}
+	}
 }
 
 // extractSyllablesFromDictionary extracts individual syllables from multi-syllable

@@ -27,3 +27,4 @@ go.work.sum
 paiboonizer-test
 cmd/paiboonizer-test
 cmd/testing_files/failures_translitkit.txt
+cmd/testing_files/draft_dictionary.tsv

@@ -30,6 +30,15 @@ type testPair struct {
 	expectedLines []string
 }
 
+// corpusFailure represents a single failed transliteration
+type corpusFailure struct {
+	file     string
+	lineNum  int
+	input    string
+	expected string
+	got      string
+}
+
 func main() {
 	header := color.New(color.Bold, color.FgYellow)
 
@@ -339,14 +348,7 @@ func runCorpusTranslitkit(module *common.Module) {
 	totalWords := 0
 	fallbacks := 0
 
-	type failure struct {
-		file     string
-		lineNum  int
-		input    string
-		expected string
-		got      string
-	}
-	var failures []failure
+	var failures []corpusFailure
 
 	for _, line := range allLines {
 		input := strings.TrimSpace(line.input)
@@ -371,7 +373,7 @@ func runCorpusTranslitkit(module *common.Module) {
 		if got == exp {
 			lineCorrect++
 		} else {
-			failures = append(failures, failure{
+			failures = append(failures, corpusFailure{
 				file:     line.file,
 				lineNum:  line.lineNum,
 				input:    input,
@@ -426,6 +428,28 @@ func runCorpusTranslitkit(module *common.Module) {
 				fmt.Fprintf(file, "  Got:      %s\n\n", f.got)
 			}
 			fmt.Printf("\nAll %d failures written to: %s\n", len(failures), failuresFile)
+		}
+	}
+
+	// Generate draft dictionary from failing words
+	failedWords := extractFailingWords(failures)
+	if len(failedWords) > 0 {
+		draftPath := filepath.Join(dir, "testing_files/draft_dictionary.tsv")
+		file, err := os.Create(draftPath)
+		if err != nil {
+			fmt.Printf("Error creating draft dictionary: %v\n", err)
+		} else {
+			defer file.Close()
+			// Sort for consistent output
+			sortedWords := make([]string, 0, len(failedWords))
+			for word := range failedWords {
+				sortedWords = append(sortedWords, word)
+			}
+			sort.Strings(sortedWords)
+			for _, word := range sortedWords {
+				fmt.Fprintf(file, "%s\t\n", word)
+			}
+			fmt.Printf("Draft dictionary: %d words written to %s\n", len(failedWords), "testing_files/draft_dictionary.tsv")
 		}
 	}
 
@@ -515,6 +539,40 @@ func containsThai(s string) bool {
 		}
 	}
 	return false
+}
+
+// extractFailingWords tokenizes failing Thai inputs and collects unique words
+// that aren't in the official dictionary
+func extractFailingWords(failures []corpusFailure) map[string]struct{} {
+	failedWords := make(map[string]struct{})
+
+	for _, f := range failures {
+		// Tokenize the Thai input
+		input := strings.TrimPrefix(f.input, "\ufeff")
+		tokenResult, err := pythainlp.Tokenize(input)
+		if err != nil || tokenResult == nil || len(tokenResult.Raw) == 0 {
+			continue
+		}
+
+		// Collect Thai words not in official dictionary
+		for _, word := range tokenResult.Raw {
+			word = strings.TrimSpace(word)
+			if word == "" || !containsThai(word) {
+				continue
+			}
+			// Skip if already in official dictionary
+			if _, ok := paiboonizer.LookupDictionary(word); ok {
+				continue
+			}
+			// Skip very short words (likely particles or fragments)
+			if len([]rune(word)) < 2 {
+				continue
+			}
+			failedWords[word] = struct{}{}
+		}
+	}
+
+	return failedWords
 }
 
 // splitWords splits a romanized string into words by spaces
