@@ -217,6 +217,9 @@ func loadLines(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
+// punctuationRegex matches Unicode punctuation characters
+var punctuationRegex = regexp.MustCompile(`[\p{P}\p{S}]`)
+
 // normalize prepares strings for comparison
 func normalize(s string) string {
 	// Remove BOM if present
@@ -224,13 +227,19 @@ func normalize(s string) string {
 	s = norm.NFC.String(s)
 	s = strings.TrimSpace(s)
 	s = strings.ToLower(s)
-	// Normalize tilde to hyphen (both are syllable separators in Paiboon)
-	s = strings.ReplaceAll(s, "~", "-")
-	// Normalize hyphens to spaces (treat as equivalent word separators)
-	s = strings.ReplaceAll(s, "-", " ")
-	// Normalize multiple spaces to single space
-	for strings.Contains(s, "  ") {
-		s = strings.ReplaceAll(s, "  ", " ")
+	// Remove all Unicode punctuation and symbols
+	s = punctuationRegex.ReplaceAllString(s, " ")
+	// Normalize ALL whitespace (tabs, multiple spaces, etc.) to single space
+	fields := strings.Fields(s)
+	s = strings.Join(fields, " ")
+	// Normalize ambiguous tones (both are valid for ไหม question particle)
+	s = strings.ReplaceAll(s, " mǎi ", " mai ")
+	s = strings.ReplaceAll(s, " mái ", " mai ")
+	if strings.HasSuffix(s, " mǎi") {
+		s = s[:len(s)-len(" mǎi")] + " mai"
+	}
+	if strings.HasSuffix(s, " mái") {
+		s = s[:len(s)-len(" mái")] + " mai"
 	}
 	// Normalize numbers to Thai romanization for fair comparison
 	s = normalizeNumbers(s)

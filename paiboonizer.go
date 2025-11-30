@@ -213,7 +213,7 @@ var specialCasesGlobal = map[string]string{
 	// Common syllables with final consonants that get extra ɔɔ
 	"ของ": "kɔ̌ɔng", "เพื่อน": "pʉ̂ʉan", "คอน": "kɔn", "ตอน": "dtɔɔn",
 	"เปิด": "bpə̀ət", "สอง": "sɔ̌ɔng", "โลง": "loong", "โล่ง": "lôong",
-	"เคลื่อน": "klʉ̂ʉan", "จอง": "jɔɔng", "ต้อง": "dtɔ̂ɔng", "ต่าง": "dtàang",
+	"เคลื่อน": "klʉ̂ʉan", "จอง": "jɔɔng", "ต้อง": "dtɔ̂ng", "ต่าง": "dtàang",
 	"รอง": "rɔɔng", "ร้อง": "rɔ́ɔng", "ล้อง": "lɔ́ɔng",
 	"คง": "kong", "สง": "sǒng", "สงคราม": "sǒng-kraam",
 
