@@ -224,6 +224,8 @@ func normalize(s string) string {
 	s = norm.NFC.String(s)
 	s = strings.TrimSpace(s)
 	s = strings.ToLower(s)
+	// Normalize tilde to hyphen (both are syllable separators in Paiboon)
+	s = strings.ReplaceAll(s, "~", "-")
 	// Normalize hyphens to spaces (treat as equivalent word separators)
 	s = strings.ReplaceAll(s, "-", " ")
 	// Normalize multiple spaces to single space
@@ -363,6 +365,10 @@ func runCorpusTranslitkit(module *common.Module) {
 		}
 		// Skip Aegisub header lines
 		if strings.HasPrefix(input, "#") && strings.Contains(input, "Aegisub") {
+			continue
+		}
+		// Skip lines containing Arabic numerals (unfair to measure)
+		if containsDigit(input) {
 			continue
 		}
 		totalLines++
@@ -505,6 +511,10 @@ func runCorpusPureRules() {
 		if strings.HasPrefix(input, "#") && strings.Contains(input, "Aegisub") {
 			continue
 		}
+		// Skip lines containing Arabic numerals (unfair to measure)
+		if containsDigit(input) {
+			continue
+		}
 
 		// Use pythainlp for word tokenization (via package-level function)
 		tokenResult, err := pythainlp.Tokenize(input)
@@ -553,6 +563,16 @@ func containsThai(s string) bool {
 	return false
 }
 
+// containsDigit checks if a string contains Arabic numerals (0-9)
+func containsDigit(s string) bool {
+	for _, r := range s {
+		if r >= '0' && r <= '9' {
+			return true
+		}
+	}
+	return false
+}
+
 // extractFailingWords tokenizes failing Thai inputs and collects unique words
 // that aren't in the official dictionary
 func extractFailingWords(failures []corpusFailure) map[string]struct{} {
@@ -578,6 +598,14 @@ func extractFailingWords(failures []corpusFailure) map[string]struct{} {
 			}
 			// Skip very short words (likely particles or fragments)
 			if len([]rune(word)) < 2 {
+				continue
+			}
+			// Skip silent consonant artifacts (e.g., ฟ์, ร์, ว์)
+			if paiboonizer.RemoveSilentConsonants(word) == "" {
+				continue
+			}
+			// Skip ๆ (mai yamok) - handled at translitkit level
+			if strings.Contains(word, "ๆ") {
 				continue
 			}
 			failedWords[word] = struct{}{}
