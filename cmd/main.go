@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"runtime"
+	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/fatih/color"
@@ -18,11 +21,14 @@ import (
 	"github.com/tassa-yoniso-manasi-karoto/translitkit/common"
 )
 
-const (
-	testFile     = "testing_files/test.txt"
-	expectedFile = "testing_files/test_Opus4.5_transliterated.txt"
-	failuresFile = "testing_files/failures_translitkit.txt"
-)
+const failuresFile = "testing_files/failures_translitkit.txt"
+
+// testPair represents a matched pair of Thai input and expected transliteration
+type testPair struct {
+	name          string
+	inputLines    []string
+	expectedLines []string
+}
 
 func main() {
 	header := color.New(color.Bold, color.FgYellow)
@@ -96,6 +102,90 @@ func getTestDir() string {
 		return "."
 	}
 	return filepath.Dir(filename)
+}
+
+// discoverCorpus finds all testN.txt + testN_Opus4.5_transliterated.txt pairs
+func discoverCorpus(dir string) ([]testPair, error) {
+	pattern := filepath.Join(dir, "testing_files", "test*.txt")
+	matches, err := filepath.Glob(pattern)
+	if err != nil {
+		return nil, err
+	}
+
+	warn := color.New(color.FgYellow)
+	errColor := color.New(color.FgRed)
+
+	var pairs []testPair
+	for _, inputPath := range matches {
+		// Skip transliterated files
+		if strings.Contains(inputPath, "_Opus4.5_transliterated") {
+			continue
+		}
+
+		// Derive expected path: testN.txt -> testN_Opus4.5_transliterated.txt
+		base := strings.TrimSuffix(filepath.Base(inputPath), ".txt")
+		expectedPath := filepath.Join(filepath.Dir(inputPath), base+"_Opus4.5_transliterated.txt")
+
+		// Check expected file exists
+		if _, err := os.Stat(expectedPath); os.IsNotExist(err) {
+			warn.Printf("WARNING: No transliteration for %s, skipping\n", base)
+			continue
+		}
+
+		// Load files
+		inputs, err := loadLines(inputPath)
+		if err != nil {
+			errColor.Printf("ERROR: Failed to load %s: %v\n", inputPath, err)
+			continue
+		}
+		expected, err := loadLines(expectedPath)
+		if err != nil {
+			errColor.Printf("ERROR: Failed to load %s: %v\n", expectedPath, err)
+			continue
+		}
+
+		// VALIDATION: Line count must match
+		if len(inputs) != len(expected) {
+			errColor.Printf("ERROR: Line mismatch in %s: %d vs %d, skipping\n",
+				base, len(inputs), len(expected))
+			continue
+		}
+
+		pairs = append(pairs, testPair{
+			name:          base,
+			inputLines:    inputs,
+			expectedLines: expected,
+		})
+	}
+
+	// Sort for consistent order (test1, test2, test8...)
+	sort.Slice(pairs, func(i, j int) bool {
+		return naturalLess(pairs[i].name, pairs[j].name)
+	})
+
+	return pairs, nil
+}
+
+// naturalLess compares strings with embedded numbers naturally
+// e.g., "test2" < "test10"
+func naturalLess(a, b string) bool {
+	numA := extractNumber(a)
+	numB := extractNumber(b)
+	if numA != numB {
+		return numA < numB
+	}
+	return a < b
+}
+
+// extractNumber extracts the first number from a string
+func extractNumber(s string) int {
+	re := regexp.MustCompile(`\d+`)
+	match := re.FindString(s)
+	if match == "" {
+		return 0
+	}
+	n, _ := strconv.Atoi(match)
+	return n
 }
 
 // loadLines reads a file and returns all lines
@@ -205,24 +295,42 @@ func numberToThai(num string) string {
 // runCorpusTranslitkit runs corpus test via translitkit with full failure analysis
 func runCorpusTranslitkit(module *common.Module) {
 	dir := getTestDir()
-	inputPath := filepath.Join(dir, testFile)
-	expectedPath := filepath.Join(dir, expectedFile)
-
-	inputs, err := loadLines(inputPath)
+	corpus, err := discoverCorpus(dir)
 	if err != nil {
-		fmt.Printf("Error loading input file: %v\n", err)
+		fmt.Printf("Error discovering corpus: %v\n", err)
+		return
+	}
+	if len(corpus) == 0 {
+		fmt.Println("No valid test pairs found")
 		return
 	}
 
-	expected, err := loadLines(expectedPath)
-	if err != nil {
-		fmt.Printf("Error loading expected file: %v\n", err)
-		return
+	// Report discovered files
+	fmt.Printf("Discovered %d test files:\n", len(corpus))
+	totalCorpusLines := 0
+	for _, p := range corpus {
+		fmt.Printf("  %s: %d lines\n", p.name, len(p.inputLines))
+		totalCorpusLines += len(p.inputLines)
 	}
+	fmt.Printf("Total corpus: %d lines\n\n", totalCorpusLines)
 
-	if len(inputs) != len(expected) {
-		fmt.Printf("Line count mismatch: %d inputs vs %d expected\n", len(inputs), len(expected))
-		return
+	// Flatten corpus for processing, tracking source file for each line
+	type lineInfo struct {
+		input    string
+		expected string
+		file     string
+		lineNum  int // Line number within the source file
+	}
+	var allLines []lineInfo
+	for _, p := range corpus {
+		for i := range p.inputLines {
+			allLines = append(allLines, lineInfo{
+				input:    p.inputLines[i],
+				expected: p.expectedLines[i],
+				file:     p.name,
+				lineNum:  i + 1,
+			})
+		}
 	}
 
 	lineCorrect := 0
@@ -232,16 +340,17 @@ func runCorpusTranslitkit(module *common.Module) {
 	fallbacks := 0
 
 	type failure struct {
-		line     int
+		file     string
+		lineNum  int
 		input    string
 		expected string
 		got      string
 	}
 	var failures []failure
 
-	for i := 0; i < len(inputs); i++ {
-		input := strings.TrimSpace(inputs[i])
-		exp := normalize(expected[i])
+	for _, line := range allLines {
+		input := strings.TrimSpace(line.input)
+		exp := normalize(line.expected)
 
 		if input == "" || exp == "" {
 			continue
@@ -251,7 +360,7 @@ func runCorpusTranslitkit(module *common.Module) {
 		// Use translitkit for transliteration
 		result, err := module.Roman(input)
 		if err != nil {
-			fmt.Printf("Error on line %d: %v\n", i+1, err)
+			fmt.Printf("Error on [%s:%d]: %v\n", line.file, line.lineNum, err)
 			fallbacks++
 			continue
 		}
@@ -263,9 +372,10 @@ func runCorpusTranslitkit(module *common.Module) {
 			lineCorrect++
 		} else {
 			failures = append(failures, failure{
-				line:     i + 1,
+				file:     line.file,
+				lineNum:  line.lineNum,
 				input:    input,
-				expected: expected[i],
+				expected: line.expected,
 				got:      result,
 			})
 		}
@@ -295,7 +405,7 @@ func runCorpusTranslitkit(module *common.Module) {
 		fmt.Println(strings.Repeat("-", 80))
 		for i := 0; i < showCount; i++ {
 			f := failures[i]
-			fmt.Printf("Line %d: %s\n", f.line, f.input)
+			fmt.Printf("[%s:%d] %s\n", f.file, f.lineNum, f.input)
 			fmt.Printf("  Expected: %s\n", f.expected)
 			fmt.Printf("  Got:      %s\n", f.got)
 		}
@@ -311,7 +421,7 @@ func runCorpusTranslitkit(module *common.Module) {
 		} else {
 			defer file.Close()
 			for _, f := range failures {
-				fmt.Fprintf(file, "Line %d: %s\n", f.line, f.input)
+				fmt.Fprintf(file, "[%s:%d] %s\n", f.file, f.lineNum, f.input)
 				fmt.Fprintf(file, "  Expected: %s\n", f.expected)
 				fmt.Fprintf(file, "  Got:      %s\n\n", f.got)
 			}
@@ -334,34 +444,27 @@ func runCorpusTranslitkit(module *common.Module) {
 // (no dictionary lookup). Silent output - just accuracy %.
 func runCorpusPureRules() {
 	dir := getTestDir()
-	inputPath := filepath.Join(dir, testFile)
-	expectedPath := filepath.Join(dir, expectedFile)
-
-	inputs, err := loadLines(inputPath)
-	if err != nil {
-		fmt.Printf("Error loading input file: %v\n", err)
+	corpus, err := discoverCorpus(dir)
+	if err != nil || len(corpus) == 0 {
+		fmt.Println("No valid test pairs found")
 		return
 	}
 
-	expected, err := loadLines(expectedPath)
-	if err != nil {
-		fmt.Printf("Error loading expected file: %v\n", err)
-		return
-	}
-
-	if len(inputs) != len(expected) {
-		fmt.Printf("Line count mismatch: %d inputs vs %d expected\n", len(inputs), len(expected))
-		return
+	// Flatten corpus
+	var allInputs, allExpected []string
+	for _, p := range corpus {
+		allInputs = append(allInputs, p.inputLines...)
+		allExpected = append(allExpected, p.expectedLines...)
 	}
 
 	wordCorrect := 0
 	totalWords := 0
 
-	for i := 0; i < len(inputs); i++ {
-		input := strings.TrimSpace(inputs[i])
+	for i := 0; i < len(allInputs); i++ {
+		input := strings.TrimSpace(allInputs[i])
 		// Remove BOM
 		input = strings.TrimPrefix(input, "\ufeff")
-		exp := normalize(expected[i])
+		exp := normalize(allExpected[i])
 
 		if input == "" || exp == "" {
 			continue
