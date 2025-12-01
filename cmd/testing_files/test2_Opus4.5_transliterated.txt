@@ -10,20 +10,20 @@ rɔɔ pɔ̂ɔ mʉng maa an-chəən rʉ̌ʉ ngai
 âi-nǔu kʉ̂n maa ləəi
 nâng gan dii-dii lâ rúu yùu wâa rót guu rɛɛng
 tôo əə́i
-sǒng-sǎi mɛ̂ɛng dtaam sɔ̌ɔng-tɛ̌ɛo yùu nɛ̂ɛ-nɛ̂ɛ ləəi
-nân ngai dtaam sɔ̌ɔng-tɛ̌ɛo mɛ̂ɛng jing-jing dûuai
+sǒng-sǎi mɛ̂ng dtaam sɔ̌ɔng-tɛ̌ɛo yùu nɛ̂ɛ-nɛ̂ɛ ləəi
+nân ngai dtaam sɔ̌ɔng-tɛ̌ɛo mɛ̂ng jing-jing dûuai
 óoi âi-dtào dtìt-lɔ́ɔ əə́i
 hə́əi náa cháa nɔ̀i gɔ̂ɔ dâai
 cháa dâai ngai
 bpen tɛ́k-sîi bplɔ̀i hâi sɔ̌ɔng-tɛ̌ɛo maa tʉ̌ng gɔ̀ɔn dâai ngai wá
-tâa guu sɛɛng man mâi dâai ná guu yɔɔm dtaai mɛ̂ɛng wan-níi ləəi
-dtaai mɛ̂ɛng nai rót nîi lɛ̀
+tâa guu sɛɛng man mâi dâai ná guu yɔɔm dtaai mɛ̂ng wan-níi ləəi
+dtaai mɛ̂ng nai rót nîi lɛ̀
 ooi âi sɔ̌ɔng-tɛ̌ɛo əə́i
 mʉng jà maa nʉ̌ʉa à~rai gwàa guu wá
 tôo əə́i nʉ́k wâa jà nɛ̂ɛ
 kǎo jɔ̀ɔt sòng kon bplào náa ləəi sɛɛng kǎo dâai à
 mʉng mɔɔng à~rai
-dǐiao ao ii-dtôo maa sàp kǎa mɛ̂ɛng ləəi dǐiao hə̀
+dǐiao ao ii-dtôo maa sàp kǎa mɛ̂ng ləəi dǐiao hə̀
 dəən mâi wǎi rə̌ə
 mâi kâo bâan lâ
 âi-giia dtii-kài
@@ -39,7 +39,7 @@ mɛ̂ɛ
 gíp pə̂ng glàp maa tʉ̌ng lɛ́ɛo gíp gɔ̂ɔ ngûuang\Nlɛ́ɛo gɔ̂ɔ kîi-gìat mâak mɛ̂ɛ chái âi-gan dì
 mâi wâang à dtɔ̂ng tam ngaan glùm
 bpai sʉ́ʉ nɔ̀i bpai lɛ́ɛo gɔ̂ɔ sʉ́ʉ bai chá~muuang maa dûuai\Ndǐiao mɛ̂ɛ tam mǔu-chá~muuang hâi gin
-hə́i!
+hə́əi!
 hə́əi chîia
 yaang dtɛ̀ɛk nîi
 nîia yaang dtɛ̀ɛk nîia
@@ -50,7 +50,7 @@ bpai ləəi wan-níi bpai pák mâi dtɔ̂ng à
 kɛ̂ɛ bpà-yaang eeng pîi
 maa pǒm tam eeng maa
 mâi dâai kan níi dtɔ̂ng guu
-jâo-kɔ̌ɔng mɛ̂ɛng hîian
+jâo-kɔ̌ɔng mɛ̂ng hîian
 âi-wát châi mái wá
 - lòp-lòp lòp-lòp\N- hə́əi dtɔ̂ɔ
 - bpai nǎi\N- əə dǐiao... dǐiao bpai sòng bâan
@@ -63,7 +63,7 @@ man bpai nǎi lɛ́ɛo wá
 - nǐi krai maa à\N- há
 nǐi krai maa
 nɔ́ɔng
-âi... dèk tɛ̌ɛo bâan mɛ̂ɛng chɔ̂ɔp maa tuuang kâa chɛɛ
+âi... dèk tɛ̌ɛo bâan mɛ̂ng chɔ̂ɔp maa tuuang kâa chɛɛ
 fɛɛn châi bpà
 dtɛ̀ɛ... oo-kee gɔ̂ɔ châi\Ngɔ̂ɔ kəəi kóp gan yùu bprà~maan dʉʉan krʉ̂ng
 dtɛ̀ɛ dtɔɔn-níi lə̂ək gan lɛ́ɛo ná lə̂ək gan bɛ̀ɛp kàat ləəi
@@ -140,7 +140,7 @@ pə̂ng yáai maa jàak chiiang-mài
 mɛ̂ɛ kǎo maa bpen pɔ̌ɔ-ɔɔ roong-riian tîi klùng
 lɛ́ɛo kǎo mâi glàp gàp mʉng rə̌ə
 maa gɔ̂ɔ hěn lɛ́ɛo dì
-- hə́i\N- hə́əi
+- hə́əi\N- hə́əi
 pîi-bɛ̂ɛng tam-mai mâi bpen guu wá
 bpen rai mǎi nɔ́ɔng
 kôot tâo à
@@ -223,11 +223,11 @@ chôok-dii ná nîia tîi wan-níi kiw mâi yaao à
 hòk-hòk hòk
 wâa ləəi ná
 sâi-grɔ̀ɔk nom nîia dtɔ̂ng ráan bpâa-jɔ̂i tâo-nán
-nʉ́ʉa mâi dtɔ̂ng duu dì mɛ̂ɛng bpɛ̂ɛng lúuan
+nʉ́ʉa mâi dtɔ̂ng duu dì mɛ̂ng bpɛ̂ɛng lúuan
 úi-úi maa bpen kûu-kûu
 mâi kít jà bɛ̀ng jing-jing dûuai
 âao hɔ̂ng-sɔ́ɔm dtrong níi mâi yùu lɛ́ɛo rə̌ə
-pîi-óot mɛ̂ɛng yáai bpai chiiang-mài lɛ́ɛo sǐia-daai
+pîi-óot mɛ̂ng yáai bpai chiiang-mài lɛ́ɛo sǐia-daai
 tʉ̌ng dəən sǔuan gɔ̂ɔ hěn tɔ́ng-fáa tîi jɛ̀m-sǎi
 dtɔ̀ɔ hâi wan-níi nèt-nʉ̀ʉai sàk tâo-rai
 kɛ̂ɛ hěn nâa təə túk-yàang gɔ̂ɔ sòt-sǎi
@@ -242,9 +242,9 @@ tú~riian tú~riian tú~riian\Ntú~riian-mang-kút tú~riian-mang-kút
 tú~riian-mang-kút tú~riian-mang-kút tú~riian-mang-kút
 - tú~riian-mang-kút tú~riian-mang-kút\N- pɔɔ!
 mâi rúu maa gɔ̀ɔn ləəi ná wâa âi nʉ́ʉa tîi gɛɛ dtɛ̀ng nîia
-mɛ̂ɛng kâo gan dâai bpé gàp laai gii-dtâa tîi lɔ́k wái ləəi nîia
+mɛ̂ng kâo gan dâai bpé gàp laai gii-dtâa tîi lɔ́k wái ləəi nîia
 âi-jɔɔm âi-bpêe fang rúu rʉ̂ʉang bpà
-dâi
+dâai
 bɛ̀ɛp níi chái kam nǎi rɔ́ng gɔ̂ɔ dâai
 kɔ̌ɔ tɔ̂n wáak ləəi
 âi-hîia âi-hîia âi-ngôo âi-kwaai
@@ -331,7 +331,7 @@ kɛ̂ɛ níi sà~baai
 - à~rai à\N- à~rai à
 pîi mɔɔ-rá~gòt
 - əə wà\N- əə wà
-guu kǐian jòt-mǎai bpai chom pîi kǎo dûuai\Nwâa bpòk níi pîi kǎo mɛ̂ɛng kôot kʉ̂n
+guu kǐian jòt-mǎai bpai chom pîi kǎo dûuai\Nwâa bpòk níi pîi kǎo mɛ̂ng kôot kʉ̂n
 - pîi kʉ̂n rʉ̌ʉ mʉng kʉ̂n\N- âi-laa-mók
 guu hěn mʉng kǐian bpai hǎa pîi kǎo lǎai kráng lɛ́ɛo
 kǎo dtɔ̀ɔp mʉng bâang mǎi
@@ -377,7 +377,7 @@ glùm rao rɔ̂ɔt nɛ̂ɛ
 yùu glùm rao ná
 sǎm-niiang kôot bpé à
 âi-hîia
-glùm rao mɛ̂ɛng kôot chôok-dii ləəi wà
+glùm rao mɛ̂ng kôot chôok-dii ləəi wà
 âi-sàt
 ai choo mii rao...
 ôo oo-kee
@@ -387,7 +387,7 @@ hoom-sɛɛn-gôon
 tii-lǎng à mʉng mâi dtɔ̂ng sà~nə̌ə hǎa kon ləəi ná
 âi-jɔ̂ɔt man àat jà mii bprà~yòot gɔ̂ɔ dâai
 bprà~yòot hîia rai à
-sít-daao mɛ̂ɛng yang bplɛɛ mâi dâai yʉʉn ngôo yùu nîia
+sít-daao mɛ̂ng yang bplɛɛ mâi dâai yʉʉn ngôo yùu nîia
 - âi-gan\N- ə́əi
 - ao jòt-mǎai maa\N- mâi hâi
 - gan ao maa dì wá\N- bplɔ̀i
@@ -512,7 +512,7 @@ dtrong níi yùu glai jàak bâan pûuak rao mǎi à
 guu hěn mʉng pá~yaa-yaam lɛ́ɛo guu nʉ̂ʉai-nʉ̀ʉai
 nàk ləəi ná mʉ̂ʉa-kʉʉn à
 sǒng-sǎan dèk man wà
-dii pûuak mɛ̂ɛng mâi jàp kâi hǔua-grǒon gan mòt
+dii pûuak mɛ̂ng mâi jàp kâi hǔua-grǒon gan mòt
 mǎai-tʉ̌ng gɛɛ à grít nàk ləəi ná
 ʉʉ
 - ao maa dâai ngai à\N- âi-gan man hâi maa à
@@ -732,16 +732,16 @@ mâi hěn bpâai grung-têep naan lɛ́ɛo wà
 mâi yâak wə́əi pʉ̂ʉan tâa bpâai hǎai gɔ̂ɔ kɛ̂ɛ dtaam rót kan nâa
 nân ngai tá~biian grung-têep
 - dtam-rùuat dtaam\N- úi
-chîia mɛ̂ɛng jîi dtùut wà
+chîia mɛ̂ng jîi dtùut wà
 mʉng kliia kɔ̌ɔng dì âi-hîia
 - kliia ləəi rə̌ə\N- reo
 hə́əi
-kon grung-têep mɛ̂ɛng ní-sǎi yɛ̂ɛ wà duu dì
+kon grung-têep mɛ̂ng ní-sǎi yɛ̂ɛ wà duu dì
 tíng kà~yà hâi man long tǎng man yâak rʉ̌ʉ ngai wá
 hə́əi kǎo nǐi rao wà
 sà~dɛɛng wâa kǎo gluua dǐiao guu kui eeng
 hə́əi man dtii kûu lɛ́ɛo mʉng
-gɔ̂ɔ hâi mɛ̂ɛng maa dì
+gɔ̂ɔ hâi mɛ̂ng maa dì
 - chîia dtam-rùuat\N- ao bpai
 - hə́əi tam rai\N- sai-reen maa lɛ́ɛo man ao jing nɛ̂ɛ
 mâi mii rai pîi mʉʉ bpai doon
@@ -754,7 +754,7 @@ hěn mǎi kǎo chá~lɔɔ lɛ́ɛo
 gan yàa kâo glâi brèek
 - bpai jɔ̀ɔt hâi kâo ying rʉ̌ʉ ngai sɛɛng bpai ləəi\N- jɔ̀ɔt
 ə́ao à~rai kɔ̌ɔng man wá
-pɔɔ guu jà mɔ̂ɔp mɛ̂ɛng sʉ̀ʉak nǐi
+pɔɔ guu jà mɔ̂ɔp mɛ̂ng sʉ̀ʉak nǐi
 - glàp rót\N- glàp bpai nǎi
 bpai gèp kɔ̌ɔng âi-sàt
 dtɔ̂ɔ
@@ -773,7 +773,7 @@ pʉ̂ʉan bpen fɛɛn-klàp kráp
 mɔɔ-rá~gòt mâi yùu
 bpà... bpâa kráp
 pûuak rao kɛ̂ɛ jà ao jòt-mǎai...
-pûu-yǐng grung-têep mɛ̂ɛng jai-ráai wà
+pûu-yǐng grung-têep mɛ̂ng jai-ráai wà
 gɔ̂ɔ mʉng bpai tam nâa rôok-jìt sài kǎo bpen guu guu gɔ̂ɔ lâi
 ao ngai wá jà kâo bpai yang-ngai à
 hǒo pîi maa dtâng glai à
@@ -867,7 +867,7 @@ man yàak jà tam
 wát yàak tam à~rai rə̌ə
 man yàak jà gɔ̀ɔt pîi sàk kráng à kráp
 kɔ̌ɔ pǒm gɔ̀ɔt pîi tɛɛn pʉ̂ʉan dâai mǎi kráp
-guu wâa âi-wát mɛ̂ɛng mâi tùuk-jai sìng níi wà
+guu wâa âi-wát mɛ̂ng mâi tùuk-jai sìng níi wà
 kɔ̀ɔp-kun kráp pîi mɔɔ-rá~gòt
 glàp gan dii-dii ná
 - kráp\N- bái-baai
@@ -914,7 +914,7 @@ nâa ìt-chǎa pûuak nán nə́
 yang-ngai à
 gɔ̂ɔ duu pûuak man dì mâi kít à~rai ləəi yàak tam à~rai gɔ̂ɔ tam
 sà~mǎi nán ná rao yàak bpai duu moo-dəən-dɔ̀ɔk à
-nân dì dtɛ̀ɛ gɔ̀ɔn à\Ngɛɛ mɛ̂ɛng kôot chɔ̂ɔp tam à~rai yàang nán ləəi
+nân dì dtɛ̀ɛ gɔ̀ɔn à\Ngɛɛ mɛ̂ng kôot chɔ̂ɔp tam à~rai yàang nán ləəi
 kǐian pleeng in-dîi châi bpà
 kǐian gaa-dtuun rúu ìik tii wâa bpai riian wít-sà~wá chə̌əi ləəi ngong
 àat mâi kəəi yùu nai sǎai-dtaa
@@ -1020,7 +1020,7 @@ jòp lɛ́ɛo
 lɛ́ɛo rúu-sʉ̀k ngai à
 mâi chɔ̂ɔp à
 kɔ̌ɔ kʉʉn dâai bpà
-dâi
+dâai
 ə̀ə bpɛ́ joo-nan à
 yùu tîi âi-fəən
 lêm níi kɔ̌ɔng gíp rə̌ə
@@ -1040,7 +1040,7 @@ bpai kɛɛ-naa-daa tam-mai wá
 rúu à~rai ao wái kɔ̂i lâo guu ríip
 əə ríip bpai-bpai ao rót bpai gèp tîi bâan reo\Nlɛ́ɛo dtaam bpai bpai
 - hěn yang wá\N- yang mâi hěn pîi
-hǒo tɛ́k-sîi mɛ̂ɛng pə̂ng ɔ̀ɔk tam-mai rao dtaam mâi tan wá
+hǒo tɛ́k-sîi mɛ̂ng pə̂ng ɔ̀ɔk tam-mai rao dtaam mâi tan wá
 man jà bpai tan dâai ngai wá kɛ̂ɛ jàk-grà~yaan yang sɛɛng mâi dâai ləəi
 ôo-hǒo pîi-dtɔ̂ɔ man châi wee-laa maa chin mǎi nîia
 - yìiap hâi mít ləəi pîi\N- ao ngán rə̌ə
@@ -1142,7 +1142,7 @@ jěng bpà lâ
 ə̀ə
 gíp
 rao mii à~rai jà bɔ̀ɔk à
-tʉ̌ng nǎi lɛ́ɛo wá mɛ̂ɛng
+tʉ̌ng nǎi lɛ́ɛo wá mɛ̂ng
 tèk sɔ̌ɔng-sɔ̌ɔng
 rao mii à~rai jà bɔ̀ɔk dtɛ̀ɛ wâa...
 rao...
@@ -1154,7 +1154,7 @@ lɛ́ɛo gɔ̂ɔ kɔ̀ɔp-kun tîi
 kɔɔi ton fang rao rɔ́ɔng pleeng
 ao jing-jing ná\Nplə̌ə-plə̌ə nâa jà mii gɛɛ kon diiao tîi ton rao wǎi
 chɔ̂ɔp tîi dâai tam à~rai gɔ̂ɔ mâi rúu gàp gɛɛ dtâng yə́
-dtɔɔn yùu gàp gɛɛ mɛ̂ɛng dii wà
+dtɔɔn yùu gàp gɛɛ mɛ̂ng dii wà
 kwaam-jing mii piang nʉ̀ng diiao tâo-nán lɛ̀ gíp
 rao chɔ̂ɔp gɛɛ wà
 hǔua-jai rao bpen kɔ̌ɔng gɛɛ wà

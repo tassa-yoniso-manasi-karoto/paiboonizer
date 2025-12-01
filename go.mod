@@ -226,3 +226,5 @@ require (
 	sigs.k8s.io/yaml v1.4.0 // indirect
 	tags.cncf.io/container-device-interface v0.8.0 // indirect
 )
+
+replace github.com/tassa-yoniso-manasi-karoto/translitkit => ../translitkit

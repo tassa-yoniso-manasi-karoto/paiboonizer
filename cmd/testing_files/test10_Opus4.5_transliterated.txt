@@ -93,7 +93,7 @@ ták-sà lɛ́ túk yàang dâai rót bâan yaa-maa-hâa gâao-nâa koo-chen-lâ
 guu wâa guu dtɔ̂ng hàang guu tam dtɛ̀ɛ ngaan dûuai kwaam lam-bàak gɔ̂ɔ guu gàa ii-gâa
 lɛ́ɛo jà~rəən sà~dtì bɛ̀ɛp hii-naa-dtâa sà~gaa mú~naa-hǒo-dtì luu-gaa-bpà~dtì
 guu tʉ̌ʉ ká~dtì wâa àt-dtaa-hì àt-dtà~noo-naa-tǒo sǎa-tú
-âi hîia yɔ̂ɔt kǎai ɔɔn-laai mɛ̂ɛng sool-ao hùt-mòt lɛ́ɛo âi sàt
+âi hîia yɔ̂ɔt kǎai ɔɔn-laai mɛ̂ng sool-ao hùt-mòt lɛ́ɛo âi sàt
 nîi plɛɛn pii-aa mʉng mâi châi rə̌ə
 yɔ̂ɔt ɔɔ-də̂ə chûuai guu dûuai
 mʉng yàak dâai kon chûuai pə̂əm bpà lâ
@@ -318,10 +318,10 @@ jà bpro dtà~làat pûuak glùm wai-rûn pá~nák-ngaan ɔ́ɔf-fít lɛ́ɛo g
 dtɔ̀ɔ yɔ̂ɔt jàak proo-dàk tîi rao mii yùu
 rʉ̌ʉ mâi gɔ̂ɔ tam pûuak gam-lai mí~ní~môn-môn gɔ̂ɔ dâai
 dǐiao mʉng lɔɔng kʉ̂n bɛ̀ɛp maa hâi guu lʉ̂ʉak nɔ̀i ná
-guu wâa an níi maa-jîn mɛ̂ɛng nǎa sàt-sàt chuua
+guu wâa an níi maa-jîn mɛ̂ng nǎa sàt-sàt chuua
 nîi kʉʉ mʉng jà mâi lə̂ək tam châi bpà
 gɔ̂ɔ mâi hěn dtɔ̂ng lə̂ək bpà
-lǎng jàak níi gɔ̂ɔ kɛ̂ɛ bplɔ̀i mɛ̂ɛng ran bpai
+lǎng jàak níi gɔ̂ɔ kɛ̂ɛ bplɔ̀i mɛ̂ng ran bpai
 lɛ́ɛo rao gɔ̂ɔ bpai nǎi gɔ̂ɔ dâai lɛ́ɛo
 mʉng nɛ̂ɛ-jai rə̌ə wá
 nɛ̂ɛ-jai dì
@@ -385,7 +385,7 @@ tâa bpen wan sùk dtɔɔn yen dâai mái à
 ʉʉ
 châi
 baai
-mɛ̂ɛng ə́əi
+mɛ̂ng ə́əi
 ooi
 ʉʉm
 mʉng ngôo à
@@ -394,7 +394,7 @@ mʉng nʉ̀ʉai lâ sì
 hǎa à~rai dɛ̀ɛk bpà
 ʉʉ
 mâi à
-dtɛ̀ɛ mɛ̂ɛng ngûuang
+dtɛ̀ɛ mɛ̂ng ngûuang
 nɛ̂ɛ-jai ná mâi hâi guu chûuai
 mâi bpen rai
 ìik nít diiao gɔ̂ɔ sèt lɛ́ɛo
