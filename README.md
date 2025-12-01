@@ -2,11 +2,13 @@ Experimental Thai-to-Paiboon romanization library for translitkit integration. I
 
 ## Accuracy
 
-**Expect 95%, with some edge case issues related to pythainlp's tokenization**
+**Expect ~95%, mainly failing on proper names**.
+
+The measured accuracy is lower because valid alternative transliteration variants are penalizing the accuracy measurement. 
 
 Against:
-- **CORPUS: With pythainlp word tokenization + dictionary + syllable segmentation of pythainlp**: 91.38%
-- CORPUS: With pythainlp word tokenization + *pure Golang rules only*: 34.33%
+- **CORPUS: With pythainlp word tokenization + dictionary + syllable segmentation of pythainlp**: 91.85%
+- CORPUS: With pythainlp word tokenization + *pure Golang rules only*: 34.29%
 - **DICTIONARY: pure Golang rules only**: 84.75%
 
 Corpus is 11714 thai sentences extracted from subtitle files.
