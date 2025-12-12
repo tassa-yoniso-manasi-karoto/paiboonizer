@@ -10,6 +10,7 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+	"sync"
 	"unicode"
 
 	"github.com/gookit/color"
@@ -33,6 +34,16 @@ var syllableDict = make(map[string]string)
 
 // Opus dictionary - LLM-generated, lower priority than official dictionary
 var opusDictionary = make(map[string]string)
+
+// Lazy initialization - dictionary is only loaded when first needed
+var dictionaryOnce sync.Once
+
+// ensureDictionaryLoaded loads the dictionary on first call (lazy initialization).
+// This prevents the dictionary from being loaded when paiboonizer is imported
+// but not actually used (e.g., when using translitkit for other languages).
+func ensureDictionaryLoaded() {
+	dictionaryOnce.Do(loadDictionary)
+}
 
 // specialCasesGlobal contains special transliterations for irregular words
 // (Sanskrit/Pali loanwords, irregular patterns, etc.)
@@ -724,6 +735,7 @@ func fallbackTransliteration(text string) string {
 
 // TransliterateWordWithSyllables handles a word with known syllables from pythainlp
 func TransliterateWordWithSyllables(word string, allSyllables []string) string {
+	ensureDictionaryLoaded()
 	// Try dictionary first
 	if trans, ok := dictionary[word]; ok {
 		return trans
@@ -789,6 +801,7 @@ func TransliterateWordWithSyllables(word string, allSyllables []string) string {
 // This is useful for providers that want to check the dictionary before falling
 // back to other transliteration methods.
 func LookupDictionary(word string) (string, bool) {
+	ensureDictionaryLoaded()
 	// Check official dictionary first (highest authority)
 	if trans, ok := dictionary[word]; ok {
 		return trans, true
@@ -803,6 +816,7 @@ func LookupDictionary(word string) (string, bool) {
 // LookupSyllable checks if a syllable exists in the syllable dictionary.
 // Returns (transliteration, true) if found, ("", false) otherwise.
 func LookupSyllable(syllable string) (string, bool) {
+	ensureDictionaryLoaded()
 	trans, ok := syllableDict[syllable]
 	return trans, ok
 }
@@ -818,6 +832,7 @@ func LookupSpecialCase(text string) (string, bool) {
 // rule-based transliteration using pythainlp tokenization when available.
 // TransliterateWord transliterates a single Thai word to Paiboon romanization
 func TransliterateWord(word string) string {
+	ensureDictionaryLoaded()
 	// Try dictionary first
 	if trans, ok := dictionary[word]; ok {
 		return trans
@@ -851,6 +866,7 @@ func TransliterateWord(word string) string {
 // followed by rule-based transliteration with syllable tokenization support.
 // This is the main public API for transliteration.
 func TransliterateWordRulesOnly(word string) string {
+	ensureDictionaryLoaded()
 	// Try dictionary lookup first
 	if trans, ok := dictionary[word]; ok {
 		return norm.NFC.String(trans)
@@ -1596,7 +1612,9 @@ var words []string
 var m = make(map[string]string)
 var re = regexp.MustCompile(`(.*),(.*\p{Thai}.*)`)
 
-func init() {
+// loadDictionary loads the dictionary from embedded files.
+// Called lazily via ensureDictionaryLoaded() on first use.
+func loadDictionary() {
 	// Use embedded filesystem for vocab files
 	entries, err := fs.ReadDir(vocabFS, "csv")
 	check(err)

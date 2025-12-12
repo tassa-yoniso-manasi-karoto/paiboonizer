@@ -57,6 +57,7 @@ type DictTestResults struct {
 
 // RunDictionaryTest runs dictionary test and returns results
 func RunDictionaryTest(mode TestMode) DictTestResults {
+	ensureDictionaryLoaded()
 	if mode == TestModePythainlp {
 		pythainlpFallbackCount = 0
 	}
@@ -254,6 +255,7 @@ func ClosePythainlp() {
 
 // DebugTransliteration shows detailed breakdown of how a word is transliterated
 func DebugTransliteration(word string) {
+	ensureDictionaryLoaded()
 	fmt.Printf("\n=== Debug: %s ===\n", word)
 
 	// Show expected from dictionary

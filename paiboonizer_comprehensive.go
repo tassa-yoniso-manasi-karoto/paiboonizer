@@ -423,6 +423,7 @@ func findSyllableEndComprehensive(runes []rune, start int) int {
 // using comprehensive syllable parsing, pattern recognition, and tone rules.
 // It handles complex vowel patterns, consonant clusters, and special cases.
 func ComprehensiveTransliterate(word string) string {
+	ensureDictionaryLoaded()
 	// Try special cases first (irregular words, loanwords)
 	if trans, ok := specialCasesGlobal[word]; ok {
 		return norm.NFC.String(trans)
