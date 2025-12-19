@@ -5,7 +5,7 @@ go 1.23.12
 require (
 	github.com/gookit/color v1.5.4
 	github.com/rivo/uniseg v0.4.7
-	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20251214043307-6259648b9d0d
+	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20251219122136-063165ab0170
 	golang.org/x/text v0.27.0
 )
 
@@ -148,7 +148,7 @@ require (
 	github.com/spf13/cobra v1.9.1 // indirect
 	github.com/spf13/pflag v1.0.7 // indirect
 	github.com/stretchr/testify v1.11.0 // indirect
-	github.com/tassa-yoniso-manasi-karoto/dockerutil v0.0.0-20251214042449-2f026c45c028 // indirect
+	github.com/tassa-yoniso-manasi-karoto/dockerutil v0.0.0-20251219114917-92ee7ec684b1 // indirect
 	github.com/theupdateframework/notary v0.7.0 // indirect
 	github.com/tilt-dev/fsnotify v1.4.8-0.20220602155310-fff9c274a375 // indirect
 	github.com/tonistiigi/dchapes-mode v0.0.0-20250318174251-73d941a28323 // indirect
