@@ -5,7 +5,7 @@ go 1.26
 require (
 	github.com/gookit/color v1.6.0
 	github.com/rivo/uniseg v0.4.7
-	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20260816083106-90b582bcda02
+	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20260816224626-7116306ed7c1
 	golang.org/x/text v0.35.0
 )
 
@@ -108,7 +108,7 @@ require (
 	github.com/spf13/cobra v1.10.2 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
-	github.com/tassa-yoniso-manasi-karoto/dockerutil v0.0.0-20260816082843-7b61cea3e0a2 // indirect
+	github.com/tassa-yoniso-manasi-karoto/dockerutil v0.0.0-20260816224127-f041ae4bfec7 // indirect
 	github.com/tilt-dev/fsnotify v1.4.8-0.20220602155310-fff9c274a375 // indirect
 	github.com/tonistiigi/dchapes-mode v0.0.0-20250318174251-73d941a28323 // indirect
 	github.com/tonistiigi/fsutil v0.0.0-20251211185533-a2aa163d723f // indirect
