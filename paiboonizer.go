@@ -650,10 +650,12 @@ func NewManagerWithRecreate(ctx context.Context, recreate bool) (*Manager, error
 	if recreate {
 		// Recreate container to ensure port mapping matches
 		if err := m.nlpManager.InitRecreate(ctx, false); err != nil {
+			_ = m.nlpManager.CloseWithContext(ctx)
 			return nil, fmt.Errorf("failed to start pythainlp service: %w", err)
 		}
 	} else {
 		if err := m.nlpManager.Init(ctx); err != nil {
+			_ = m.nlpManager.CloseWithContext(ctx)
 			return nil, fmt.Errorf("failed to start pythainlp service: %w", err)
 		}
 	}

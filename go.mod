@@ -5,7 +5,7 @@ go 1.26
 require (
 	github.com/gookit/color v1.6.0
 	github.com/rivo/uniseg v0.4.7
-	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20260312024642-9a0fab8f34a1
+	github.com/tassa-yoniso-manasi-karoto/go-pythainlp v0.0.0-20260816083106-90b582bcda02
 	golang.org/x/text v0.35.0
 )
 
@@ -59,7 +59,6 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
-	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-version v1.8.0 // indirect
 	github.com/in-toto/attestation v1.1.2 // indirect
@@ -109,7 +108,7 @@ require (
 	github.com/spf13/cobra v1.10.2 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
-	github.com/tassa-yoniso-manasi-karoto/dockerutil v0.0.0-20260312023325-2253830d6704 // indirect
+	github.com/tassa-yoniso-manasi-karoto/dockerutil v0.0.0-20260816082843-7b61cea3e0a2 // indirect
 	github.com/tilt-dev/fsnotify v1.4.8-0.20220602155310-fff9c274a375 // indirect
 	github.com/tonistiigi/dchapes-mode v0.0.0-20250318174251-73d941a28323 // indirect
 	github.com/tonistiigi/fsutil v0.0.0-20251211185533-a2aa163d723f // indirect
